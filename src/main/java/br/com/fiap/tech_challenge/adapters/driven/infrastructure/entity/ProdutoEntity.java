@@ -6,7 +6,8 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.math.BigDecimal;
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
+
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 
 @Entity
 @Data

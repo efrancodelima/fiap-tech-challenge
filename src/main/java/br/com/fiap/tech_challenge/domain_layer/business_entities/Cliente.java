@@ -115,7 +115,7 @@ public class Cliente {
         }
     }
 
-    public void validarCliente() throws BusinessRulesExceptions {
+    private void validarCliente() throws BusinessRulesExceptions {
         if (nome == null && email == null) {
             throw new BusinessRulesExceptions(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }

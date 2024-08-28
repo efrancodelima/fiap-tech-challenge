@@ -3,7 +3,8 @@ package br.com.fiap.tech_challenge.adapters.driven.infrastructure.repository.ada
 import br.com.fiap.tech_challenge.adapters.driven.infrastructure.entity.ProdutoEntity;
 import br.com.fiap.tech_challenge.adapters.driven.infrastructure.repository.ProdutoRepository;
 import br.com.fiap.tech_challenge.core.application.ports.repository.ProdutoRepositoryPort;
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

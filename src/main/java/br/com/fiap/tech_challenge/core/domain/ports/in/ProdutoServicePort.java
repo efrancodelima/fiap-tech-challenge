@@ -1,7 +1,7 @@
 package br.com.fiap.tech_challenge.core.domain.ports.in;
 
 import br.com.fiap.tech_challenge.core.domain.model.Produto;
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 
 import java.math.BigDecimal;
 
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.ProdutoExceptions;
 
@@ -88,13 +88,13 @@ public class Produto {
     }
 
     // Métodos de validação
-    public void validarId(long id) throws BusinessRulesExceptions {
+    private void validarId(long id) throws BusinessRulesExceptions {
         if (id < 1) {
             throw new BusinessRulesExceptions(ProdutoExceptions.ID_MIN.getMensagem());
         }
     }
 
-    public void validarNome(String nome) throws BusinessRulesExceptions {
+    private void validarNome(String nome) throws BusinessRulesExceptions {
         if (nome == null || nome.isEmpty()) {
             throw new BusinessRulesExceptions(ProdutoExceptions.NOME_VAZIO.getMensagem());
         } else if (nome.length() < 5) {
@@ -104,7 +104,7 @@ public class Produto {
         }
     }
 
-    public void validarDescricao(String descricao) throws BusinessRulesExceptions {
+    private void validarDescricao(String descricao) throws BusinessRulesExceptions {
         if (descricao == null) {
             return;
         } else if (descricao.length() < 20) {
@@ -114,7 +114,7 @@ public class Produto {
         }
     }
 
-    public void validarPreco(BigDecimal preco) throws BusinessRulesExceptions {
+    private void validarPreco(BigDecimal preco) throws BusinessRulesExceptions {
         if (preco == null) {
             throw new BusinessRulesExceptions(ProdutoExceptions.PRECO_NULO.getMensagem());
         } else if (preco.compareTo(BigDecimal.ZERO) <= 0) {
@@ -124,8 +124,7 @@ public class Produto {
         }
     }
 
-    public void validarCategoria(CategoriaProduto categoria) throws BusinessRulesExceptions {
-        // A categoria não pode ser nula
+    private void validarCategoria(CategoriaProduto categoria) throws BusinessRulesExceptions {
         if (categoria == null) {
             throw new BusinessRulesExceptions(ProdutoExceptions.CATEGORIA_NULA.getMensagem());
         }

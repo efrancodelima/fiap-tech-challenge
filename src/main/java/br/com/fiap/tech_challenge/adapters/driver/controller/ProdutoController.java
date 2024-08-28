@@ -6,8 +6,9 @@ import br.com.fiap.tech_challenge.adapters.driver.controller.model.request.Atual
 import br.com.fiap.tech_challenge.adapters.driver.controller.model.request.CadastrarProdutoDTO;
 import br.com.fiap.tech_challenge.adapters.driver.controller.swagger.ProdutoSwaggerInterface;
 import br.com.fiap.tech_challenge.core.domain.model.Produto;
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.core.domain.ports.in.ProdutoServicePort;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

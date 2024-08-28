@@ -1,6 +1,5 @@
 package br.com.fiap.tech_challenge.adapters.driven.infrastructure.entity;
 
-import br.com.fiap.tech_challenge.core.domain.model.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 
 @Entity
 @Data
@@ -25,7 +26,7 @@ public class PedidoEntity {
     private BigDecimal valorTotalPedido;
 
     @Column(name = "situacao", nullable = false)
-    private StatusPedido situacao;
+    private StatusPedidoEnum situacao;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")

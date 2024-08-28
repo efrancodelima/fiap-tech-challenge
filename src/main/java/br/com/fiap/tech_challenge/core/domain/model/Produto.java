@@ -1,9 +1,10 @@
 package br.com.fiap.tech_challenge.core.domain.model;
 
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
 import lombok.Data;
 
 import java.math.BigDecimal;
+
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 
 @Data
 public class Produto {

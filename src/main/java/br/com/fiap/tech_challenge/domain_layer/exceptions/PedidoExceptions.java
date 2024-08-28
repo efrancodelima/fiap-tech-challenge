@@ -1,6 +1,6 @@
 package br.com.fiap.tech_challenge.domain_layer.exceptions;
 
-public enum PedidoExceptionsMsg {
+public enum PedidoExceptions {
     ID_MIN("O ID do produto deve ser maior que 0."),
     DATA_NULA("A data do pedido não pode ser nula."),
     DATA_MIN("A data do pedido não pode ser menor que 01/01/2024."),
@@ -19,7 +19,7 @@ public enum PedidoExceptionsMsg {
 
     private String mensagem;
 
-    PedidoExceptionsMsg(String mensagem) {
+    PedidoExceptions(String mensagem) {
         this.mensagem = mensagem;
     }
 

@@ -3,59 +3,54 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import br.com.fiap.tech_challenge.core.domain.model.enums.StatusPedido;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.PedidoExceptionsMsg;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.PedidoExceptions;
+import br.com.fiap.tech_challenge.domain_layer.interfaces.IPedido;
 
-public class Pedido {
+public class Pedido implements IPedido {
     private long id;
-    private LocalDate data;
     private Cliente cliente;
     private List<ItemPedido> itens;
     private LocalDateTime dataHoraCheckout;
-    private StatusPedido status;
-    private LocalDateTime dataHoraStatus;
-
-    private static final LocalDate DATA_MINIMA = LocalDate.of(2020, 1, 1);
-    private static final LocalDate DATA_MAXIMA = LocalDate.now();
+    private StatusPagamento statusPagamento;
+    private StatusPedido statusPedido;
 
     // Construtor usado para criar um novo pedido
-    public Pedido(Cliente cliente) {
-        this.data = LocalDate.now();
-        this.cliente = cliente;
-        this.itens = new ArrayList<ItemPedido>();
-        this.status = StatusPedido.AGUARDANDO_CHECKOUT;
-        this.dataHoraStatus = LocalDateTime.now();
-    }
-
-    // Construtor usado para instanciar um pedido já existente
-    public Pedido(long id, LocalDate data, Cliente cliente, List<ItemPedido> itens, LocalDateTime dataHoraCheckout,
-            StatusPedido status, LocalDateTime dataHoraStatus) throws BusinessRulesExceptions {
+    public Pedido(Cliente cliente) throws BusinessRulesExceptions {
         try {
-            setId(id);
-            setData(data);
-            this.cliente = cliente;
-            setItens(itens);
-            setDataHoraCheckout(dataHoraCheckout);
-            setStatus(status);
-            setDataHoraStatus(dataHoraStatus);
+            var status = new StatusPedido(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
+            setCliente(cliente);
+            setItens(null);
+            setStatusPedido(status);
         } catch (BusinessRulesExceptions e) {
             String msg = "Erro ao instanciar o pedido! " + e.getMessage();
             throw new BusinessRulesExceptions(msg);
         }
+    }
 
+    // Construtor usado para instanciar um pedido já existente
+    public Pedido(long id, Cliente cliente, List<ItemPedido> itens, LocalDateTime dataHoraCheckout,
+            StatusPagamento pagamento, StatusPedido status)
+            throws BusinessRulesExceptions {
+        try {
+            setId(id);
+            setCliente(cliente);
+            setItens(itens);
+            setDataHoraCheckout(dataHoraCheckout);
+            setStatusPagamento(pagamento);
+            setStatusPedido(status);
+        } catch (BusinessRulesExceptions e) {
+            String msg = "Erro ao instanciar o pedido! " + e.getMessage();
+            throw new BusinessRulesExceptions(msg);
+        }
     }
 
     // Getters
     public long getId() {
         return id;
-    }
-
-    public LocalDate getData() {
-        return data;
     }
 
     public Cliente getCliente() {
@@ -70,12 +65,12 @@ public class Pedido {
         return dataHoraCheckout;
     }
 
-    public StatusPedido getStatus() {
-        return status;
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
     }
 
-    public LocalDateTime getDataHoraStatus() {
-        return dataHoraStatus;
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
     }
 
     public BigDecimal getValorPedido() {
@@ -92,9 +87,8 @@ public class Pedido {
         this.id = id;
     }
 
-    private void setData(LocalDate data) throws BusinessRulesExceptions {
-        validarData(data);
-        this.data = data;
+    private void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     private void setItens(List<ItemPedido> itens) {
@@ -110,93 +104,74 @@ public class Pedido {
         this.dataHoraCheckout = dataHoraCheckout;
     }
 
-    private void setStatus(StatusPedido status) throws BusinessRulesExceptions {
-        validarStatus(status);
-        this.status = status;
+    private void setStatusPagamento(StatusPagamento status) throws BusinessRulesExceptions {
+        this.statusPagamento = status;
     }
 
-    private void setDataHoraStatus(LocalDateTime dataHoraStatus) throws BusinessRulesExceptions {
-        validarDataHoraStatus(dataHoraStatus);
-        this.dataHoraStatus = dataHoraStatus;
+    private void setStatusPedido(StatusPedido status) throws BusinessRulesExceptions {
+        validarStatusPedido(status);
+        this.statusPedido = status;
     }
 
     // Métodos de validação
     private void validarId(long id) throws BusinessRulesExceptions {
         if (id < 1) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.ID_MIN.getMensagem());
-        }
-    }
-
-    private void validarData(LocalDate data) throws BusinessRulesExceptions {
-        if (data == null) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_NULA.getMensagem());
-        } else if (data.isBefore(DATA_MINIMA)) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_MIN.getMensagem());
-        } else if (data.isAfter(DATA_MAXIMA)) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_MAX.getMensagem());
+            throw new BusinessRulesExceptions(PedidoExceptions.ID_MIN.getMensagem());
         }
     }
 
     private void validarDataHoraCheckout(LocalDateTime dataHora) throws BusinessRulesExceptions {
-        LocalDate data = dataHora == null ? null : dataHora.toLocalDate();
-        if (data == null) {
+        if (dataHora == null) {
             return;
-        } else if (data.isBefore(DATA_MINIMA)) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_CHECKOUT_MIN.getMensagem());
-        } else if (data.isAfter(DATA_MAXIMA)) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_CHECKOUT_MAX.getMensagem());
+        }
+
+        if (dataHora.isBefore(Constantes.dataHoraMinima)) {
+            throw new BusinessRulesExceptions(PedidoExceptions.DATA_CHECKOUT_MIN.getMensagem());
+        }
+
+        if (dataHora.isAfter(LocalDateTime.now())) {
+            throw new BusinessRulesExceptions(PedidoExceptions.DATA_CHECKOUT_MAX.getMensagem());
         }
     }
 
-    private void validarStatus(StatusPedido status) throws BusinessRulesExceptions {
+    private void validarStatusPedido(StatusPedido status) throws BusinessRulesExceptions {
         if (status == null) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.STATUS_NULO.getMensagem());
-        }
-    }
-
-    private void validarDataHoraStatus(LocalDateTime dataHora) throws BusinessRulesExceptions {
-        LocalDate data = dataHora == null ? null : dataHora.toLocalDate();
-
-        if (data == null) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_STATUS_NULA.getMensagem());
-        } else if (data.isBefore(DATA_MINIMA)) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_STATUS_MIN.getMensagem());
-        } else if (data.isAfter(DATA_MAXIMA)) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.DATA_STATUS_MAX.getMensagem());
+            throw new BusinessRulesExceptions(PedidoExceptions.STATUS_NULO.getMensagem());
         }
     }
 
     private void validarItem(ItemPedido item) throws BusinessRulesExceptions {
         if (item == null) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.ITEM_NULO.getMensagem());
+            throw new BusinessRulesExceptions(PedidoExceptions.ITEM_NULO.getMensagem());
         }
     }
 
     private void validarNumeroItem(int numeroItem) throws BusinessRulesExceptions {
         if (numeroItem < 1 || numeroItem > itens.size()) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.NUMERO_ITEM.getMensagem());
+            throw new BusinessRulesExceptions(PedidoExceptions.NUMERO_ITEM.getMensagem());
         }
     }
 
     private void validarCheckoutNaoRealizado() throws BusinessRulesExceptions {
         if (dataHoraCheckout != null) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.CHECKOUT_REALIZADO.getMensagem());
+            throw new BusinessRulesExceptions(PedidoExceptions.CHECKOUT_REALIZADO.getMensagem());
         }
     }
 
     private void validarPedidoContemItem() throws BusinessRulesExceptions {
         if (itens.size() == 0) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.PEDIDO_VAZIO.getMensagem());
+            throw new BusinessRulesExceptions(PedidoExceptions.PEDIDO_VAZIO.getMensagem());
         }
     }
 
     private void validarPedidoNaoFinalizado() throws BusinessRulesExceptions {
-        if (status == StatusPedido.FINALIZADO) {
-            throw new BusinessRulesExceptions(PedidoExceptionsMsg.PEDIDO_FINALIZADO.getMensagem());
+        if (statusPedido.getStatus() == StatusPedidoEnum.FINALIZADO) {
+            throw new BusinessRulesExceptions(PedidoExceptions.PEDIDO_FINALIZADO.getMensagem());
         }
     }
 
-    // Outros métodos
+    // Métodos públicos
+    @Override
     public void adicionarItem(ItemPedido item) throws BusinessRulesExceptions {
         try {
             validarCheckoutNaoRealizado();
@@ -208,6 +183,7 @@ public class Pedido {
         this.itens.add(item);
     }
 
+    @Override
     public void alterarItem(int numeroItem, ItemPedido item) throws BusinessRulesExceptions {
         try {
             validarCheckoutNaoRealizado();
@@ -220,6 +196,7 @@ public class Pedido {
         this.itens.set(numeroItem - 1, item);
     }
 
+    @Override
     public void removerItem(int numeroItem) throws BusinessRulesExceptions {
         try {
             validarCheckoutNaoRealizado();
@@ -231,7 +208,8 @@ public class Pedido {
         this.itens.remove(numeroItem - 1);
     }
 
-    public void realizarCheckout() throws BusinessRulesExceptions {
+    @Override
+    public void fazerCheckout() throws BusinessRulesExceptions {
         try {
             validarCheckoutNaoRealizado();
             validarPedidoContemItem();
@@ -241,10 +219,11 @@ public class Pedido {
         }
 
         setDataHoraCheckout(LocalDateTime.now());
-        mudarStatus();
+        atualizarStatusPedido();
     }
 
-    public void mudarStatus() throws BusinessRulesExceptions {
+    @Override
+    public void atualizarStatusPedido() throws BusinessRulesExceptions {
         try {
             validarPedidoNaoFinalizado();
         } catch (BusinessRulesExceptions e) {
@@ -252,9 +231,10 @@ public class Pedido {
             throw new BusinessRulesExceptions(msg);
         }
 
-        StatusPedido[] statusArray = StatusPedido.values();
-        int posicaoAtual = status.ordinal();
+        StatusPedidoEnum[] statusArray = StatusPedidoEnum.values();
+        int posicaoAtual = statusPedido.getStatus().ordinal();
         int proximaPosicao = (posicaoAtual + 1) % statusArray.length;
-        this.status = statusArray[proximaPosicao];
+        var novoStatus = new StatusPedido(statusArray[proximaPosicao], LocalDateTime.now());
+        setStatusPedido(novoStatus);
     }
 }

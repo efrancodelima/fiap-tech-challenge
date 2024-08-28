@@ -2,7 +2,7 @@ package br.com.fiap.tech_challenge.adapters.driver.controller.swagger;
 
 import br.com.fiap.tech_challenge.adapters.driver.controller.model.request.AtualizarProdutoDTO;
 import br.com.fiap.tech_challenge.adapters.driver.controller.model.request.CadastrarProdutoDTO;
-import br.com.fiap.tech_challenge.core.domain.model.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;

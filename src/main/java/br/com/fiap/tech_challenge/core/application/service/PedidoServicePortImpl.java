@@ -10,8 +10,9 @@ import br.com.fiap.tech_challenge.core.application.mapper.PedidoMapper;
 import br.com.fiap.tech_challenge.core.application.ports.repository.PedidoRepositoryPort;
 import br.com.fiap.tech_challenge.core.application.ports.repository.ProdutoRepositoryPort;
 import br.com.fiap.tech_challenge.core.domain.model.Pedido;
-import br.com.fiap.tech_challenge.core.domain.model.enums.StatusPedido;
 import br.com.fiap.tech_challenge.core.domain.ports.in.PedidoServicePort;
+// import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedido;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +63,7 @@ public class PedidoServicePortImpl implements PedidoServicePort {
       });
 
       // Valor mockado por conta do FAKE CHECKOUT
-      entity.setSituacao(StatusPedido.PAGO);
+      // entity.setSituacao(StatusPedido.PAGO);
       entity.setDataPedido(new Date());
       entity.setValorTotalPedido(getValorTotalPedido(entity.getItensPedido()));
 
