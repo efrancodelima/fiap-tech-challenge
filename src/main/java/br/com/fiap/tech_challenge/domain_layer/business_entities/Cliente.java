@@ -16,7 +16,7 @@ public class Cliente {
     public Cliente(String nome, Cpf cpf, String email) throws BusinessRulesExceptions {
         try {
             setNome(nome);
-            this.cpf = cpf;
+            setCpf(cpf);
             setEmail(email);
             validarCliente();
         } catch (BusinessRulesExceptions e) {
@@ -64,7 +64,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public void setEmail(String email) throws BusinessRulesExceptions {
+    private void setCpf(Cpf cpf) throws BusinessRulesExceptions {
+        validarCpf(cpf);
+        this.cpf = cpf;
+    }
+
+    private void setEmail(String email) throws BusinessRulesExceptions {
         email = email == null ? null : email.trim();
         validarEmail(email);
         this.email = email;
@@ -90,6 +95,12 @@ public class Cliente {
         }
     }
 
+    private void validarCpf(Cpf cpf) throws BusinessRulesExceptions {
+        if (cpf == null) {
+            throw new BusinessRulesExceptions(ClienteExceptions.CPF_NULO.getMensagem());
+        }
+    }
+
     private void validarEmail(String email) throws BusinessRulesExceptions {
         if (email == null) {
             return;
@@ -105,8 +116,8 @@ public class Cliente {
     }
 
     public void validarCliente() throws BusinessRulesExceptions {
-        if (nome == null && cpf == null && email == null) {
-            throw new BusinessRulesExceptions(ClienteExceptions.CLIENTE_INVALIDO.getMensagem());
+        if (nome == null && email == null) {
+            throw new BusinessRulesExceptions(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }
     }
 
