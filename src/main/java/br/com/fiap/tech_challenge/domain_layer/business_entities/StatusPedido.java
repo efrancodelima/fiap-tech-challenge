@@ -9,14 +9,13 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.StatusPedidoExceptions
 public class StatusPedido {
 
     // Atributos
-    private StatusPedidoEnum status;
-    private LocalDateTime dataHora;
+    private final StatusPedidoEnum status;
+    private final LocalDateTime dataHora;
 
     // Construtor
     StatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws BusinessRulesExceptions {
         try {
-            validarStatus(status);
-            validarDataHora(dataHora);
+            validarStatusPedido(status, dataHora);
             this.status = status;
             this.dataHora = dataHora;
         } catch (BusinessRulesExceptions e) {
@@ -35,6 +34,11 @@ public class StatusPedido {
     }
 
     // Métodos de validação
+    private void validarStatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws BusinessRulesExceptions {
+        validarStatus(status);
+        validarDataHora(dataHora);
+    }
+
     private void validarStatus(StatusPedidoEnum status) throws BusinessRulesExceptions {
         if (status == null) {
             throw new BusinessRulesExceptions(StatusPedidoExceptions.STATUS_NULO.getMensagem());

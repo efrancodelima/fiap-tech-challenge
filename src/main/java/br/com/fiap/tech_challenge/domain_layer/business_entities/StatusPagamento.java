@@ -10,14 +10,13 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.StatusPedidoExceptions
 public class StatusPagamento {
 
     // Atributos
-    private StatusPagamentoEnum status;
-    private LocalDateTime dataHora;
+    private final StatusPagamentoEnum status;
+    private final LocalDateTime dataHora;
 
     // Construtor
     StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws BusinessRulesExceptions {
         try {
-            validarStatus(status);
-            validarTimestamp(timestamp);
+            validarStatusPagamento(status, timestamp);
             this.status = status;
             this.dataHora = timestamp;
         } catch (BusinessRulesExceptions e) {
@@ -36,6 +35,12 @@ public class StatusPagamento {
     }
 
     // Métodos de validação
+    private void validarStatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp)
+            throws BusinessRulesExceptions {
+        validarStatus(status);
+        validarTimestamp(timestamp);
+    }
+
     private void validarStatus(StatusPagamentoEnum status) throws BusinessRulesExceptions {
         if (status == null) {
             throw new BusinessRulesExceptions(StatusPedidoExceptions.STATUS_NULO.getMensagem());

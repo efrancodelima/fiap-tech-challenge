@@ -7,14 +7,15 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.CpfExceptions;
 
 public class Cpf {
 
-    private int numero;
-    private int digitoVerificador;
+    private final int numero;
+    private final byte digitoVerificador;
 
     // Construtor
-    public Cpf(int numero, int digitoVerificador) throws BusinessRulesExceptions {
+    public Cpf(int numero, byte digitoVerificador) throws BusinessRulesExceptions {
         try {
-            setNumero(numero);
-            setDigitoVerificador(numero, digitoVerificador);
+            validarCpf(numero, digitoVerificador);
+            this.numero = numero;
+            this.digitoVerificador = digitoVerificador;
         } catch (BusinessRulesExceptions e) {
             String msg = "Erro ao instanciar o CPF! ";
             throw new BusinessRulesExceptions(msg + e.getMessage());
@@ -30,22 +31,16 @@ public class Cpf {
         return numero;
     }
 
-    public int getDigitoVerificador() {
+    public byte getDigitoVerificador() {
         return digitoVerificador;
     }
 
-    // Setters
-    private void setNumero(int numero) throws BusinessRulesExceptions {
-        validarNumero(numero);
-        this.numero = numero;
-    }
-
-    private void setDigitoVerificador(int numero, int digitoVerificador) throws BusinessRulesExceptions {
-        validarDigitoVerificador(numero, digitoVerificador);
-        this.digitoVerificador = digitoVerificador;
-    }
-
     // Métodos de validação
+    private void validarCpf(int numero, byte digitoVerificador) throws BusinessRulesExceptions {
+        validarNumero(numero);
+        validarDigitoVerificador(numero, digitoVerificador);
+    }
+
     private void validarNumero(int numero) throws BusinessRulesExceptions {
         if (numero < 1) {
             throw new BusinessRulesExceptions(CpfExceptions.NUMERO_MIN.getMensagem());
@@ -54,7 +49,7 @@ public class Cpf {
         }
     }
 
-    private void validarDigitoVerificador(int numero, int digitoVerificador) throws BusinessRulesExceptions {
+    private void validarDigitoVerificador(int numero, byte digitoVerificador) throws BusinessRulesExceptions {
         if (digitoVerificador != calcularDigitoVerificador(numero)) {
             throw new BusinessRulesExceptions(CpfExceptions.DIGITO_INVALIDO.getMensagem());
         }

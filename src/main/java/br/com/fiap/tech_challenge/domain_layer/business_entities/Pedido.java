@@ -1,6 +1,5 @@
 package br.com.fiap.tech_challenge.domain_layer.business_entities;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ public class Pedido implements IPedido {
         try {
             var status = new StatusPedido(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
             setCliente(cliente);
-            setItens(null);
+            setItens(null, null);
             setStatusPedido(status);
         } catch (BusinessRulesExceptions e) {
             String msg = "Erro ao instanciar o pedido! " + e.getMessage();
@@ -38,8 +37,8 @@ public class Pedido implements IPedido {
         try {
             setId(id);
             setCliente(cliente);
-            setItens(itens);
-            setDataHoraCheckout(dataHoraCheckout);
+            setItens(itens, dataHoraCheckout);
+            setDataHoraCheckout(dataHoraCheckout, statusPedido.getStatus());
             setStatusPagamento(pagamento);
             setStatusPedido(status);
         } catch (BusinessRulesExceptions e) {
@@ -91,16 +90,14 @@ public class Pedido implements IPedido {
         this.cliente = cliente;
     }
 
-    private void setItens(List<ItemPedido> itens) {
-        if (itens == null) {
-            this.itens = new ArrayList<ItemPedido>();
-        } else {
-            this.itens = itens;
-        }
+    private void setItens(List<ItemPedido> itens, LocalDateTime dataHoraCheckout) throws BusinessRulesExceptions {
+        validarItens(itens, dataHoraCheckout);
+        this.itens = itens;
     }
 
-    private void setDataHoraCheckout(LocalDateTime dataHoraCheckout) throws BusinessRulesExceptions {
-        validarDataHoraCheckout(dataHoraCheckout);
+    private void setDataHoraCheckout(LocalDateTime dataHoraCheckout, StatusPedidoEnum statusPedido)
+            throws BusinessRulesExceptions {
+        validarDataHoraCheckout(dataHoraCheckout, statusPedido);
         this.dataHoraCheckout = dataHoraCheckout;
     }
 
@@ -120,9 +117,22 @@ public class Pedido implements IPedido {
         }
     }
 
-    private void validarDataHoraCheckout(LocalDateTime dataHora) throws BusinessRulesExceptions {
-        if (dataHora == null) {
+    private void validarItens(List<ItemPedido> itens, LocalDateTime dataHoraCheckout) throws BusinessRulesExceptions {
+        if (dataHoraCheckout != null) {
+            if (itens == null || itens.size() == 0) {
+                throw new BusinessRulesExceptions(PedidoExceptions.ITENS_VAZIO.getMensagem());
+            }
+        }
+    }
+
+    private void validarDataHoraCheckout(LocalDateTime dataHora, StatusPedidoEnum statusPedido)
+            throws BusinessRulesExceptions {
+        if (dataHora == null && statusPedido == StatusPedidoEnum.AGUARDANDO_CHECKOUT) {
             return;
+        }
+
+        if (dataHora == null) {
+            throw new BusinessRulesExceptions(PedidoExceptions.DATA_CHECKOUT_NULA.getMensagem());
         }
 
         if (dataHora.isBefore(Constantes.dataHoraMinima)) {
@@ -218,7 +228,7 @@ public class Pedido implements IPedido {
             throw new BusinessRulesExceptions(msg);
         }
 
-        setDataHoraCheckout(LocalDateTime.now());
+        setDataHoraCheckout(LocalDateTime.now(), StatusPedidoEnum.AGUARDANDO_CHECKOUT);
         atualizarStatusPedido();
     }
 

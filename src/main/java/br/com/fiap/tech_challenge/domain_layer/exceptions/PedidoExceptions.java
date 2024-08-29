@@ -1,16 +1,15 @@
 package br.com.fiap.tech_challenge.domain_layer.exceptions;
 
 public enum PedidoExceptions {
-    ID_MIN("O ID do produto deve ser maior que 0."),
+    ID_MIN("O ID do pedido deve ser maior que 0."),
+    ITENS_VAZIO("O pedido deve conter pelo menos um item se o checkout já foi feito."),
     DATA_NULA("A data do pedido não pode ser nula."),
     DATA_MIN("A data do pedido não pode ser menor que 01/01/2024."),
     DATA_MAX("A data do pedido não pode ser maior que a data atual."),
+    DATA_CHECKOUT_NULA("A data do checkout não pode ser nula se o checkout já foi feito."),
     DATA_CHECKOUT_MIN("A data do checkout não pode ser menor que 01/01/2024."),
     DATA_CHECKOUT_MAX("A data do checkout não pode ser maior que a data atual."),
     STATUS_NULO("O status do pedido não pode ser nulo."),
-    DATA_STATUS_NULA("A data do status do pedido não pode ser nula."),
-    DATA_STATUS_MIN("A data do status do pedido não pode ser menor que 01/01/2024."),
-    DATA_STATUS_MAX("A data do status do pedido não pode ser maior que a data atual."),
     ITEM_NULO("O item não pode ser nulo."),
     NUMERO_ITEM("O número do item é inválido."),
     CHECKOUT_REALIZADO("O checkout do pedido já foi realizado."),
