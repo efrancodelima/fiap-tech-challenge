@@ -28,6 +28,12 @@ public class ClienteUseCase implements IClienteUseCase {
 
     @Override
     public Cliente buscarClientePorCpf(Cpf cpf) throws Exception {
-        return gateway.buscarClientePorCpf(cpf);
+        try {
+            return gateway.buscarClientePorCpf(cpf);
+        } catch (Exception e) {
+            String msg = "Erro ao buscar o cliente! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
+
 }

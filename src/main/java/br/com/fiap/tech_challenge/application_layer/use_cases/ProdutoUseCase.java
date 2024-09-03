@@ -20,22 +20,43 @@ public class ProdutoUseCase implements IProdutoUseCase {
     // Métodos
     @Override
     public Produto cadastrarProduto(Produto novoProduto) throws Exception {
-        return gateway.gravarProduto(novoProduto);
+        try {
+            return gateway.gravarProduto(novoProduto);
+        } catch (Exception e) {
+            String msg = "Erro ao cadastrar o produto! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
 
     @Override
     public void editarProduto(Produto produtoEditado) throws Exception {
-        gateway.atualizarProduto(produtoEditado);
+        try {
+            gateway.atualizarProduto(produtoEditado);
+        } catch (Exception e) {
+            String msg = "Erro ao editar o produto! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
 
     @Override
     public void removerProduto(Produto produto) throws Exception {
-        gateway.removerProduto(produto);
+        try {
+            gateway.removerProduto(produto);
+        } catch (Exception e) {
+            String msg = "Erro ao remover o produto! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
 
     @Override
     public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria)
             throws Exception {
-        return gateway.buscarPorCategoria(categoria);
+        try {
+            return gateway.buscarPorCategoria(categoria);
+        } catch (Exception e) {
+            String msg = "Erro ao buscar os produtos! ";
+            throw new Exception(msg + e.getMessage());
+        }
+
     }
 }

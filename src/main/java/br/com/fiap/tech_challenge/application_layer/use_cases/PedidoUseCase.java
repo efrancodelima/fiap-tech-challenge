@@ -19,31 +19,46 @@ public class PedidoUseCase implements IPedidoUseCase {
     // Métodos
     @Override
     public void atualizarStatus(Pedido pedido) throws Exception {
-        pedido.atualizarStatusPedido();
-        gateway.atualizarPedido(pedido);
+        try {
+            pedido.atualizarStatusPedido();
+            gateway.atualizarPedido(pedido);
+        } catch (Exception e) {
+            String msg = "Erro ao atualizar o status do pedido! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
 
     @Override
     public void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado)
             throws Exception {
-        // melhorar isso aqui
+        // TODO: falta implementar
     }
 
     @Override
     public boolean consultarStatusPagamento(Pedido pedido) throws Exception {
-        // vai mudar
+        // TODO: falta implementar
         return true;
     }
 
     @Override
     public void fazerCheckout(Pedido pedido) throws Exception {
-        pedido.fazerCheckout();
-        gateway.gravarPedido(pedido);
+        try {
+            pedido.fazerCheckout();
+            gateway.gravarPedido(pedido);
+        } catch (Exception e) {
+            String msg = "Erro ao fazer o checkout! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
 
     @Override
     public List<Pedido> listarPedidos() throws Exception {
-        return gateway.listarPedidos();
+        try {
+            return gateway.listarPedidos();
+        } catch (Exception e) {
+            String msg = "Erro ao listar os pedidos! ";
+            throw new Exception(msg + e.getMessage());
+        }
     }
 
 }
