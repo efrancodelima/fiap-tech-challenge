@@ -3,13 +3,13 @@ package br.com.fiap.tech_challenge.interface_layer.gateways.entities;
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
-@Entity
+@Embeddable
 public class ItemPedidoJpa implements Serializable {
 
     @ManyToOne

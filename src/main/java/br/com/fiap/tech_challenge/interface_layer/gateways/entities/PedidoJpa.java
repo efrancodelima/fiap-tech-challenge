@@ -2,6 +2,7 @@ package br.com.fiap.tech_challenge.interface_layer.gateways.entities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,8 +30,7 @@ public class PedidoJpa {
     @JoinColumn(name = "cliente_id", nullable = true)
     private ClienteJpa cliente;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pedido_id")
+    @ElementCollection
     private List<ItemPedidoJpa> itens;
 
     @Column(name = "timestamp_checkout", nullable = true)

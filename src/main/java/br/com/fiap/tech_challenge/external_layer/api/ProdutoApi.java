@@ -6,16 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoApi {
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrarProduto(Produto novoProduto) {
+    public ResponseEntity<String> cadastrarProduto() {
         try {
-            return new ResponseEntity<>("funfou", HttpStatus.CREATED);
+            return new ResponseEntity<>("funfou\n\n", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
