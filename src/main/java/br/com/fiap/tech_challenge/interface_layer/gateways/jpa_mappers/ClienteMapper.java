@@ -2,7 +2,6 @@ package br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ClienteJpa;
 
 public final class ClienteMapper {
@@ -13,13 +12,13 @@ public final class ClienteMapper {
                 cliente.getEmail());
     }
 
-    public static Cliente entidadeJpaParaEntidadeNegocio(ClienteJpa clienteJpa) throws BusinessRulesExceptions {
+    public static Cliente entidadeJpaParaEntidadeNegocio(ClienteJpa clienteJpa) throws Exception {
         Cpf cpf = criarCpf(clienteJpa.getCpf());
         return new Cliente(clienteJpa.getId(), cpf, clienteJpa.getNome(), clienteJpa.getEmail());
     }
 
     // Métodos privados
-    private static Cpf criarCpf(long cpf) throws BusinessRulesExceptions {
+    private static Cpf criarCpf(long cpf) throws Exception {
         byte digitoVerificador = (byte) (cpf % 100L);
         int numero = (int) (cpf / 100);
         return new Cpf(numero, digitoVerificador);

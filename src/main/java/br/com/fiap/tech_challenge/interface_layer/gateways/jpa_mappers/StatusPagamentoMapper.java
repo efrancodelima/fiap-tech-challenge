@@ -1,7 +1,6 @@
 package br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.StatusPagamentoJpa;
 
 public final class StatusPagamentoMapper {
@@ -11,7 +10,7 @@ public final class StatusPagamentoMapper {
     }
 
     public static StatusPagamento entidadeJpaParaEntidadeNegocio(StatusPagamentoJpa status)
-            throws BusinessRulesExceptions {
+            throws Exception {
         return new StatusPagamento(status.getStatus(), status.getDataHora());
     }
 

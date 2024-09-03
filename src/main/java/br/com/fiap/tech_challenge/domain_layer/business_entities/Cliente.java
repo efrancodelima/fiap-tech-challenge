@@ -3,7 +3,6 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.ClienteExceptions;
 
 public class Cliente {
@@ -13,25 +12,25 @@ public class Cliente {
     private String email;
 
     // Construtores
-    public Cliente(Cpf cpf, String nome, String email) throws BusinessRulesExceptions {
+    public Cliente(Cpf cpf, String nome, String email) throws Exception {
         try {
             setCpf(cpf);
             setNome(nome);
             setEmail(email);
             validarCliente(nome, email);
-        } catch (BusinessRulesExceptions e) {
+        } catch (Exception e) {
             String msg = "Erro ao instanciar o cliente! ";
-            throw new BusinessRulesExceptions(msg + e.getMessage());
+            throw new Exception(msg + e.getMessage());
         }
     }
 
-    public Cliente(long id, Cpf cpf, String nome, String email) throws BusinessRulesExceptions {
+    public Cliente(long id, Cpf cpf, String nome, String email) throws Exception {
         this(cpf, nome, email);
         try {
             setId(id);
-        } catch (BusinessRulesExceptions e) {
+        } catch (Exception e) {
             String msg = "Erro ao instanciar o cliente! ";
-            throw new BusinessRulesExceptions(msg + e.getMessage());
+            throw new Exception(msg + e.getMessage());
         }
     }
 
@@ -53,71 +52,71 @@ public class Cliente {
     }
 
     // Setters
-    private void setId(long id) throws BusinessRulesExceptions {
+    private void setId(long id) throws Exception {
         validarId(id);
         this.id = id;
     }
 
-    private void setCpf(Cpf cpf) throws BusinessRulesExceptions {
+    private void setCpf(Cpf cpf) throws Exception {
         validarCpf(cpf);
         this.cpf = cpf;
     }
 
-    private void setNome(String nome) throws BusinessRulesExceptions {
+    private void setNome(String nome) throws Exception {
         nome = nome == null ? null : nome.trim();
         validarnome(nome);
         this.nome = nome;
     }
 
-    private void setEmail(String email) throws BusinessRulesExceptions {
+    private void setEmail(String email) throws Exception {
         email = email == null ? null : email.trim();
         validarEmail(email);
         this.email = email;
     }
 
     // Métodos de validação
-    private void validarId(long id) throws BusinessRulesExceptions {
+    private void validarId(long id) throws Exception {
         if (id < 1) {
-            throw new BusinessRulesExceptions(ClienteExceptions.ID_MIN.getMensagem());
+            throw new Exception(ClienteExceptions.ID_MIN.getMensagem());
         }
     }
 
-    private void validarCpf(Cpf cpf) throws BusinessRulesExceptions {
+    private void validarCpf(Cpf cpf) throws Exception {
         if (cpf == null) {
-            throw new BusinessRulesExceptions(ClienteExceptions.CPF_NULO.getMensagem());
+            throw new Exception(ClienteExceptions.CPF_NULO.getMensagem());
         }
     }
 
-    private void validarnome(String nome) throws BusinessRulesExceptions {
+    private void validarnome(String nome) throws Exception {
         if (nome == null || nome.isEmpty()) {
             return;
         } else if (nome.length() > 30) {
-            throw new BusinessRulesExceptions(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
+            throw new Exception(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
         } else {
             ArrayList<String> palavras = getListaPalavras(nome, 3);
             if (palavras.size() < 1) {
-                throw new BusinessRulesExceptions(ClienteExceptions.NOME_INVALIDO.getMensagem());
+                throw new Exception(ClienteExceptions.NOME_INVALIDO.getMensagem());
             }
         }
     }
 
-    private void validarEmail(String email) throws BusinessRulesExceptions {
+    private void validarEmail(String email) throws Exception {
         if (email == null) {
             return;
         } else if (email.length() > 20) {
-            throw new BusinessRulesExceptions(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
+            throw new Exception(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
         } else {
             String emailRegexRFC5322 = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
             Pattern pattern = Pattern.compile(emailRegexRFC5322);
             if (!pattern.matcher(email).matches()) {
-                throw new BusinessRulesExceptions(ClienteExceptions.EMAIL_INVALIDO.getMensagem());
+                throw new Exception(ClienteExceptions.EMAIL_INVALIDO.getMensagem());
             }
         }
     }
 
-    private void validarCliente(String nome, String email) throws BusinessRulesExceptions {
+    private void validarCliente(String nome, String email) throws Exception {
         if (nome == null && email == null) {
-            throw new BusinessRulesExceptions(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
+            throw new Exception(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }
     }
 

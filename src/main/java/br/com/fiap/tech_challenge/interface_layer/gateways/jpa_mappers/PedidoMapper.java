@@ -8,7 +8,6 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPedido;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ClienteJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ItemPedidoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.PedidoJpa;
@@ -29,7 +28,7 @@ public final class PedidoMapper {
                 statusPagamentoJpa, statusPedidoJpa);
     }
 
-    public static Pedido entidadeJpaParaEntidadeNegocio(PedidoJpa pedidoJpa) throws BusinessRulesExceptions {
+    public static Pedido entidadeJpaParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
         long id = pedidoJpa.getId();
         Cliente cliente = ClienteMapper.entidadeJpaParaEntidadeNegocio(pedidoJpa.getCliente());
         List<ItemPedido> itens = ItemPedidoMapper.entidadesJpaParaEntidadesNegocio(pedidoJpa.getItens());
@@ -41,7 +40,7 @@ public final class PedidoMapper {
     }
 
     public static List<Pedido> entidadesJpaParaEntidadesNegocio(List<PedidoJpa> pedidosJpa)
-            throws BusinessRulesExceptions {
+            throws Exception {
         List<Pedido> pedidos = new ArrayList<>();
         for (PedidoJpa pedidoJpa : pedidosJpa) {
             Pedido pedido = entidadeJpaParaEntidadeNegocio(pedidoJpa);

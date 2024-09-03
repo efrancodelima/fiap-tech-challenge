@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IClienteGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ClienteJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers.ClienteMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IClienteJpaRepository;
@@ -32,9 +31,9 @@ public class ClienteGateway implements IClienteGateway {
     }
 
     @Override
-    public Cliente atualizarCliente(Cliente cliente) throws Exception {
+    public void atualizarCliente(Cliente cliente) throws Exception {
         // O repositório JPA usa o método save() para insert e update
-        return gravarCliente(cliente);
+        gravarCliente(cliente);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class ClienteGateway implements IClienteGateway {
     }
 
     @Override
-    public Cliente buscarClientePorCpf(Cpf cpf) throws BusinessRulesExceptions, Exception {
+    public Cliente buscarClientePorCpf(Cpf cpf) throws Exception {
         ClienteJpa clienteJpa = clienteJpaRepository.findByCpf(cpf.getNumeroComDigito());
         return converterParaEntidadeNegocio(clienteJpa);
     }
@@ -54,7 +53,7 @@ public class ClienteGateway implements IClienteGateway {
         return ClienteMapper.entidadeNegocioParaEntidadeJpa(cliente);
     }
 
-    private Cliente converterParaEntidadeNegocio(ClienteJpa clienteJpa) throws BusinessRulesExceptions {
+    private Cliente converterParaEntidadeNegocio(ClienteJpa clienteJpa) throws Exception {
         return ClienteMapper.entidadeJpaParaEntidadeNegocio(clienteJpa);
     }
 

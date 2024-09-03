@@ -5,7 +5,6 @@ import java.util.List;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IProdutoUseCase;
 
 public class ProdutoUseCase implements IProdutoUseCase {
@@ -20,23 +19,23 @@ public class ProdutoUseCase implements IProdutoUseCase {
 
     // Métodos
     @Override
-    public Produto cadastrarProduto(Produto novoProduto) throws BusinessRulesExceptions, Exception {
+    public Produto cadastrarProduto(Produto novoProduto) throws Exception {
         return gateway.gravarProduto(novoProduto);
     }
 
     @Override
-    public Produto editarProduto(Produto produtoEditado) throws BusinessRulesExceptions, Exception {
-        return gateway.atualizarProduto(produtoEditado);
+    public void editarProduto(Produto produtoEditado) throws Exception {
+        gateway.atualizarProduto(produtoEditado);
     }
 
     @Override
-    public void removerProduto(Produto produto) throws BusinessRulesExceptions, Exception {
+    public void removerProduto(Produto produto) throws Exception {
         gateway.removerProduto(produto);
     }
 
     @Override
     public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria)
-            throws BusinessRulesExceptions, Exception {
+            throws Exception {
         return gateway.buscarPorCategoria(categoria);
     }
 }

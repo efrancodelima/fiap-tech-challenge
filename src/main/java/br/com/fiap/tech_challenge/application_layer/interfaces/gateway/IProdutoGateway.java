@@ -4,16 +4,15 @@ import java.util.List;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 
 public interface IProdutoGateway {
 
     public Produto gravarProduto(Produto produto) throws Exception;
 
-    public Produto atualizarProduto(Produto produto) throws Exception;
+    public void atualizarProduto(Produto produto) throws Exception;
 
     public void removerProduto(Produto produto) throws Exception;
 
-    public List<Produto> buscarPorCategoria(CategoriaProduto categoria) throws BusinessRulesExceptions, Exception;
+    public List<Produto> buscarPorCategoria(CategoriaProduto categoria) throws Exception;
 
 }

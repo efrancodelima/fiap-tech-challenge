@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ProdutoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers.ProdutoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IProdutoJpaRepository;
@@ -34,9 +33,9 @@ public class ProdutoGateway implements IProdutoGateway {
     }
 
     @Override
-    public Produto atualizarProduto(Produto produto) throws Exception {
+    public void atualizarProduto(Produto produto) throws Exception {
         // O repositório JPA usa o método save() para insert e update
-        return gravarProduto(produto);
+        gravarProduto(produto);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class ProdutoGateway implements IProdutoGateway {
     }
 
     @Override
-    public List<Produto> buscarPorCategoria(CategoriaProduto categoria) throws BusinessRulesExceptions, Exception {
+    public List<Produto> buscarPorCategoria(CategoriaProduto categoria) throws Exception, Exception {
         List<ProdutoJpa> produtosJpa = produtoJpaRepository.findByCategoria(categoria);
         return converterParaEntidadesNegocio(produtosJpa);
     }
@@ -56,11 +55,11 @@ public class ProdutoGateway implements IProdutoGateway {
         return ProdutoMapper.entidadeNegocioParaEntidadeJpa(produto);
     }
 
-    private Produto converterParaEntidadeNegocio(ProdutoJpa produtoJpa) throws BusinessRulesExceptions {
+    private Produto converterParaEntidadeNegocio(ProdutoJpa produtoJpa) throws Exception {
         return ProdutoMapper.entidadeJpaParaEntidadeNegocio(produtoJpa);
     }
 
-    private List<Produto> converterParaEntidadesNegocio(List<ProdutoJpa> produtosJpa) throws BusinessRulesExceptions {
+    private List<Produto> converterParaEntidadesNegocio(List<ProdutoJpa> produtosJpa) throws Exception {
         return ProdutoMapper.entidadesJpaParaEntidadesNegocio(produtosJpa);
     }
 

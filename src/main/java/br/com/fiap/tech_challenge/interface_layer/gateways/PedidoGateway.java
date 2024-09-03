@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.PedidoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers.PedidoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoJpaRepository;
@@ -45,7 +44,7 @@ public class PedidoGateway implements IPedidoGateway {
     }
 
     @Override
-    public List<Pedido> listarPedidos() throws BusinessRulesExceptions, Exception {
+    public List<Pedido> listarPedidos() throws Exception, Exception {
 
         List<StatusPedidoEnum> statusListados = new ArrayList<>();
         statusListados.add(StatusPedidoEnum.RECEBIDO);
@@ -61,11 +60,11 @@ public class PedidoGateway implements IPedidoGateway {
         return PedidoMapper.entidadeNegocioParaEntidadeJpa(pedido);
     }
 
-    private Pedido converterParaEntidadeNegocio(PedidoJpa pedidoJpa) throws BusinessRulesExceptions {
+    private Pedido converterParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
         return PedidoMapper.entidadeJpaParaEntidadeNegocio(pedidoJpa);
     }
 
-    private List<Pedido> converterParaEntidadesNegocio(List<PedidoJpa> pedidoJpa) throws BusinessRulesExceptions {
+    private List<Pedido> converterParaEntidadesNegocio(List<PedidoJpa> pedidoJpa) throws Exception {
         return PedidoMapper.entidadesJpaParaEntidadesNegocio(pedidoJpa);
     }
 

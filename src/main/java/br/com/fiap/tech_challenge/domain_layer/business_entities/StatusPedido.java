@@ -3,7 +3,6 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.StatusPedidoExceptions;
 
 public class StatusPedido {
@@ -13,14 +12,14 @@ public class StatusPedido {
     private final LocalDateTime dataHora;
 
     // Construtor
-    public StatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws BusinessRulesExceptions {
+    public StatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws Exception {
         try {
             validarStatusPedido(status, dataHora);
             this.status = status;
             this.dataHora = dataHora;
-        } catch (BusinessRulesExceptions e) {
+        } catch (Exception e) {
             String msg = "Erro ao definir o status do pedido! ";
-            throw new BusinessRulesExceptions(msg + e.getMessage());
+            throw new Exception(msg + e.getMessage());
         }
     }
 
@@ -34,28 +33,28 @@ public class StatusPedido {
     }
 
     // Métodos de validação
-    private void validarStatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws BusinessRulesExceptions {
+    private void validarStatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws Exception {
         validarStatus(status);
         validarDataHora(dataHora);
     }
 
-    private void validarStatus(StatusPedidoEnum status) throws BusinessRulesExceptions {
+    private void validarStatus(StatusPedidoEnum status) throws Exception {
         if (status == null) {
-            throw new BusinessRulesExceptions(StatusPedidoExceptions.STATUS_NULO.getMensagem());
+            throw new Exception(StatusPedidoExceptions.STATUS_NULO.getMensagem());
         }
     }
 
-    private void validarDataHora(LocalDateTime dataHora) throws BusinessRulesExceptions {
+    private void validarDataHora(LocalDateTime dataHora) throws Exception {
         if (dataHora == null) {
-            throw new BusinessRulesExceptions(StatusPedidoExceptions.DATA_HORA_NULO.getMensagem());
+            throw new Exception(StatusPedidoExceptions.DATA_HORA_NULO.getMensagem());
         }
 
         if (dataHora.isBefore(Constantes.dataHoraMinimaValidacao)) {
-            throw new BusinessRulesExceptions(StatusPedidoExceptions.DATA_HORA_MIN.getMensagem());
+            throw new Exception(StatusPedidoExceptions.DATA_HORA_MIN.getMensagem());
         }
 
         if (dataHora.isAfter(LocalDateTime.now())) {
-            throw new BusinessRulesExceptions(StatusPedidoExceptions.DATA_HORA_MAX.getMensagem());
+            throw new Exception(StatusPedidoExceptions.DATA_HORA_MAX.getMensagem());
         }
     }
 }

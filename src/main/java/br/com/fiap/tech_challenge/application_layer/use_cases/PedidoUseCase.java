@@ -5,7 +5,6 @@ import java.util.List;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IPedidoUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 
 public class PedidoUseCase implements IPedidoUseCase {
 
@@ -19,31 +18,31 @@ public class PedidoUseCase implements IPedidoUseCase {
 
     // Métodos
     @Override
-    public void atualizarStatus(Pedido pedido) throws BusinessRulesExceptions, Exception {
+    public void atualizarStatus(Pedido pedido) throws Exception {
         pedido.atualizarStatusPedido();
         gateway.atualizarPedido(pedido);
     }
 
     @Override
     public void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado)
-            throws BusinessRulesExceptions, Exception {
+            throws Exception {
         // melhorar isso aqui
     }
 
     @Override
-    public boolean consultarStatusPagamento(Pedido pedido) throws BusinessRulesExceptions, Exception {
+    public boolean consultarStatusPagamento(Pedido pedido) throws Exception {
         // vai mudar
         return true;
     }
 
     @Override
-    public void fazerCheckout(Pedido pedido) throws BusinessRulesExceptions, Exception {
+    public void fazerCheckout(Pedido pedido) throws Exception {
         pedido.fazerCheckout();
         gateway.gravarPedido(pedido);
     }
 
     @Override
-    public List<Pedido> listarPedidos() throws BusinessRulesExceptions, Exception {
+    public List<Pedido> listarPedidos() throws Exception {
         return gateway.listarPedidos();
     }
 
