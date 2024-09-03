@@ -135,7 +135,7 @@ public class Pedido implements IPedido {
             throw new BusinessRulesExceptions(PedidoExceptions.DATA_CHECKOUT_NULA.getMensagem());
         }
 
-        if (dataHora.isBefore(Constantes.dataHoraMinima)) {
+        if (dataHora.isBefore(Constantes.dataHoraMinimaValidacao)) {
             throw new BusinessRulesExceptions(PedidoExceptions.DATA_CHECKOUT_MIN.getMensagem());
         }
 

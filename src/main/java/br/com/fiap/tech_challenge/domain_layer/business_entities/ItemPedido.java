@@ -7,14 +7,15 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.ItemPedidoExceptions;
 
 public class ItemPedido {
 
-    private Produto produto;
-    private int quantidade;
+    private final Produto produto;
+    private final int quantidade;
 
     // Construtor
-    ItemPedido(Produto produto, int quantidade) throws BusinessRulesExceptions {
+    public ItemPedido(Produto produto, int quantidade) throws BusinessRulesExceptions {
         try {
-            setProduto(produto);
-            setQuantidade(quantidade);
+            validarCpf(produto, quantidade);
+            this.produto = produto;
+            this.quantidade = quantidade;
         } catch (BusinessRulesExceptions e) {
             String msg = "Erro ao instanciar o item de pedido! " + e.getMessage();
             throw new BusinessRulesExceptions(msg);
@@ -34,18 +35,12 @@ public class ItemPedido {
         return produto.getPreco().multiply(BigDecimal.valueOf(quantidade));
     }
 
-    // Setters
-    private void setProduto(Produto produto) throws BusinessRulesExceptions {
-        validarProduto(produto);
-        this.produto = produto;
-    }
-
-    private void setQuantidade(int quantidade) throws BusinessRulesExceptions {
-        validarQuantidade(quantidade);
-        this.quantidade = quantidade;
-    }
-
     // Métodos de validação
+    private void validarCpf(Produto produto, int quantidade) throws BusinessRulesExceptions {
+        validarProduto(produto);
+        validarQuantidade(quantidade);
+    }
+
     private void validarProduto(Produto produto) throws BusinessRulesExceptions {
         if (produto == null) {
             throw new BusinessRulesExceptions(ItemPedidoExceptions.PRODUTO_NULO.getMensagem());

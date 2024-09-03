@@ -13,7 +13,7 @@ public class StatusPedido {
     private final LocalDateTime dataHora;
 
     // Construtor
-    StatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws BusinessRulesExceptions {
+    public StatusPedido(StatusPedidoEnum status, LocalDateTime dataHora) throws BusinessRulesExceptions {
         try {
             validarStatusPedido(status, dataHora);
             this.status = status;
@@ -50,7 +50,7 @@ public class StatusPedido {
             throw new BusinessRulesExceptions(StatusPedidoExceptions.DATA_HORA_NULO.getMensagem());
         }
 
-        if (dataHora.isBefore(Constantes.dataHoraMinima)) {
+        if (dataHora.isBefore(Constantes.dataHoraMinimaValidacao)) {
             throw new BusinessRulesExceptions(StatusPedidoExceptions.DATA_HORA_MIN.getMensagem());
         }
 

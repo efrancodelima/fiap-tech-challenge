@@ -14,7 +14,7 @@ public class StatusPagamento {
     private final LocalDateTime dataHora;
 
     // Construtor
-    StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws BusinessRulesExceptions {
+    public StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws BusinessRulesExceptions {
         try {
             validarStatusPagamento(status, timestamp);
             this.status = status;
@@ -52,7 +52,7 @@ public class StatusPagamento {
             throw new BusinessRulesExceptions(StatusPagamentoExceptions.DATA_HORA_NULO.getMensagem());
         }
 
-        if (timestamp.isBefore(Constantes.dataHoraMinima)) {
+        if (timestamp.isBefore(Constantes.dataHoraMinimaValidacao)) {
             throw new BusinessRulesExceptions(StatusPagamentoExceptions.DATA_HORA_MIN.getMensagem());
         }
 

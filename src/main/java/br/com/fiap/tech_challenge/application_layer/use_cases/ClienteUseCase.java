@@ -5,7 +5,6 @@ import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IClient
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.ClienteExceptions;
 
 public class ClienteUseCase implements IClienteUseCase {
 
@@ -19,12 +18,12 @@ public class ClienteUseCase implements IClienteUseCase {
 
     // Métodos
     @Override
-    public void cadastrarCliente(Cliente cliente) {
+    public void cadastrarCliente(Cliente cliente) throws BusinessRulesExceptions, Exception {
         gateway.gravarCliente(cliente);
     }
 
     @Override
-    public Cliente buscarClientePorCpf(Cpf cpf) {
+    public Cliente buscarClientePorCpf(Cpf cpf) throws BusinessRulesExceptions, Exception {
         return gateway.buscarClientePorCpf(cpf);
     }
 }

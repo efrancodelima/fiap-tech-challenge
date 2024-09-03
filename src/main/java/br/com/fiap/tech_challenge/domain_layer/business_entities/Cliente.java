@@ -8,25 +8,25 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.ClienteExceptions;
 
 public class Cliente {
     private long id;
-    private String nome;
     private Cpf cpf;
+    private String nome;
     private String email;
 
     // Construtores
-    public Cliente(String nome, Cpf cpf, String email) throws BusinessRulesExceptions {
+    public Cliente(Cpf cpf, String nome, String email) throws BusinessRulesExceptions {
         try {
-            setNome(nome);
             setCpf(cpf);
+            setNome(nome);
             setEmail(email);
-            validarCliente();
+            validarCliente(nome, email);
         } catch (BusinessRulesExceptions e) {
             String msg = "Erro ao instanciar o cliente! ";
             throw new BusinessRulesExceptions(msg + e.getMessage());
         }
     }
 
-    public Cliente(long id, String nome, Cpf cpf, String email) throws BusinessRulesExceptions {
-        this(nome, cpf, email);
+    public Cliente(long id, Cpf cpf, String nome, String email) throws BusinessRulesExceptions {
+        this(cpf, nome, email);
         try {
             setId(id);
         } catch (BusinessRulesExceptions e) {
@@ -40,12 +40,12 @@ public class Cliente {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
     public Cpf getCpf() {
         return cpf;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public String getEmail() {
@@ -58,15 +58,15 @@ public class Cliente {
         this.id = id;
     }
 
+    private void setCpf(Cpf cpf) throws BusinessRulesExceptions {
+        validarCpf(cpf);
+        this.cpf = cpf;
+    }
+
     private void setNome(String nome) throws BusinessRulesExceptions {
         nome = nome == null ? null : nome.trim();
         validarnome(nome);
         this.nome = nome;
-    }
-
-    private void setCpf(Cpf cpf) throws BusinessRulesExceptions {
-        validarCpf(cpf);
-        this.cpf = cpf;
     }
 
     private void setEmail(String email) throws BusinessRulesExceptions {
@@ -82,6 +82,12 @@ public class Cliente {
         }
     }
 
+    private void validarCpf(Cpf cpf) throws BusinessRulesExceptions {
+        if (cpf == null) {
+            throw new BusinessRulesExceptions(ClienteExceptions.CPF_NULO.getMensagem());
+        }
+    }
+
     private void validarnome(String nome) throws BusinessRulesExceptions {
         if (nome == null || nome.isEmpty()) {
             return;
@@ -92,12 +98,6 @@ public class Cliente {
             if (palavras.size() < 1) {
                 throw new BusinessRulesExceptions(ClienteExceptions.NOME_INVALIDO.getMensagem());
             }
-        }
-    }
-
-    private void validarCpf(Cpf cpf) throws BusinessRulesExceptions {
-        if (cpf == null) {
-            throw new BusinessRulesExceptions(ClienteExceptions.CPF_NULO.getMensagem());
         }
     }
 
@@ -115,7 +115,7 @@ public class Cliente {
         }
     }
 
-    private void validarCliente() throws BusinessRulesExceptions {
+    private void validarCliente(String nome, String email) throws BusinessRulesExceptions {
         if (nome == null && email == null) {
             throw new BusinessRulesExceptions(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }

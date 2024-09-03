@@ -1,16 +1,19 @@
 package br.com.fiap.tech_challenge.application_layer.interfaces.gateway;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import br.com.fiap.tech_challenge.adapters.driver.controller.model.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesExceptions;
 
 public interface IProdutoGateway {
-    public Produto gravarProduto(Produto produto);
 
-    public Produto atualizarProduto(Produto produto);
+    public Produto gravarProduto(Produto produto) throws Exception;
 
-    public void removerProduto(Produto produto);
+    public Produto atualizarProduto(Produto produto) throws Exception;
 
-    public ArrayList<Produto> buscarPorCategoria(CategoriaProduto categoria);
+    public void removerProduto(Produto produto) throws Exception;
+
+    public List<Produto> buscarPorCategoria(CategoriaProduto categoria) throws BusinessRulesExceptions, Exception;
+
 }

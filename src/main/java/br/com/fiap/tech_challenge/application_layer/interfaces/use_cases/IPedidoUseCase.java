@@ -7,17 +7,15 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException
 
 public interface IPedidoUseCase {
 
-    void atualizarStatus(Pedido pedido) throws BusinessRulesExceptions;
+    void atualizarStatus(Pedido pedido) throws BusinessRulesExceptions, Exception;
 
     // Para usar com o webhook
-    void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado);
-    
-    boolean consultarStatusPagamento(Pedido pedido);
+    void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado) throws BusinessRulesExceptions, Exception;
 
-    void fazerCheckout(Pedido pedido) throws BusinessRulesExceptions;
+    boolean consultarStatusPagamento(Pedido pedido) throws BusinessRulesExceptions, Exception;
 
-    List<Pedido> listarPedidos();
+    void fazerCheckout(Pedido pedido) throws BusinessRulesExceptions, Exception;
 
-    
+    List<Pedido> listarPedidos() throws BusinessRulesExceptions, Exception;
 
 }

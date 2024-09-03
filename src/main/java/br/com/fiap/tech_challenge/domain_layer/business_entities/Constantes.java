@@ -4,6 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Constantes {
-    public static LocalDate dataMinima = LocalDate.of(2020, 1, 1);
-    public static LocalDateTime dataHoraMinima = dataMinima.atStartOfDay();
+    public static LocalDate dataMinimaValidacao = LocalDate.of(2020, 1, 1);
+    public static LocalDateTime dataHoraMinimaValidacao = dataMinimaValidacao.atStartOfDay();
 }
