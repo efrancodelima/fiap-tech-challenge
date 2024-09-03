@@ -15,12 +15,7 @@ public class ClienteGateway implements IClienteGateway {
 
     // Atributos
     @Autowired
-    private final IClienteJpaRepository clienteJpaRepository;
-
-    // Construtor
-    public ClienteGateway(IClienteJpaRepository repositorioJpa) {
-        this.clienteJpaRepository = repositorioJpa;
-    }
+    private IClienteJpaRepository clienteJpaRepository;
 
     // Métodos públicos
     @Override

@@ -17,12 +17,7 @@ public class ProdutoGateway implements IProdutoGateway {
 
     // Atributos
     @Autowired
-    private final IProdutoJpaRepository produtoJpaRepository;
-
-    // Construtor
-    public ProdutoGateway(IProdutoJpaRepository repositorioJpa) {
-        this.produtoJpaRepository = repositorioJpa;
-    }
+    private IProdutoJpaRepository produtoJpaRepository;
 
     // Métodos públicos
     @Override

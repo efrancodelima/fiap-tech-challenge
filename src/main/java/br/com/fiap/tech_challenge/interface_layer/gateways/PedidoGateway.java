@@ -16,12 +16,7 @@ public class PedidoGateway implements IPedidoGateway {
 
     // Atributos
     @Autowired
-    private final IPedidoJpaRepository pedidoJpaRepository;
-
-    // Construtor
-    public PedidoGateway(IPedidoJpaRepository repositorioJpa) {
-        this.pedidoJpaRepository = repositorioJpa;
-    }
+    private IPedidoJpaRepository pedidoJpaRepository;
 
     // Métodos públicos
     @Override
