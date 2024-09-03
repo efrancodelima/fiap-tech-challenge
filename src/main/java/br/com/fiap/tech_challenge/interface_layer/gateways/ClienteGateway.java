@@ -6,16 +6,16 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IClienteGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
-import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ClienteJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers.ClienteMapper;
-import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IClienteJpaRepository;
+import br.com.fiap.tech_challenge.interface_layer.gateways.adapters.ClienteMapper;
+import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ClienteJpa;
+import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IClienteRepository;
 
 @Component
 public class ClienteGateway implements IClienteGateway {
 
     // Atributos
     @Autowired
-    private IClienteJpaRepository clienteJpaRepository;
+    private IClienteRepository clienteJpaRepository;
 
     // Métodos públicos
     @Override

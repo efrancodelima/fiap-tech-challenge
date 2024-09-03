@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.ProdutoJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers.ProdutoMapper;
-import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IProdutoJpaRepository;
+import br.com.fiap.tech_challenge.interface_layer.gateways.adapters.ProdutoMapper;
+import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ProdutoJpa;
+import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IProdutoRepository;
 
 @Component
 public class ProdutoGateway implements IProdutoGateway {
 
     // Atributos
     @Autowired
-    private IProdutoJpaRepository produtoJpaRepository;
+    private IProdutoRepository produtoJpaRepository;
 
     // Métodos públicos
     @Override

@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
-import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_entities.PedidoJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.jpa_mappers.PedidoMapper;
-import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoJpaRepository;
+import br.com.fiap.tech_challenge.interface_layer.gateways.adapters.PedidoMapper;
+import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;
+import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoRepository;
 
 public class PedidoGateway implements IPedidoGateway {
 
     // Atributos
     @Autowired
-    private IPedidoJpaRepository pedidoJpaRepository;
+    private IPedidoRepository pedidoJpaRepository;
 
     // Métodos públicos
     @Override
