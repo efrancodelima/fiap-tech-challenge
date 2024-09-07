@@ -1,7 +1,7 @@
 package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum ProdutoExceptions {
-    ID_MIN("O ID do produto deve ser maior que 0."),
+    CODIGO_MIN("O código do produto deve ser maior que 0."),
     NOME_VAZIO("Informe o nome do produto!"),
     NOME_MIN_CHAR("O nome do produto precisa ter, no mínimo, 5 caracteres."),
     NOME_MAX_CHAR("O nome do produto não pode ter mais de 20 caracteres."),

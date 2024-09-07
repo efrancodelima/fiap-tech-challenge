@@ -8,7 +8,7 @@ public interface IPedidoGateway {
 
     public Pedido gravarPedido(Pedido pedido) throws Exception;
 
-    public Pedido atualizarPedido(Pedido pedido) throws Exception;
+    public void atualizarPedido(Pedido pedido) throws Exception;
 
     public void removerPedido(Pedido pedido) throws Exception;
 

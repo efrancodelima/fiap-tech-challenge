@@ -1,11 +1,10 @@
-package br.com.fiap.tech_challenge.external_layer.swagger;
+package br.com.fiap.tech_challenge.external_layer.api.interfaces;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,10 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
-import java.util.List;
 
 @Tag(name = "Produtos")
-public interface IProdutoSwagger {
+public interface IProdutoApi {
 
         // Cadastrar produto
         @Operation(summary = "Cadastrar produto", description = "Para cadastrar um novo produto, clique em "

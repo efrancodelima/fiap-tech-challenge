@@ -82,7 +82,7 @@ public class Produto {
     // Métodos de validação
     private void validarCodigo(long codigo) throws BusinessRulesException {
         if (codigo < 1) {
-            throw new BusinessRulesException(ProdutoExceptions.ID_MIN.getMensagem());
+            throw new BusinessRulesException(ProdutoExceptions.CODIGO_MIN.getMensagem());
         }
     }
 

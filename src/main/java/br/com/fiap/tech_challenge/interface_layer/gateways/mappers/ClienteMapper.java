@@ -7,14 +7,14 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ClienteJpa;
 public final class ClienteMapper {
 
     // Métodos públicos
-    public static ClienteJpa mapperParaEntidadeJpa(Cliente cliente) {
-        return new ClienteJpa(cliente.getId(), cliente.getCpf().getNumeroComDigito(), cliente.getNome(),
+    public static ClienteJpa mapearParaEntidadeJpa(Cliente cliente) {
+        return new ClienteJpa(cliente.getCodigo(), cliente.getCpf().getNumeroComDigito(), cliente.getNome(),
                 cliente.getEmail());
     }
 
-    public static Cliente mapperParaEntidadeNegocio(ClienteJpa clienteJpa) throws Exception {
+    public static Cliente mapearParaEntidadeNegocio(ClienteJpa clienteJpa) throws Exception {
         Cpf cpf = criarCpf(clienteJpa.getCpf());
-        return new Cliente(clienteJpa.getId(), cpf, clienteJpa.getNome(), clienteJpa.getEmail());
+        return new Cliente(clienteJpa.getCodigo(), cpf, clienteJpa.getNome(), clienteJpa.getEmail());
     }
 
     // Métodos privados

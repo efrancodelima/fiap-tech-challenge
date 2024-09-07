@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.tech_challenge.external_layer.swagger.IProdutoSwagger;
+import br.com.fiap.tech_challenge.external_layer.api.interfaces.IProdutoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.ProdutoController;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
 
 @RestController
 @RequestMapping("/produtos")
-public class ProdutoApi implements IProdutoSwagger {
+public class ProdutoApi implements IProdutoApi {
 
     @Autowired
     private ProdutoController controller;

@@ -20,14 +20,13 @@ public class ProdutoGateway implements IProdutoGateway {
     @Autowired
     private IProdutoRepository produtoJpaRepository;
     private final String PRODUTO_NAO_ENCONTRADO = "Não foi encontrado nenhum produto para o código informado.";
-    private final String PRODUTOS_NAO_ENCONTRADOS = "Não foi encontrado nenhum produto para a categoria informada.";
 
     // Métodos públicos
     @Override
     public Produto gravarProduto(Produto produto) throws Exception {
-        ProdutoJpa produtoJpa = converterParaEntidadeJpa(produto);
+        ProdutoJpa produtoJpa = ProdutoMapper.mapearParaEntidadeJpa(produto);
         produtoJpa = produtoJpaRepository.save(produtoJpa);
-        return converterParaEntidadeNegocio(produtoJpa);
+        return ProdutoMapper.mapearParaEntidadeNegocio(produtoJpa);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class ProdutoGateway implements IProdutoGateway {
         if (!produtoJpaRepository.existsById(produto.getCodigo())) {
             throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
         }
-        ProdutoJpa produtoJpa = converterParaEntidadeJpa(produto);
+        ProdutoJpa produtoJpa = ProdutoMapper.mapearParaEntidadeJpa(produto);
         produtoJpaRepository.save(produtoJpa);
     }
 
@@ -51,25 +50,7 @@ public class ProdutoGateway implements IProdutoGateway {
     public List<Produto> buscarPorCategoria(CategoriaProduto categoria)
             throws ResourceNotFoundException, Exception {
         List<ProdutoJpa> produtosJpa = produtoJpaRepository.findByCategoria(categoria);
-        if (produtosJpa.size() > 0) {
-            return converterParaEntidadesNegocio(produtosJpa);
-        } else {
-            throw new ResourceNotFoundException(PRODUTOS_NAO_ENCONTRADOS);
-        }
-    }
-
-    // Métodos privados
-    private ProdutoJpa converterParaEntidadeJpa(Produto produto) {
-        return ProdutoMapper.mapperParaEntidadeJpa(produto);
-    }
-
-    private Produto converterParaEntidadeNegocio(ProdutoJpa produtoJpa) throws Exception {
-        return ProdutoMapper.mapperParaEntidadeNegocio(produtoJpa);
-    }
-
-    private List<Produto> converterParaEntidadesNegocio(List<ProdutoJpa> produtosJpa)
-            throws Exception {
-        return ProdutoMapper.mapperParaEntidadesNegocio(produtosJpa);
+        return ProdutoMapper.mapearParaEntidadesNegocio(produtosJpa);
     }
 
 }

@@ -5,11 +5,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.domain_layer.constants.Validacao;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.PedidoExceptions;
 import br.com.fiap.tech_challenge.domain_layer.interfaces.IPedido;
 
 public class Pedido implements IPedido {
-    private long id;
+    private long numero;
     private Cliente cliente;
     private List<ItemPedido> itens;
     private LocalDateTime dataHoraCheckout;
@@ -30,11 +31,11 @@ public class Pedido implements IPedido {
     }
 
     // Construtor usado para instanciar um pedido já existente
-    public Pedido(long id, Cliente cliente, List<ItemPedido> itens, LocalDateTime dataHoraCheckout,
+    public Pedido(long numero, Cliente cliente, List<ItemPedido> itens, LocalDateTime dataHoraCheckout,
             StatusPagamento pagamento, StatusPedido status)
             throws Exception {
         try {
-            setId(id);
+            setNumero(numero);
             setCliente(cliente);
             setItens(itens, dataHoraCheckout);
             setDataHoraCheckout(dataHoraCheckout, statusPedido.getStatus());
@@ -47,8 +48,8 @@ public class Pedido implements IPedido {
     }
 
     // Getters
-    public long getId() {
-        return id;
+    public long getNumero() {
+        return numero;
     }
 
     public Cliente getCliente() {
@@ -80,9 +81,9 @@ public class Pedido implements IPedido {
     }
 
     // Setters
-    private void setId(long id) throws Exception {
-        validarId(id);
-        this.id = id;
+    private void setNumero(long numero) throws Exception {
+        validarNumero(numero);
+        this.numero = numero;
     }
 
     private void setCliente(Cliente cliente) {
@@ -110,9 +111,9 @@ public class Pedido implements IPedido {
     }
 
     // Métodos de validação
-    private void validarId(long id) throws Exception {
-        if (id < 1) {
-            throw new Exception(PedidoExceptions.ID_MIN.getMensagem());
+    private void validarNumero(long numero) throws Exception {
+        if (numero < 1) {
+            throw new Exception(PedidoExceptions.NUMERO_MIN.getMensagem());
         }
     }
 
@@ -134,7 +135,7 @@ public class Pedido implements IPedido {
             throw new Exception(PedidoExceptions.DATA_CHECKOUT_NULA.getMensagem());
         }
 
-        if (dataHora.isBefore(Constantes.dataHoraMinimaValidacao)) {
+        if (dataHora.isBefore(Validacao.dataHoraMinima)) {
             throw new Exception(PedidoExceptions.DATA_CHECKOUT_MIN.getMensagem());
         }
 

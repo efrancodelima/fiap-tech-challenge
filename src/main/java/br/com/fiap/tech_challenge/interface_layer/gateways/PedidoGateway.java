@@ -9,6 +9,7 @@ import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGa
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.PedidoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoRepository;
 
@@ -17,24 +18,31 @@ public class PedidoGateway implements IPedidoGateway {
     // Atributos
     @Autowired
     private IPedidoRepository pedidoJpaRepository;
+    private final String PEDIDO_NAO_ENCONTRADO = "Não foi encontrado nenhum pedido para o código informado.";
 
     // Métodos públicos
     @Override
     public Pedido gravarPedido(Pedido pedido) throws Exception {
-        PedidoJpa pedidoJpa = converterParaEntidadeJpa(pedido);
+        PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpa = pedidoJpaRepository.save(pedidoJpa);
-        return converterParaEntidadeNegocio(pedidoJpa);
+        return PedidoMapper.mapearParaEntidadeNegocio(pedidoJpa);
     }
 
     @Override
-    public Pedido atualizarPedido(Pedido pedido) throws Exception {
-        // O repositório JPA usa o método save() para insert e update
-        return gravarPedido(pedido);
+    public void atualizarPedido(Pedido pedido) throws Exception {
+        if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
+            throw new ResourceNotFoundException(PEDIDO_NAO_ENCONTRADO);
+        }
+        PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
+        pedidoJpaRepository.save(pedidoJpa);
     }
 
     @Override
     public void removerPedido(Pedido pedido) throws Exception {
-        PedidoJpa pedidoJpa = converterParaEntidadeJpa(pedido);
+        if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
+            throw new ResourceNotFoundException(PEDIDO_NAO_ENCONTRADO);
+        }
+        PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpaRepository.delete(pedidoJpa);
     }
 
@@ -46,21 +54,9 @@ public class PedidoGateway implements IPedidoGateway {
         statusListados.add(StatusPedidoEnum.EM_PREPARACAO);
         statusListados.add(StatusPedidoEnum.PRONTO);
 
-        List<PedidoJpa> itensJpa = pedidoJpaRepository.listarPedidosPorStatusIn(statusListados);
-        return converterParaEntidadesNegocio(itensJpa);
-    }
+        List<PedidoJpa> pedidosJpa = pedidoJpaRepository.listarPedidosPorStatusIn(statusListados);
+        return PedidoMapper.mapearParaEntidadesNegocio(pedidosJpa);
 
-    // Métodos privados
-    private PedidoJpa converterParaEntidadeJpa(Pedido pedido) {
-        return PedidoMapper.entidadeNegocioParaEntidadeJpa(pedido);
-    }
-
-    private Pedido converterParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
-        return PedidoMapper.entidadeJpaParaEntidadeNegocio(pedidoJpa);
-    }
-
-    private List<Pedido> converterParaEntidadesNegocio(List<PedidoJpa> pedidoJpa) throws Exception {
-        return PedidoMapper.entidadesJpaParaEntidadesNegocio(pedidoJpa);
     }
 
 }

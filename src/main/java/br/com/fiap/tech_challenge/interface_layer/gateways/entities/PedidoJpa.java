@@ -28,7 +28,7 @@ public class PedidoJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long numero;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = true)

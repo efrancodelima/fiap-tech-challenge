@@ -5,11 +5,11 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.StatusPagame
 
 public final class StatusPagamentoMapper {
 
-    public static StatusPagamentoJpa entidadeNegocioParaEntidadeJpa(StatusPagamento status) {
+    public static StatusPagamentoJpa mapearParaEntidadeJpa(StatusPagamento status) {
         return new StatusPagamentoJpa(status.getStatus(), status.getDataHora());
     }
 
-    public static StatusPagamento entidadeJpaParaEntidadeNegocio(StatusPagamentoJpa status)
+    public static StatusPagamento mapearParaEntidadeNegocio(StatusPagamentoJpa status)
             throws Exception {
         return new StatusPagamento(status.getStatus(), status.getDataHora());
     }

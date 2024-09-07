@@ -7,37 +7,27 @@ import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.ClienteExceptions;
 
 public class Cliente {
-    private long id;
+    private long codigo;
     private Cpf cpf;
     private String nome;
     private String email;
 
     // Construtores
-    public Cliente(Cpf cpf, String nome, String email) throws Exception {
-        try {
-            setCpf(cpf);
-            setNome(nome);
-            setEmail(email);
-            validarCliente(nome, email);
-        } catch (Exception e) {
-            String msg = "Erro ao instanciar o cliente! ";
-            throw new BusinessRulesException(msg + e.getMessage());
-        }
+    public Cliente(Cpf cpf, String nome, String email) throws BusinessRulesException {
+        setCpf(cpf);
+        setNome(nome);
+        setEmail(email);
+        validarCliente(nome, email);
     }
 
-    public Cliente(long id, Cpf cpf, String nome, String email) throws Exception {
+    public Cliente(long codigo, Cpf cpf, String nome, String email) throws BusinessRulesException {
         this(cpf, nome, email);
-        try {
-            setId(id);
-        } catch (Exception e) {
-            String msg = "Erro ao instanciar o cliente! ";
-            throw new BusinessRulesException(msg + e.getMessage());
-        }
+        setCodigo(codigo);
     }
 
     // Getters
-    public long getId() {
-        return id;
+    public long getCodigo() {
+        return codigo;
     }
 
     public Cpf getCpf() {
@@ -53,42 +43,42 @@ public class Cliente {
     }
 
     // Setters
-    private void setId(long id) throws Exception {
-        validarId(id);
-        this.id = id;
+    private void setCodigo(long codigo) throws BusinessRulesException {
+        validarCodigo(codigo);
+        this.codigo = codigo;
     }
 
-    private void setCpf(Cpf cpf) throws Exception {
+    private void setCpf(Cpf cpf) throws BusinessRulesException {
         validarCpf(cpf);
         this.cpf = cpf;
     }
 
-    private void setNome(String nome) throws Exception {
+    private void setNome(String nome) throws BusinessRulesException {
         nome = nome == null ? null : nome.trim();
         validarnome(nome);
         this.nome = nome;
     }
 
-    private void setEmail(String email) throws Exception {
+    private void setEmail(String email) throws BusinessRulesException {
         email = email == null ? null : email.trim();
         validarEmail(email);
         this.email = email;
     }
 
     // Métodos de validação
-    private void validarId(long id) throws Exception {
-        if (id < 1) {
-            throw new BusinessRulesException(ClienteExceptions.ID_MIN.getMensagem());
+    private void validarCodigo(long codigo) throws BusinessRulesException {
+        if (codigo < 1) {
+            throw new BusinessRulesException(ClienteExceptions.CODIGO_MIN.getMensagem());
         }
     }
 
-    private void validarCpf(Cpf cpf) throws Exception {
+    private void validarCpf(Cpf cpf) throws BusinessRulesException {
         if (cpf == null) {
             throw new BusinessRulesException(ClienteExceptions.CPF_NULO.getMensagem());
         }
     }
 
-    private void validarnome(String nome) throws Exception {
+    private void validarnome(String nome) throws BusinessRulesException {
         if (nome == null || nome.isEmpty()) {
             return;
         } else if (nome.length() > 30) {
@@ -101,7 +91,7 @@ public class Cliente {
         }
     }
 
-    private void validarEmail(String email) throws Exception {
+    private void validarEmail(String email) throws BusinessRulesException {
         if (email == null) {
             return;
         } else if (email.length() > 20) {
@@ -115,7 +105,7 @@ public class Cliente {
         }
     }
 
-    private void validarCliente(String nome, String email) throws Exception {
+    private void validarCliente(String nome, String email) throws BusinessRulesException {
         if (nome == null && email == null) {
             throw new BusinessRulesException(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }

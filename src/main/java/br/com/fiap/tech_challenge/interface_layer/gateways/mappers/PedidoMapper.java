@@ -17,33 +17,33 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.StatusPedido
 public final class PedidoMapper {
 
     // Métodos públicos
-    public static PedidoJpa entidadeNegocioParaEntidadeJpa(Pedido pedido) {
-        ClienteJpa clienteJpa = ClienteMapper.mapperParaEntidadeJpa(pedido.getCliente());
-        List<ItemPedidoJpa> itensJpa = ItemPedidoMapper.adaptarParaEntidadeJpa(pedido.getItens());
+    public static PedidoJpa mapearParaEntidadeJpa(Pedido pedido) {
+        ClienteJpa clienteJpa = ClienteMapper.mapearParaEntidadeJpa(pedido.getCliente());
+        List<ItemPedidoJpa> itensJpa = ItemPedidoMapper.mapearParaEntidadeJpa(pedido.getItens());
         StatusPagamentoJpa statusPagamentoJpa = StatusPagamentoMapper
-                .entidadeNegocioParaEntidadeJpa(pedido.getStatusPagamento());
-        StatusPedidoJpa statusPedidoJpa = StatusPedidoMapper.entidadeNegocioParaEntidadeJpa(pedido.getStatusPedido());
+                .mapearParaEntidadeJpa(pedido.getStatusPagamento());
+        StatusPedidoJpa statusPedidoJpa = StatusPedidoMapper.mapearParaEntidadeJpa(pedido.getStatusPedido());
 
-        return new PedidoJpa(pedido.getId(), clienteJpa, itensJpa, pedido.getDataHoraCheckout(),
+        return new PedidoJpa(pedido.getNumero(), clienteJpa, itensJpa, pedido.getDataHoraCheckout(),
                 statusPagamentoJpa, statusPedidoJpa);
     }
 
-    public static Pedido entidadeJpaParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
-        long id = pedidoJpa.getId();
-        Cliente cliente = ClienteMapper.mapperParaEntidadeNegocio(pedidoJpa.getCliente());
-        List<ItemPedido> itens = ItemPedidoMapper.adaptarParaEntidadeNegocio(pedidoJpa.getItens());
+    public static Pedido mapearParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
+        long id = pedidoJpa.getNumero();
+        Cliente cliente = ClienteMapper.mapearParaEntidadeNegocio(pedidoJpa.getCliente());
+        List<ItemPedido> itens = ItemPedidoMapper.mapearParaEntidadeNegocio(pedidoJpa.getItens());
         StatusPagamento statusPagamento = StatusPagamentoMapper
-                .entidadeJpaParaEntidadeNegocio(pedidoJpa.getStatusPagamento());
-        StatusPedido statusPedido = StatusPedidoMapper.entidadeJpaParaEntidadeNegocio(pedidoJpa.getStatusPedido());
+                .mapearParaEntidadeNegocio(pedidoJpa.getStatusPagamento());
+        StatusPedido statusPedido = StatusPedidoMapper.mapearParaEntidadeNegocio(pedidoJpa.getStatusPedido());
 
         return new Pedido(id, cliente, itens, pedidoJpa.getDataHoraCheckout(), statusPagamento, statusPedido);
     }
 
-    public static List<Pedido> entidadesJpaParaEntidadesNegocio(List<PedidoJpa> pedidosJpa)
+    public static List<Pedido> mapearParaEntidadesNegocio(List<PedidoJpa> pedidosJpa)
             throws Exception {
         List<Pedido> pedidos = new ArrayList<>();
         for (PedidoJpa pedidoJpa : pedidosJpa) {
-            Pedido pedido = entidadeJpaParaEntidadeNegocio(pedidoJpa);
+            Pedido pedido = mapearParaEntidadeNegocio(pedidoJpa);
             pedidos.add(pedido);
         }
         return pedidos;
