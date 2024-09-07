@@ -3,8 +3,8 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPagamentoEnum;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.StatusPagamentoExceptions;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.StatusPedidoExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.StatusPagamentoExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.StatusPedidoExceptions;
 
 public class StatusPagamento {
 

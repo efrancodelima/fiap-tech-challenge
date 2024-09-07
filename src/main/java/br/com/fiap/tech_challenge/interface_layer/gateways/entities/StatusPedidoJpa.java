@@ -4,13 +4,17 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class StatusPedidoJpa {
 
@@ -20,11 +24,5 @@ public class StatusPedidoJpa {
 
     @Column(name = "timestamp_status_pedido", nullable = false)
     private LocalDateTime dataHora;
-
-    // Construtor
-    public StatusPedidoJpa(StatusPedidoEnum status, LocalDateTime dataHora) {
-        this.status = status;
-        this.dataHora = dataHora;
-    }
 
 }

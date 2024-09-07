@@ -8,12 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "produto")
 public class ProdutoJpa {
@@ -34,19 +39,5 @@ public class ProdutoJpa {
     @Enumerated(EnumType.STRING)
     @Column(name = "categoria", nullable = false)
     private CategoriaProduto categoria;
-
-    // Construtor com todos os parâmetros, exceto o id
-    public ProdutoJpa(String nome, String descricao, BigDecimal preco, CategoriaProduto categoria) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.categoria = categoria;
-    }
-
-    // Construtor com todos os parâmetros
-    public ProdutoJpa(long id, String nome, String descricao, BigDecimal preco, CategoriaProduto categoria) {
-        this(nome, descricao, preco, categoria);
-        this.id = id;
-    }
 
 }

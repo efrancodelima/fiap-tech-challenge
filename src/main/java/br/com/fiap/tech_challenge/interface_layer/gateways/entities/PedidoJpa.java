@@ -15,9 +15,13 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "pedido")
 public class PedidoJpa {
@@ -41,16 +45,5 @@ public class PedidoJpa {
 
     @Embedded
     private StatusPedidoJpa statusPedido;
-
-    // Construtor
-    public PedidoJpa(long id, ClienteJpa cliente, List<ItemPedidoJpa> itens, LocalDateTime dataHoraCheckout,
-            StatusPagamentoJpa statusPagamento, StatusPedidoJpa statusPedido) {
-        this.id = id;
-        this.cliente = cliente;
-        this.itens = itens;
-        this.dataHoraCheckout = dataHoraCheckout;
-        this.statusPagamento = statusPagamento;
-        this.statusPedido = statusPedido;
-    }
 
 }

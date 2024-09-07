@@ -2,7 +2,7 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 
 import org.apache.commons.lang3.StringUtils;
 
-import br.com.fiap.tech_challenge.domain_layer.exceptions.CpfExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.CpfExceptions;
 
 public class Cpf {
 

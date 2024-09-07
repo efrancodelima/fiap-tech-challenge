@@ -11,7 +11,7 @@ public interface IProdutoGateway {
 
     public void atualizarProduto(Produto produto) throws Exception;
 
-    public void removerProduto(Produto produto) throws Exception;
+    public void removerProduto(long idProduto) throws Exception;
 
     public List<Produto> buscarPorCategoria(CategoriaProduto categoria) throws Exception;
 

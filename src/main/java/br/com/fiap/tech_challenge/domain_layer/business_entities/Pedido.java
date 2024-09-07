@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.PedidoExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.PedidoExceptions;
 import br.com.fiap.tech_challenge.domain_layer.interfaces.IPedido;
 
 public class Pedido implements IPedido {

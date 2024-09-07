@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.interface_layer.gateways.adapters;
+package br.com.fiap.tech_challenge.interface_layer.gateways.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ public final class PedidoMapper {
 
     // Métodos públicos
     public static PedidoJpa entidadeNegocioParaEntidadeJpa(Pedido pedido) {
-        ClienteJpa clienteJpa = ClienteMapper.entidadeNegocioParaEntidadeJpa(pedido.getCliente());
-        List<ItemPedidoJpa> itensJpa = ItemPedidoMapper.entidadesNegocioParaEntidadesJpa(pedido.getItens());
+        ClienteJpa clienteJpa = ClienteMapper.mapperParaEntidadeJpa(pedido.getCliente());
+        List<ItemPedidoJpa> itensJpa = ItemPedidoMapper.adaptarParaEntidadeJpa(pedido.getItens());
         StatusPagamentoJpa statusPagamentoJpa = StatusPagamentoMapper
                 .entidadeNegocioParaEntidadeJpa(pedido.getStatusPagamento());
         StatusPedidoJpa statusPedidoJpa = StatusPedidoMapper.entidadeNegocioParaEntidadeJpa(pedido.getStatusPedido());
@@ -30,8 +30,8 @@ public final class PedidoMapper {
 
     public static Pedido entidadeJpaParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
         long id = pedidoJpa.getId();
-        Cliente cliente = ClienteMapper.entidadeJpaParaEntidadeNegocio(pedidoJpa.getCliente());
-        List<ItemPedido> itens = ItemPedidoMapper.entidadesJpaParaEntidadesNegocio(pedidoJpa.getItens());
+        Cliente cliente = ClienteMapper.mapperParaEntidadeNegocio(pedidoJpa.getCliente());
+        List<ItemPedido> itens = ItemPedidoMapper.adaptarParaEntidadeNegocio(pedidoJpa.getItens());
         StatusPagamento statusPagamento = StatusPagamentoMapper
                 .entidadeJpaParaEntidadeNegocio(pedidoJpa.getStatusPagamento());
         StatusPedido statusPedido = StatusPedidoMapper.entidadeJpaParaEntidadeNegocio(pedidoJpa.getStatusPedido());

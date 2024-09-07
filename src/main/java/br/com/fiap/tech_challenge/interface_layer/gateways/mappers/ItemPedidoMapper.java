@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.interface_layer.gateways.adapters;
+package br.com.fiap.tech_challenge.interface_layer.gateways.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,30 +11,30 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ProdutoJpa;
 public final class ItemPedidoMapper {
 
     // Métodos públicos
-    public static ItemPedidoJpa entidadeNegocioParaEntidadeJpa(ItemPedido item) {
-        ProdutoJpa produtoJpa = ProdutoMapper.entidadeNegocioParaEntidadeJpa(item.getProduto());
+    public static ItemPedidoJpa adaptarParaEntidadeNegocio(ItemPedido item) {
+        ProdutoJpa produtoJpa = ProdutoMapper.mapperParaEntidadeJpa(item.getProduto());
         return new ItemPedidoJpa(produtoJpa, item.getQuantidade());
     }
 
-    public static List<ItemPedidoJpa> entidadesNegocioParaEntidadesJpa(List<ItemPedido> itens) {
+    public static List<ItemPedidoJpa> adaptarParaEntidadeJpa(List<ItemPedido> itens) {
         List<ItemPedidoJpa> result = new ArrayList<ItemPedidoJpa>();
         for (ItemPedido item : itens) {
-            ItemPedidoJpa itemJpa = entidadeNegocioParaEntidadeJpa(item);
+            ItemPedidoJpa itemJpa = adaptarParaEntidadeNegocio(item);
             result.add(itemJpa);
         }
         return result;
     }
 
-    public static ItemPedido entidadeJpaParaEntidadeNegocio(ItemPedidoJpa itemJpa) throws Exception {
-        Produto produto = ProdutoMapper.entidadeJpaParaEntidadeNegocio(itemJpa.getProduto());
+    public static ItemPedido adaptarParaEntidadeNegocio(ItemPedidoJpa itemJpa) throws Exception {
+        Produto produto = ProdutoMapper.mapperParaEntidadeNegocio(itemJpa.getProduto());
         return new ItemPedido(produto, itemJpa.getQuantidade());
     }
 
-    public static List<ItemPedido> entidadesJpaParaEntidadesNegocio(List<ItemPedidoJpa> itensJpa)
+    public static List<ItemPedido> adaptarParaEntidadeNegocio(List<ItemPedidoJpa> itensJpa)
             throws Exception {
         List<ItemPedido> result = new ArrayList<ItemPedido>();
         for (ItemPedidoJpa itemJpa : itensJpa) {
-            ItemPedido item = entidadeJpaParaEntidadeNegocio(itemJpa);
+            ItemPedido item = adaptarParaEntidadeNegocio(itemJpa);
             result.add(item);
         }
         return result;

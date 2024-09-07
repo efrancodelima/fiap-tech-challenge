@@ -3,7 +3,8 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import br.com.fiap.tech_challenge.domain_layer.exceptions.ClienteExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.ClienteExceptions;
 
 public class Cliente {
     private long id;
@@ -20,7 +21,7 @@ public class Cliente {
             validarCliente(nome, email);
         } catch (Exception e) {
             String msg = "Erro ao instanciar o cliente! ";
-            throw new Exception(msg + e.getMessage());
+            throw new BusinessRulesException(msg + e.getMessage());
         }
     }
 
@@ -30,7 +31,7 @@ public class Cliente {
             setId(id);
         } catch (Exception e) {
             String msg = "Erro ao instanciar o cliente! ";
-            throw new Exception(msg + e.getMessage());
+            throw new BusinessRulesException(msg + e.getMessage());
         }
     }
 
@@ -77,13 +78,13 @@ public class Cliente {
     // Métodos de validação
     private void validarId(long id) throws Exception {
         if (id < 1) {
-            throw new Exception(ClienteExceptions.ID_MIN.getMensagem());
+            throw new BusinessRulesException(ClienteExceptions.ID_MIN.getMensagem());
         }
     }
 
     private void validarCpf(Cpf cpf) throws Exception {
         if (cpf == null) {
-            throw new Exception(ClienteExceptions.CPF_NULO.getMensagem());
+            throw new BusinessRulesException(ClienteExceptions.CPF_NULO.getMensagem());
         }
     }
 
@@ -91,11 +92,11 @@ public class Cliente {
         if (nome == null || nome.isEmpty()) {
             return;
         } else if (nome.length() > 30) {
-            throw new Exception(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
+            throw new BusinessRulesException(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
         } else {
             ArrayList<String> palavras = getListaPalavras(nome, 3);
             if (palavras.size() < 1) {
-                throw new Exception(ClienteExceptions.NOME_INVALIDO.getMensagem());
+                throw new BusinessRulesException(ClienteExceptions.NOME_INVALIDO.getMensagem());
             }
         }
     }
@@ -104,19 +105,19 @@ public class Cliente {
         if (email == null) {
             return;
         } else if (email.length() > 20) {
-            throw new Exception(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
+            throw new BusinessRulesException(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
         } else {
             String emailRegexRFC5322 = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
             Pattern pattern = Pattern.compile(emailRegexRFC5322);
             if (!pattern.matcher(email).matches()) {
-                throw new Exception(ClienteExceptions.EMAIL_INVALIDO.getMensagem());
+                throw new BusinessRulesException(ClienteExceptions.EMAIL_INVALIDO.getMensagem());
             }
         }
     }
 
     private void validarCliente(String nome, String email) throws Exception {
         if (nome == null && email == null) {
-            throw new Exception(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
+            throw new BusinessRulesException(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }
     }
 

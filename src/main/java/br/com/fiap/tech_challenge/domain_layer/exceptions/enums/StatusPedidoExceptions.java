@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.domain_layer.exceptions;
+package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum StatusPedidoExceptions {
     STATUS_NULO("O status do pedido não pode ser nulo."),

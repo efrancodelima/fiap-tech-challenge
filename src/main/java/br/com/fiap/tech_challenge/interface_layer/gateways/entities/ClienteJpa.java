@@ -6,9 +6,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Cliente")
 public class ClienteJpa {
@@ -22,18 +26,5 @@ public class ClienteJpa {
 
     private String nome;
     private String email;
-
-    // Construtor com todos os argumentos, exceto 'id'
-    public ClienteJpa(long cpf, String nome, String email) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.email = email;
-    }
-    
-    // Construtor com todos os argumentos
-    public ClienteJpa(long id, long cpf, String nome, String email) {
-        this(cpf, nome, email);
-        this.id = id;
-    }
 
 }

@@ -11,7 +11,7 @@ public interface IProdutoUseCase {
 
     void editarProduto(Produto produtoEditado) throws Exception;
 
-    void removerProduto(Produto produto) throws Exception;
+    void removerProduto(long idProduto) throws Exception;
 
     List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria) throws Exception;
 }

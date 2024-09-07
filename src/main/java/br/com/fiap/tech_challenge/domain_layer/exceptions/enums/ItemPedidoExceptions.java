@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.domain_layer.exceptions;
+package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum ItemPedidoExceptions {
     PRODUTO_NULO("O produto não pode ser nulo."),

@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.domain_layer.exceptions;
+package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum StatusPagamentoExceptions {
     STATUS_NULO("O status do pagamento não pode ser nulo."),

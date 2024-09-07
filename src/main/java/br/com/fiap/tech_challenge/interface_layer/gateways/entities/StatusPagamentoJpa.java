@@ -4,13 +4,17 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPagamentoEnum;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class StatusPagamentoJpa {
 
@@ -20,11 +24,5 @@ public class StatusPagamentoJpa {
 
     @Column(name = "timestamp_status_pagamento", nullable = true)
     private LocalDateTime dataHora;
-
-    // Construtor
-    public StatusPagamentoJpa(StatusPagamentoEnum status, LocalDateTime dataHora) {
-        this.status = status;
-        this.dataHora = dataHora;
-    }
 
 }

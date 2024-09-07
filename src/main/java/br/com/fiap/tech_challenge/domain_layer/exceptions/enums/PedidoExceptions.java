@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.domain_layer.exceptions;
+package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum PedidoExceptions {
     ID_MIN("O ID do pedido deve ser maior que 0."),

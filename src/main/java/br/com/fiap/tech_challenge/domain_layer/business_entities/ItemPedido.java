@@ -2,7 +2,7 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 
 import java.math.BigDecimal;
 
-import br.com.fiap.tech_challenge.domain_layer.exceptions.ItemPedidoExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.ItemPedidoExceptions;
 
 public class ItemPedido {
 

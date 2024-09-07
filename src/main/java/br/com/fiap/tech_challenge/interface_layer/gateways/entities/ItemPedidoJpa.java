@@ -6,9 +6,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class ItemPedidoJpa implements Serializable {
 
@@ -18,11 +22,5 @@ public class ItemPedidoJpa implements Serializable {
 
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
-
-    // Construtor
-    public ItemPedidoJpa(ProdutoJpa produto, int quantidade) {
-        this.produto = produto;
-        this.quantidade = quantidade;
-    }
 
 }

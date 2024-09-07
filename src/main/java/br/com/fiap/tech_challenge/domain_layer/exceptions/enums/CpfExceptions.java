@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.domain_layer.exceptions;
+package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum CpfExceptions {
     NUMERO_MIN("O número do CPF deve ser maior que 0."),
