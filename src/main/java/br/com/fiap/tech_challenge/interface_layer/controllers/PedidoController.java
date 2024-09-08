@@ -84,4 +84,10 @@ public class PedidoController implements IPedidoController {
         StatusPagamento statusPagamento = pedidoUseCase.consultarStatusPagamento(numeroPedido);
         return PedidoResponseAdapter.adaptarParaStatusPagamento(numeroPedido, statusPagamento, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<StatusDto>> listarPedidos() throws Exception {
+        List<Pedido> pedidos = pedidoUseCase.listarPedidos();
+        return PedidoResponseAdapter.adaptarParaListaPedidos(pedidos, HttpStatus.OK);
+    }
 }

@@ -14,6 +14,6 @@ public interface IPedidoGateway {
 
     public Pedido buscarPedido(long numeroPedido) throws Exception;
 
-    public List<Pedido> listarPedidos() throws Exception;
+    public List<Pedido> buscarPedidos() throws Exception;
 
 }

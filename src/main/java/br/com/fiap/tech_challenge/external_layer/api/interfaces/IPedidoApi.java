@@ -6,12 +6,14 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusDto;
 
@@ -19,7 +21,7 @@ import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusDto;
 public interface IPedidoApi {
 
         // Fazer checkout
-        @Operation(summary = "Fazer checkout do pedido", description = PedidoConstantes.descricaoFazerCheckout)
+        @Operation(summary = "Fazer checkout", description = PedidoConstantes.descricaoFazerCheckout)
         @ApiResponses(value = {
                         @ApiResponse(responseCode = "201", description = PedidoConstantes.d201, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e201))),
                         @ApiResponse(responseCode = "400", description = PedidoConstantes.d400, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e400))),
@@ -53,6 +55,17 @@ public interface IPedidoApi {
         ResponseEntity<StatusDto> consultarStatusPagamento(@PathVariable("numeroPedido") Long numeroPedido)
                         throws Exception;
 
+        // Listar pedidos
+        @Operation(summary = "Listar pedidos", description = PedidoConstantes.descricaoListarPedidos)
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = PedidoConstantes.d200, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.l200))),
+                        @ApiResponse(responseCode = "400", description = PedidoConstantes.d400, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e400))),
+                        @ApiResponse(responseCode = "404", description = PedidoConstantes.d404, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e404))),
+                        @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
+                        @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
+        @PostMapping(value = "/listar")
+        ResponseEntity<List<StatusDto>> listarPedidos() throws Exception;
+
 }
 
 final class PedidoConstantes {
@@ -60,6 +73,7 @@ final class PedidoConstantes {
         public static final String descricaoFazerCheckout = "Para realizar o checkout do pedido, informe os dados do pedido conforme o schema PedidoDto no final desta página.<br>O CPF do cliente é opcional, coloque zero se não quiser identificar o cliente.";
         public static final String descricaoAtualizarStatusPedido = "Para atualizar o status do pedido, informe o número do pedido pelo path.<br>Os status possuem uma ordem sequencial, então ele mudará automaticamente para o valor seguinte.";
         public static final String descricaoConsultarStatusPagamento = "Para consultar o status do pagamento, informe o número do pedido pelo path.";
+        public static final String descricaoListarPedidos = "Lista os pedidos recebidos, em preparação e prontos.<br>Os pedidos mais antigos são exibidos primeiro e os mais novos depois.<br>A lista também é ordenada pelo status do pedido: pedidos prontos no topo da lista e recebidos no final.";
 
         public static final String d200 = "Sucesso!";
         public static final String d201 = d200;
@@ -69,9 +83,8 @@ final class PedidoConstantes {
         public static final String d422 = "Operação não permitida!";
         public static final String d500 = "Erro!";
 
-        public static final String e200 = "{ \"numero\": 1, \"cliente\": null, \"itens\": [ { \"produto\": { \"codigo\": 1, \"nome\": \"X-Monstrão\", \"descricao\": \"O lanche do marombeiro, "
-                        + "repleto de whey e creatina.\", \"preco\": 35.9, \"categoria\": \"LANCHE\" }, \"quantidade\": 2, \"valorItem\": 71.8 } ], \"dataHoraCheckout\": "
-                        + "null, \"statusPagamento\": null, \"statusPedido\": { \"status\": \"RECEBIDO\", \"dataHora\": \"2024-09-08T00:12:59.95886677\" }, \"valorPedido\": 71.8 }";
+        public static final String e200 = "{ \"numeroPedido\": 4, \"statusPedido\": \"PRONTO\", \"dataHora\": \"2024-09-08 15:31:59\" }";
+        public static final String l200 = "[ { \"numeroPedido\": 4, \"statusPedido\": \"PRONTO\", \"dataHora\": \"2024-09-08 15:31:59\" }, { \"numeroPedido\": 1, \"statusPedido\": \"EM_PREPARACAO\", \"dataHora\": \"2024-09-08 15:31:52\" }]";
         public static final String e201 = e200;
         public static final String e204 = "";
         public static final String e400 = "{ \"timestamp\": \"2024-09-08T02:05:58.036+00:00\", \"status\": 400, \"error\": \"Bad Request\", \"path\": \"/api/v2/pedidos/checkout\" }";

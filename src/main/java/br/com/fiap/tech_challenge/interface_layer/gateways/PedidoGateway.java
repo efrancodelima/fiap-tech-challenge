@@ -70,16 +70,10 @@ public class PedidoGateway implements IPedidoGateway {
     }
 
     @Override
-    public List<Pedido> listarPedidos() throws Exception, Exception {
+    public List<Pedido> buscarPedidos() throws Exception, Exception {
 
-        List<StatusPedidoEnum> statusListados = new ArrayList<>();
-        statusListados.add(StatusPedidoEnum.RECEBIDO);
-        statusListados.add(StatusPedidoEnum.EM_PREPARACAO);
-        statusListados.add(StatusPedidoEnum.PRONTO);
-
-        List<PedidoJpa> pedidosJpa = pedidoJpaRepository.listarPedidosPorStatusIn(statusListados);
+        List<PedidoJpa> pedidosJpa = pedidoJpaRepository.findAll();
         return PedidoMapper.mapearParaEntidadesNegocio(pedidosJpa);
-
     }
 
 }

@@ -1,11 +1,12 @@
 package br.com.fiap.tech_challenge.external_layer.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.external_layer.api.interfaces.IPedidoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.PedidoController;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
@@ -31,6 +32,11 @@ public class PedidoApi implements IPedidoApi {
     @Override
     public ResponseEntity<StatusDto> consultarStatusPagamento(Long numeroPedido) throws Exception {
         return controller.consultarStatusPagamento(numeroPedido);
+    }
+
+    @Override
+    public ResponseEntity<List<StatusDto>> listarPedidos() throws Exception {
+        return controller.listarPedidos();
     }
 
 }
