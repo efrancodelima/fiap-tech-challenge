@@ -10,7 +10,7 @@ import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
 public final class ProdutoRequestAdapter {
 
     public static Produto adaptar(ProdutoDto produtoDto) throws BusinessRulesException {
-        String nome = produtoDto.getNome();
+        String nome = produtoDto.getNome().trim();
         String descricao = produtoDto.getDescricao();
         BigDecimal preco = produtoDto.getPreco();
         CategoriaProduto categoria = CategoriaProdutoRequestAdapter.adaptar(produtoDto.getCategoria());

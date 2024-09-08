@@ -2,11 +2,12 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.interfaces;
 
 import org.springframework.http.ResponseEntity;
 
+import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ClienteDto;
 
 public interface IClienteController {
 
-    ResponseEntity<String> cadastrarCliente(ClienteDto clienteDto);
+    ResponseEntity<Cliente> cadastrarCliente(ClienteDto clienteDto) throws Exception;
 
-    ResponseEntity<String> buscarClientePorCpf(Long cpfLong);
+    ResponseEntity<Cliente> buscarClientePorCpf(Long cpfLong) throws Exception;
 }

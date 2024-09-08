@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProdutoDto {
 
-    @Schema(description = "Nome do produto", example = "X-Monstrão")
+    @Schema(description = "Nome do produto.", example = "X-Monstrão")
     public String nome;
 
-    @Schema(description = "Descrição do produto", example = "O lanche do marombeiro, repleto de whey e creatina.")
+    @Schema(description = "Descrição do produto (opcional).", example = "O lanche do marombeiro, repleto de whey e creatina.")
     public String descricao;
 
     @Schema(description = "Preço do produto. Use vírgula no lugar de ponto.", example = "35.90")

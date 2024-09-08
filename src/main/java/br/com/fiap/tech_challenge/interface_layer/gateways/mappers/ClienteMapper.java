@@ -8,7 +8,7 @@ public final class ClienteMapper {
 
     // Métodos públicos
     public static ClienteJpa mapearParaEntidadeJpa(Cliente cliente) {
-        return new ClienteJpa(cliente.getCodigo(), cliente.getCpf().getNumeroComDigito(), cliente.getNome(),
+        return new ClienteJpa(cliente.getCodigo(), cliente.getCpf().pegarNumeroComDigito(), cliente.getNome(),
                 cliente.getEmail());
     }
 

@@ -5,7 +5,6 @@ import java.util.List;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
 import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IProdutoUseCase;
 
 public class ProdutoUseCase implements IProdutoUseCase {
@@ -25,24 +24,23 @@ public class ProdutoUseCase implements IProdutoUseCase {
     }
 
     @Override
-    public void editarProduto(Produto produtoEditado) throws ResourceNotFoundException, Exception {
+    public void editarProduto(Produto produtoEditado) throws Exception {
         gateway.atualizarProduto(produtoEditado);
 
     }
 
     @Override
-    public void removerProduto(long codigoProduto) throws ResourceNotFoundException, Exception {
+    public void removerProduto(long codigoProduto) throws Exception {
         gateway.removerProduto(codigoProduto);
     }
 
     @Override
-    public Produto buscarProdutoPorCodigo(long codigoProduto) throws ResourceNotFoundException, Exception {
+    public Produto buscarProdutoPorCodigo(long codigoProduto) throws Exception {
         return gateway.buscarProduto(codigoProduto);
     }
 
     @Override
-    public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria)
-            throws ResourceNotFoundException, Exception {
+    public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria) throws Exception {
         return gateway.buscarProdutosPorCategoria(categoria);
     }
 

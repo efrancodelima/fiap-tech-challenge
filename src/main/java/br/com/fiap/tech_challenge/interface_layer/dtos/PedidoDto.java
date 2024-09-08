@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PedidoDto {
 
-    @Schema(description = "CPF do cliente (opcional)", example = "0")
+    @Schema(description = "CPF do cliente (opcional).", example = "0")
     public Long cpfCliente;
 
-    @Schema(description = "Itens do pedido", example = "[{\"codigoProduto\": 1, \"quantidade\": 2}, {\"codigoProduto\": 2, \"quantidade\": 1}]")
+    @Schema(description = "Itens do pedido.", example = "[{\"codigoProduto\": 1, \"quantidade\": 2}, {\"codigoProduto\": 2, \"quantidade\": 1}]")
     public List<ItemPedidoDto> itens;
 
 }

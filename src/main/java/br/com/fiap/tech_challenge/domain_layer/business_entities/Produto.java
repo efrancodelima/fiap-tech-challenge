@@ -64,7 +64,13 @@ public class Produto {
     }
 
     private void setDescricao(String descricao) throws BusinessRulesException {
-        descricao = descricao == null ? null : descricao.trim();
+
+        if (descricao == null || descricao.isBlank()) {
+            descricao = null;
+        } else {
+            descricao = descricao.trim();
+        }
+
         validarDescricao(descricao);
         this.descricao = descricao;
     }

@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClienteDto {
 
-    @Schema(description = "CPF do cliente", example = "11122233396")
+    @Schema(description = "CPF do cliente.", example = "11122233396")
     public Long cpf;
 
-    @Schema(description = "Nome do cliente", example = "Arthur Conan Doyle")
+    @Schema(description = "Nome do cliente.", example = "Arthur Conan Doyle")
     public String nome;
 
-    @Schema(description = "Email do cliente", example = "conanad@gmail.com")
+    @Schema(description = "Email do cliente.", example = "conanad@gmail.com")
     public String email;
 
 }

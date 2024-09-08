@@ -18,14 +18,14 @@ public class ClienteGateway implements IClienteGateway {
     // Atributos
     @Autowired
     private IClienteRepository clienteJpaRepository;
-    private final String CLIENTE_NAO_ENCONTRADO = "Não foi encontrado nenhum cliente para o CPF informado.";
+    private final String CLIENTE_NAO_ENCONTRADO = "Nenhum cliente foi encontrado para o CPF informado.";
     private final String CLIENTE_JA_EXISTE = "Já existe um cliente cadastrado com esse CPF.";
 
     // Métodos públicos
     @Override
     public Cliente gravarCliente(Cliente cliente) throws BusinessRulesException, Exception {
 
-        long cpfLong = cliente.getCpf().getNumeroComDigito();
+        long cpfLong = cliente.getCpf().pegarNumeroComDigito();
         if (clienteJpaRepository.existsByCpf(cpfLong)) {
             throw new BusinessRulesException(CLIENTE_JA_EXISTE);
         }
@@ -56,7 +56,7 @@ public class ClienteGateway implements IClienteGateway {
     @Override
     public Cliente buscarClientePorCpf(Cpf cpf) throws ResourceNotFoundException, Exception {
 
-        ClienteJpa clienteJpa = clienteJpaRepository.findByCpf(cpf.getNumeroComDigito());
+        ClienteJpa clienteJpa = clienteJpaRepository.findByCpf(cpf.pegarNumeroComDigito());
 
         if (clienteJpa == null) {
             throw new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO);

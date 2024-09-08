@@ -13,16 +13,17 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IPedidoController;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ItemPedidoRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.ExceptionResponseAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.MessageResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.PedidoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ItemPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.PedidoGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
 import jakarta.annotation.PostConstruct;
 
 @Component
@@ -50,38 +51,22 @@ public class PedidoController implements IPedidoController {
         this.produtoUseCase = new ProdutoUseCase(produtoGateway);
     }
 
-    // @Override
-    // public ResponseEntity<String> fazerCheckout(PedidoDto pedidoDto) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'fazerCheckout'");
-    // }
-
     @Override
-    public ResponseEntity<String> fazerCheckout(PedidoDto pedidoDto) {
+    public ResponseEntity<Pedido> fazerCheckout(PedidoDto pedidoDto) throws Exception {
 
-        try {
-            Cliente cliente = null;
-            Long cpfLong = pedidoDto.getCpfCliente();
-            if (cpfLong != null && cpfLong != 0) {
-                Cpf cpf = CpfRequestAdapter.adaptar(cpfLong);
-                cliente = clienteUseCase.buscarClientePorCpf(cpf);
-            }
-
-            List<ItemPedido> itens;
-            List<ItemPedidoDto> itensDto = pedidoDto.getItens();
-            itens = ItemPedidoRequestAdapter.adaptar(produtoUseCase, itensDto);
-
-            Pedido pedido = new Pedido(cliente, itens);
-            long numeroPedido = pedidoUseCase.fazerCheckout(pedido);
-            String msg = "Checkout realizado com sucesso! Número do pedido: " + numeroPedido + ".";
-
-            return MessageResponseAdapter.adaptar(msg);
-
-        } catch (Exception e) {
-            return ExceptionResponseAdapter.adaptar(e);
+        Cliente cliente = null;
+        Long cpfLong = pedidoDto.getCpfCliente();
+        if (cpfLong != null && cpfLong != 0) {
+            Cpf cpf = CpfRequestAdapter.adaptar(cpfLong);
+            cliente = clienteUseCase.buscarClientePorCpf(cpf);
         }
 
-    }
+        List<ItemPedido> itens;
+        List<ItemPedidoDto> itensDto = pedidoDto.getItens();
+        itens = ItemPedidoRequestAdapter.adaptar(produtoUseCase, itensDto);
 
+        Pedido pedido = new Pedido(cliente, itens);
+        pedido = pedidoUseCase.fazerCheckout(pedido);
+        return PedidoResponseAdapter.adaptar(pedido);
+    }
 }

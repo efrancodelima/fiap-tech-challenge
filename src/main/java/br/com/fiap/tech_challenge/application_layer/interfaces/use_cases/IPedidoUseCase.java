@@ -6,7 +6,7 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 
 public interface IPedidoUseCase {
 
-    long fazerCheckout(Pedido pedido) throws Exception;
+    Pedido fazerCheckout(Pedido pedido) throws Exception;
 
     void atualizarStatus(Pedido pedido) throws Exception;
 

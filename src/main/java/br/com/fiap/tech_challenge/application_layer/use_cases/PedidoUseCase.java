@@ -18,10 +18,9 @@ public class PedidoUseCase implements IPedidoUseCase {
 
     // Métodos
     @Override
-    public long fazerCheckout(Pedido pedido) throws Exception {
+    public Pedido fazerCheckout(Pedido pedido) throws Exception {
         pedido.fazerCheckout();
-        pedido = gateway.gravarPedido(pedido);
-        return pedido.getNumero();
+        return gateway.gravarPedido(pedido);
     }
 
     @Override

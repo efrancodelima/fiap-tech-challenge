@@ -12,7 +12,6 @@ import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IClient
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ClienteRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.ClienteResponseAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.ExceptionResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ClienteDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import jakarta.annotation.PostConstruct;
@@ -34,32 +33,18 @@ public class ClienteController implements IClienteController {
 
     // Métodos públicos
     @Override
-    public ResponseEntity<String> cadastrarCliente(ClienteDto clienteDto) {
+    public ResponseEntity<Cliente> cadastrarCliente(ClienteDto clienteDto) throws Exception {
 
-        Cliente cliente;
-
-        try {
-            cliente = ClienteRequestAdapter.adaptar(clienteDto);
-            cliente = clienteUseCase.cadastrarCliente(cliente);
-        } catch (Exception e) {
-            return ExceptionResponseAdapter.adaptar(e);
-        }
-
+        Cliente cliente = ClienteRequestAdapter.adaptar(clienteDto);
+        cliente = clienteUseCase.cadastrarCliente(cliente);
         return ClienteResponseAdapter.adaptar(cliente, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<String> buscarClientePorCpf(Long cpfLong) {
+    public ResponseEntity<Cliente> buscarClientePorCpf(Long cpfLong) throws Exception {
 
-        Cliente cliente;
-
-        try {
-            Cpf cpf = CpfRequestAdapter.adaptar(cpfLong);
-            cliente = clienteUseCase.buscarClientePorCpf(cpf);
-        } catch (Exception e) {
-            return ExceptionResponseAdapter.adaptar(e);
-        }
-
+        Cpf cpf = CpfRequestAdapter.adaptar(cpfLong);
+        Cliente cliente = clienteUseCase.buscarClientePorCpf(cpf);
         return ClienteResponseAdapter.adaptar(cliente, HttpStatus.OK);
     }
 }

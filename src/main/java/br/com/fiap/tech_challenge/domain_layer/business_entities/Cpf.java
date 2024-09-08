@@ -18,7 +18,7 @@ public class Cpf {
     }
 
     // Getters
-    public long getNumeroComDigito() {
+    public long pegarNumeroComDigito() {
         return Long.parseLong(this.toString());
     }
 

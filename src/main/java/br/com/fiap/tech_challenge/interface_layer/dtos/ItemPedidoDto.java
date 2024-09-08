@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemPedidoDto {
 
-    @Schema(description = "Código do produto", example = "1")
+    @Schema(description = "Código do produto.", example = "1")
     public Long codigoProduto;
 
-    @Schema(description = "Quantidade", example = "1")
+    @Schema(description = "Quantidade.", example = "1")
     public Integer quantidade;
 }
