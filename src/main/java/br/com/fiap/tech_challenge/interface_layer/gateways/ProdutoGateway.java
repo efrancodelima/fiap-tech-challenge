@@ -10,7 +10,7 @@ import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoG
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ProdutoJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.ProdutoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IProdutoRepository;
 
@@ -31,38 +31,38 @@ public class ProdutoGateway implements IProdutoGateway {
     }
 
     @Override
-    public void atualizarProduto(Produto produto) throws ResourceNotFoundException, Exception {
+    public void atualizarProduto(Produto produto) throws MyNotFoundException, Exception {
         if (!produtoJpaRepository.existsById(produto.getCodigo())) {
-            throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
+            throw new MyNotFoundException(PRODUTO_NAO_ENCONTRADO);
         }
         ProdutoJpa produtoJpa = ProdutoMapper.mapearParaEntidadeJpa(produto);
         produtoJpaRepository.save(produtoJpa);
     }
 
     @Override
-    public void removerProduto(long codigoProduto) throws ResourceNotFoundException, Exception {
+    public void removerProduto(long codigoProduto) throws MyNotFoundException, Exception {
         if (!produtoJpaRepository.existsById(codigoProduto)) {
-            throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
+            throw new MyNotFoundException(PRODUTO_NAO_ENCONTRADO);
         }
         produtoJpaRepository.deleteById(codigoProduto);
     }
 
     @Override
     public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria)
-            throws ResourceNotFoundException, Exception {
+            throws MyNotFoundException, Exception {
         List<ProdutoJpa> produtosJpa = produtoJpaRepository.findByCategoria(categoria);
         return ProdutoMapper.mapearParaEntidadesNegocio(produtosJpa);
     }
 
     @Override
-    public Produto buscarProduto(long codigoProduto) throws ResourceNotFoundException, Exception {
+    public Produto buscarProduto(long codigoProduto) throws MyNotFoundException, Exception {
 
         Optional<ProdutoJpa> produtoJpa = produtoJpaRepository.findById(codigoProduto);
 
         if (produtoJpa.isPresent()) {
             return ProdutoMapper.mapearParaEntidadeNegocio(produtoJpa.get());
         } else {
-            throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
+            throw new MyNotFoundException(PRODUTO_NAO_ENCONTRADO);
         }
     }
 

@@ -13,7 +13,7 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IPedidoController;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ItemPedidoRequestAdapter;
@@ -23,7 +23,7 @@ import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.PedidoGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 import jakarta.annotation.PostConstruct;
 
 @Component

@@ -3,7 +3,7 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.ClienteExceptions;
 
 public class Cliente {
@@ -13,14 +13,14 @@ public class Cliente {
     private String email;
 
     // Construtores
-    public Cliente(Cpf cpf, String nome, String email) throws BusinessRulesException {
+    public Cliente(Cpf cpf, String nome, String email) throws MyBusinessException {
         setCpf(cpf);
         setNome(nome);
         setEmail(email);
         validarCliente(nome, email);
     }
 
-    public Cliente(long codigo, Cpf cpf, String nome, String email) throws BusinessRulesException {
+    public Cliente(long codigo, Cpf cpf, String nome, String email) throws MyBusinessException {
         this(cpf, nome, email);
         setCodigo(codigo);
     }
@@ -43,71 +43,71 @@ public class Cliente {
     }
 
     // Setters
-    private void setCodigo(long codigo) throws BusinessRulesException {
+    private void setCodigo(long codigo) throws MyBusinessException {
         validarCodigo(codigo);
         this.codigo = codigo;
     }
 
-    private void setCpf(Cpf cpf) throws BusinessRulesException {
+    private void setCpf(Cpf cpf) throws MyBusinessException {
         validarCpf(cpf);
         this.cpf = cpf;
     }
 
-    private void setNome(String nome) throws BusinessRulesException {
+    private void setNome(String nome) throws MyBusinessException {
         nome = nome == null ? null : nome.trim();
         validarnome(nome);
         this.nome = nome;
     }
 
-    private void setEmail(String email) throws BusinessRulesException {
+    private void setEmail(String email) throws MyBusinessException {
         email = email == null ? null : email.trim();
         validarEmail(email);
         this.email = email;
     }
 
     // Métodos de validação
-    private void validarCodigo(long codigo) throws BusinessRulesException {
+    private void validarCodigo(long codigo) throws MyBusinessException {
         if (codigo < 1) {
-            throw new BusinessRulesException(ClienteExceptions.CODIGO_MIN.getMensagem());
+            throw new MyBusinessException(ClienteExceptions.CODIGO_MIN.getMensagem());
         }
     }
 
-    private void validarCpf(Cpf cpf) throws BusinessRulesException {
+    private void validarCpf(Cpf cpf) throws MyBusinessException {
         if (cpf == null) {
-            throw new BusinessRulesException(ClienteExceptions.CPF_NULO.getMensagem());
+            throw new MyBusinessException(ClienteExceptions.CPF_NULO.getMensagem());
         }
     }
 
-    private void validarnome(String nome) throws BusinessRulesException {
+    private void validarnome(String nome) throws MyBusinessException {
         if (nome == null || nome.isEmpty()) {
             return;
         } else if (nome.length() > 30) {
-            throw new BusinessRulesException(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
+            throw new MyBusinessException(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
         } else {
             ArrayList<String> palavras = getListaPalavras(nome, 3);
             if (palavras.size() < 1) {
-                throw new BusinessRulesException(ClienteExceptions.NOME_INVALIDO.getMensagem());
+                throw new MyBusinessException(ClienteExceptions.NOME_INVALIDO.getMensagem());
             }
         }
     }
 
-    private void validarEmail(String email) throws BusinessRulesException {
+    private void validarEmail(String email) throws MyBusinessException {
         if (email == null) {
             return;
         } else if (email.length() > 20) {
-            throw new BusinessRulesException(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
+            throw new MyBusinessException(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
         } else {
             String emailRegexRFC5322 = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
             Pattern pattern = Pattern.compile(emailRegexRFC5322);
             if (!pattern.matcher(email).matches()) {
-                throw new BusinessRulesException(ClienteExceptions.EMAIL_INVALIDO.getMensagem());
+                throw new MyBusinessException(ClienteExceptions.EMAIL_INVALIDO.getMensagem());
             }
         }
     }
 
-    private void validarCliente(String nome, String email) throws BusinessRulesException {
+    private void validarCliente(String nome, String email) throws MyBusinessException {
         if (nome == null && email == null) {
-            throw new BusinessRulesException(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
+            throw new MyBusinessException(ClienteExceptions.NOME_EMAIL_NULOS.getMensagem());
         }
     }
 

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 
 @Tag(name = "Pedido")
 public interface IPedidoApi {

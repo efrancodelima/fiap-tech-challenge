@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
 
 public final class ProdutoRequestAdapter {
 
-    public static Produto adaptar(ProdutoDto produtoDto) throws BusinessRulesException {
+    public static Produto adaptar(ProdutoDto produtoDto) throws MyBusinessException {
         String nome = produtoDto.getNome().trim();
         String descricao = produtoDto.getDescricao();
         BigDecimal preco = produtoDto.getPreco();
@@ -17,7 +17,7 @@ public final class ProdutoRequestAdapter {
         return new Produto(nome, descricao, preco, categoria);
     }
 
-    public static Produto adaptar(long id, ProdutoDto produtoDto) throws BusinessRulesException {
+    public static Produto adaptar(long id, ProdutoDto produtoDto) throws MyBusinessException {
         var produto = adaptar(produtoDto);
         produto.setCodigo(id);
         return produto;

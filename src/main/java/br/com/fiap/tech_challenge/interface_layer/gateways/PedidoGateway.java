@@ -10,7 +10,7 @@ import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGa
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.PedidoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoRepository;
 
@@ -33,7 +33,7 @@ public class PedidoGateway implements IPedidoGateway {
     @Override
     public void atualizarPedido(Pedido pedido) throws Exception {
         if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
-            throw new ResourceNotFoundException(PEDIDO_NAO_ENCONTRADO);
+            throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
         }
         PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpaRepository.save(pedidoJpa);
@@ -42,7 +42,7 @@ public class PedidoGateway implements IPedidoGateway {
     @Override
     public void removerPedido(Pedido pedido) throws Exception {
         if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
-            throw new ResourceNotFoundException(PEDIDO_NAO_ENCONTRADO);
+            throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
         }
         PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpaRepository.delete(pedidoJpa);

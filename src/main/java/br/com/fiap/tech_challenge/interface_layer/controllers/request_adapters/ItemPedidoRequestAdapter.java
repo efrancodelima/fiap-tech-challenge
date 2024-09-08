@@ -7,19 +7,19 @@ import br.com.fiap.tech_challenge.application_layer.use_cases.ProdutoUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ItemPedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 
 public final class ItemPedidoRequestAdapter {
 
     // Métodos públicos
     public static ItemPedido adaptar(ProdutoUseCase produtoUseCase, ItemPedidoDto itemPedidoDto)
-            throws ResourceNotFoundException, Exception {
+            throws MyNotFoundException, Exception {
         Produto produto = produtoUseCase.buscarProdutoPorCodigo(itemPedidoDto.getCodigoProduto());
         return new ItemPedido(produto, itemPedidoDto.getQuantidade());
     }
 
     public static List<ItemPedido> adaptar(ProdutoUseCase produtoUseCase, List<ItemPedidoDto> itensPedidoDto)
-            throws ResourceNotFoundException, Exception {
+            throws MyNotFoundException, Exception {
 
         List<ItemPedido> result = new ArrayList<>();
 

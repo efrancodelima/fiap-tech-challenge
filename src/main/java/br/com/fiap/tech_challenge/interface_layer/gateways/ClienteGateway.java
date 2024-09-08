@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IClienteGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ClienteJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.ClienteMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IClienteRepository;
 
@@ -23,11 +23,11 @@ public class ClienteGateway implements IClienteGateway {
 
     // Métodos públicos
     @Override
-    public Cliente gravarCliente(Cliente cliente) throws BusinessRulesException, Exception {
+    public Cliente gravarCliente(Cliente cliente) throws MyBusinessException, Exception {
 
         long cpfLong = cliente.getCpf().pegarNumeroComDigito();
         if (clienteJpaRepository.existsByCpf(cpfLong)) {
-            throw new BusinessRulesException(CLIENTE_JA_EXISTE);
+            throw new MyBusinessException(CLIENTE_JA_EXISTE);
         }
 
         ClienteJpa clienteJpa = ClienteMapper.mapearParaEntidadeJpa(cliente);
@@ -36,30 +36,30 @@ public class ClienteGateway implements IClienteGateway {
     }
 
     @Override
-    public void atualizarCliente(Cliente cliente) throws ResourceNotFoundException, Exception {
+    public void atualizarCliente(Cliente cliente) throws MyNotFoundException, Exception {
         if (!clienteJpaRepository.existsById(cliente.getCodigo())) {
-            throw new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO);
+            throw new MyNotFoundException(CLIENTE_NAO_ENCONTRADO);
         }
         ClienteJpa clienteJpa = ClienteMapper.mapearParaEntidadeJpa(cliente);
         clienteJpaRepository.save(clienteJpa);
     }
 
     @Override
-    public void removerCliente(Cliente cliente) throws ResourceNotFoundException, Exception {
+    public void removerCliente(Cliente cliente) throws MyNotFoundException, Exception {
         if (!clienteJpaRepository.existsById(cliente.getCodigo())) {
-            throw new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO);
+            throw new MyNotFoundException(CLIENTE_NAO_ENCONTRADO);
         }
         ClienteJpa clienteJpa = ClienteMapper.mapearParaEntidadeJpa(cliente);
         clienteJpaRepository.delete(clienteJpa);
     }
 
     @Override
-    public Cliente buscarClientePorCpf(Cpf cpf) throws ResourceNotFoundException, Exception {
+    public Cliente buscarClientePorCpf(Cpf cpf) throws MyNotFoundException, Exception {
 
         ClienteJpa clienteJpa = clienteJpaRepository.findByCpf(cpf.pegarNumeroComDigito());
 
         if (clienteJpa == null) {
-            throw new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO);
+            throw new MyNotFoundException(CLIENTE_NAO_ENCONTRADO);
         } else {
             return ClienteMapper.mapearParaEntidadeNegocio(clienteJpa);
         }

@@ -4,28 +4,21 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.Data;
+
+@Data
 public class ErrorResponse {
 
-    private int statusCode;
+    private int code;
+    private String status;
     private String message;
     private LocalDateTime timestamp;
 
     public ErrorResponse(HttpStatus httpStatus, String message) {
-        this.statusCode = httpStatus.value();
+        this.code = httpStatus.value();
+        this.status = httpStatus.getReasonPhrase();
         this.message = message;
         this.timestamp = LocalDateTime.now();
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
     }
 
 }
