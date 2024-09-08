@@ -4,9 +4,11 @@ import java.util.List;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPagamentoEnum;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.interfaces.IPedido;
 import br.com.fiap.tech_challenge.domain_layer.constants.Validacao;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.PedidoExceptions;
 
 public class Pedido implements IPedido {
@@ -18,19 +20,21 @@ public class Pedido implements IPedido {
     private StatusPedido statusPedido;
 
     // Construtor usado para criar um pedido antes do checkout
-    public Pedido(Cliente cliente, List<ItemPedido> itens) throws Exception {
+    public Pedido(Cliente cliente, List<ItemPedido> itens) throws MyBusinessException {
 
+        var statusPagamento = new StatusPagamento(StatusPagamentoEnum.AGUARDANDO_PAGAMENTO, LocalDateTime.now());
         var statusPedido = new StatusPedido(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
 
         setCliente(cliente);
         setItens(itens);
+        setStatusPagamento(statusPagamento);
         setStatusPedido(statusPedido);
     }
 
     // Construtor usado para instanciar um pedido já existente
     public Pedido(long numero, Cliente cliente, List<ItemPedido> itens, LocalDateTime dataHoraCheckout,
             StatusPagamento pagamento, StatusPedido statusPedido)
-            throws Exception {
+            throws MyBusinessException {
 
         setNumero(numero);
         setCliente(cliente);
@@ -74,7 +78,7 @@ public class Pedido implements IPedido {
     }
 
     // Setters
-    private void setNumero(long numero) throws Exception {
+    private void setNumero(long numero) throws MyBusinessException {
         validarNumero(numero);
         this.numero = numero;
     }
@@ -83,87 +87,94 @@ public class Pedido implements IPedido {
         this.cliente = cliente;
     }
 
-    private void setItens(List<ItemPedido> itens) throws Exception {
+    private void setItens(List<ItemPedido> itens) throws MyBusinessException {
         validarItens(itens);
         this.itens = itens;
     }
 
     private void setDataHoraCheckout(LocalDateTime dataHoraCheckout, StatusPedidoEnum statusPedido)
-            throws Exception {
+            throws MyBusinessException {
         validarDataHoraCheckout(dataHoraCheckout, statusPedido);
         this.dataHoraCheckout = dataHoraCheckout;
     }
 
-    private void setStatusPagamento(StatusPagamento status) throws Exception {
+    private void setStatusPagamento(StatusPagamento status) throws MyBusinessException {
+        validarStatus(status);
         this.statusPagamento = status;
     }
 
-    private void setStatusPedido(StatusPedido status) throws Exception {
-        validarStatusPedido(status);
+    private void setStatusPedido(StatusPedido status) throws MyBusinessException {
+        validarStatus(status);
         this.statusPedido = status;
     }
 
     // Métodos de validação
-    private void validarNumero(long numero) throws Exception {
+    private void validarNumero(long numero) throws MyBusinessException {
         if (numero < 1) {
-            throw new Exception(PedidoExceptions.NUMERO_MIN.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.NUMERO_MIN.getMensagem());
         }
     }
 
-    private void validarItens(List<ItemPedido> itens) throws Exception {
+    private void validarItens(List<ItemPedido> itens) throws MyBusinessException {
         if (itens == null || itens.size() == 0) {
-            throw new Exception(PedidoExceptions.ITENS_VAZIO.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.ITENS_VAZIO.getMensagem());
         }
     }
 
     private void validarDataHoraCheckout(LocalDateTime dataHora, StatusPedidoEnum statusPedido)
-            throws Exception {
+            throws MyBusinessException {
         if (dataHora == null && statusPedido != StatusPedidoEnum.AGUARDANDO_CHECKOUT) {
-            throw new Exception(PedidoExceptions.DATA_CHECKOUT_NULA.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.DATA_CHECKOUT_NULA.getMensagem());
         }
 
         if (dataHora.isBefore(Validacao.dataHoraMinima)) {
-            throw new Exception(PedidoExceptions.DATA_CHECKOUT_MIN.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.DATA_CHECKOUT_MIN.getMensagem());
         }
 
         if (dataHora.isAfter(LocalDateTime.now())) {
-            throw new Exception(PedidoExceptions.DATA_CHECKOUT_MAX.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.DATA_CHECKOUT_MAX.getMensagem());
         }
     }
 
-    private void validarStatusPedido(StatusPedido status) throws Exception {
+    private void validarStatus(StatusPagamento status) throws MyBusinessException {
         if (status == null) {
-            throw new Exception(PedidoExceptions.STATUS_NULO.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.STATUS_NULO.getMensagem());
         }
     }
 
-    private void validarItem(ItemPedido item) throws Exception {
+    private void validarStatus(StatusPedido status) throws MyBusinessException {
+        if (status == null) {
+            throw new MyBusinessException(PedidoExceptions.STATUS_NULO.getMensagem());
+        }
+    }
+
+    private void validarItem(ItemPedido item) throws MyBusinessException {
         if (item == null) {
-            throw new Exception(PedidoExceptions.ITEM_NULO.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.ITEM_NULO.getMensagem());
         }
     }
 
-    private void validarNumeroItem(int numeroItem) throws Exception {
+    private void validarNumeroItem(int numeroItem) throws MyBusinessException {
         if (numeroItem < 1 || numeroItem > itens.size()) {
-            throw new Exception(PedidoExceptions.NUMERO_ITEM.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.NUMERO_ITEM.getMensagem());
         }
     }
 
-    private void validarCheckoutNaoRealizado() throws Exception {
+    private void validarCheckoutNaoRealizado() throws MyBusinessException {
         if (dataHoraCheckout != null) {
-            throw new Exception(PedidoExceptions.CHECKOUT_REALIZADO.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.CHECKOUT_REALIZADO.getMensagem());
         }
     }
 
-    private void validarPedidoContemItem() throws Exception {
+    private void validarPedidoContemItem() throws MyBusinessException {
         if (itens.size() == 0) {
-            throw new Exception(PedidoExceptions.PEDIDO_VAZIO.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.PEDIDO_VAZIO.getMensagem());
         }
     }
 
-    private void validarPedidoNaoFinalizado() throws Exception {
+    private void validarPedidoNaoFinalizado() throws MyBusinessException {
         if (statusPedido.getStatus() == StatusPedidoEnum.FINALIZADO) {
-            throw new Exception(PedidoExceptions.PEDIDO_FINALIZADO.getMensagem());
+            throw new MyBusinessException(PedidoExceptions.PEDIDO_FINALIZADO.getMensagem());
         }
     }
 
@@ -177,44 +188,44 @@ public class Pedido implements IPedido {
 
     // Métodos públicos
     @Override
-    public void adicionarItem(ItemPedido item) throws Exception {
+    public void adicionarItem(ItemPedido item) throws MyBusinessException {
         try {
             validarCheckoutNaoRealizado();
             validarItem(item);
         } catch (Exception e) {
             String msg = "Erro ao adicionar o item ao pedido! " + e.getMessage();
-            throw new Exception(msg);
+            throw new MyBusinessException(msg);
         }
         this.itens.add(item);
     }
 
     @Override
-    public void alterarItem(int numeroItem, ItemPedido item) throws Exception {
+    public void alterarItem(int numeroItem, ItemPedido item) throws MyBusinessException {
         try {
             validarCheckoutNaoRealizado();
             validarNumeroItem(numeroItem);
             validarItem(item);
         } catch (Exception e) {
             String msg = "Erro ao alterar o item do pedido! " + e.getMessage();
-            throw new Exception(msg);
+            throw new MyBusinessException(msg);
         }
         this.itens.set(numeroItem - 1, item);
     }
 
     @Override
-    public void removerItem(int numeroItem) throws Exception {
+    public void removerItem(int numeroItem) throws MyBusinessException {
         try {
             validarCheckoutNaoRealizado();
             validarNumeroItem(numeroItem);
         } catch (Exception e) {
             String msg = "Erro ao remover o item do pedido! " + e.getMessage();
-            throw new Exception(msg);
+            throw new MyBusinessException(msg);
         }
         this.itens.remove(numeroItem - 1);
     }
 
     @Override
-    public void fazerCheckout() throws Exception {
+    public void fazerCheckout() throws MyBusinessException {
         validarCheckoutNaoRealizado();
         validarPedidoContemItem();
         setDataHoraCheckout(LocalDateTime.now(), StatusPedidoEnum.AGUARDANDO_CHECKOUT);
@@ -222,7 +233,7 @@ public class Pedido implements IPedido {
     }
 
     @Override
-    public void atualizarStatusPedido() throws Exception {
+    public void atualizarStatusPedido() throws MyBusinessException {
         validarPedidoNaoFinalizado();
 
         var nextStatus = getNextStatusPedido();

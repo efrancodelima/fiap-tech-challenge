@@ -1,8 +1,7 @@
 package br.com.fiap.tech_challenge.application_layer.interfaces.use_cases;
 
-import java.util.List;
-
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
 
 public interface IPedidoUseCase {
 
@@ -10,11 +9,6 @@ public interface IPedidoUseCase {
 
     Pedido atualizarStatusPedido(long numeroPedido) throws Exception;
 
-    // Para usar com o webhook
-    void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado) throws Exception;
-
-    boolean consultarStatusPagamento(Pedido pedido) throws Exception;
-
-    List<Pedido> listarPedidos() throws Exception;
+    StatusPagamento consultarStatusPagamento(long numeroPedido) throws Exception;
 
 }

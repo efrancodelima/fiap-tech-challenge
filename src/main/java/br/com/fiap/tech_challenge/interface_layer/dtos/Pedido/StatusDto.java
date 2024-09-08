@@ -1,22 +1,20 @@
 package br.com.fiap.tech_challenge.interface_layer.dtos.Pedido;
 
-import java.time.LocalDateTime;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class StatusPedidoDto {
+public class StatusDto {
 
     @Schema(description = "Número do pedido.", example = "123")
     public Long numeroPedido;
 
-    @Schema(description = "Status do pedido.", example = "RECEBIDO")
+    @Schema(description = "Status do pedido ou do pagamento.", example = "RECEBIDO")
     public String statusPedido;
 
-    @Schema(description = "Data e hora da última atualização do status.", example = "2024-09-08T09:10:00")
-    public LocalDateTime dataHoraStatus;
+    @Schema(description = "Data e hora da última atualização do status.", example = "2024-09-08 09:10:00")
+    public String dataHora;
 
 }

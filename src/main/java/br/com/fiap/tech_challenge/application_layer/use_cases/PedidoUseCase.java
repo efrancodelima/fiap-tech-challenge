@@ -1,10 +1,9 @@
 package br.com.fiap.tech_challenge.application_layer.use_cases;
 
-import java.util.List;
-
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IPedidoUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
 
 public class PedidoUseCase implements IPedidoUseCase {
 
@@ -32,20 +31,9 @@ public class PedidoUseCase implements IPedidoUseCase {
     }
 
     @Override
-    public void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado)
-            throws Exception {
-        // TODO: falta implementar
-    }
-
-    @Override
-    public boolean consultarStatusPagamento(Pedido pedido) throws Exception {
-        // TODO: falta implementar
-        return true;
-    }
-
-    @Override
-    public List<Pedido> listarPedidos() throws Exception {
-        return gateway.listarPedidos();
+    public StatusPagamento consultarStatusPagamento(long numeroPedido) throws Exception {
+        Pedido pedido = gateway.buscarPedido(numeroPedido);
+        return pedido.getStatusPagamento();
     }
 
 }

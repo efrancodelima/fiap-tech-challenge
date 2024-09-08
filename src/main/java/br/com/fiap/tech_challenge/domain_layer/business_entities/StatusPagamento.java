@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPagamentoEnum;
 import br.com.fiap.tech_challenge.domain_layer.constants.Validacao;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.StatusPagamentoExceptions;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.StatusPedidoExceptions;
 
@@ -14,15 +15,10 @@ public class StatusPagamento {
     private final LocalDateTime dataHora;
 
     // Construtor
-    public StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws Exception {
-        try {
-            validarStatusPagamento(status, timestamp);
-            this.status = status;
-            this.dataHora = timestamp;
-        } catch (Exception e) {
-            String msg = "Erro ao definir o status do pagamento! ";
-            throw new Exception(msg + e.getMessage());
-        }
+    public StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws MyBusinessException {
+        validarStatusPagamento(status, timestamp);
+        this.status = status;
+        this.dataHora = timestamp;
     }
 
     // Getters
@@ -36,28 +32,28 @@ public class StatusPagamento {
 
     // Métodos de validação
     private void validarStatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp)
-            throws Exception {
+            throws MyBusinessException {
         validarStatus(status);
         validarTimestamp(timestamp);
     }
 
-    private void validarStatus(StatusPagamentoEnum status) throws Exception {
+    private void validarStatus(StatusPagamentoEnum status) throws MyBusinessException {
         if (status == null) {
-            throw new Exception(StatusPedidoExceptions.STATUS_NULO.getMensagem());
+            throw new MyBusinessException(StatusPedidoExceptions.STATUS_NULO.getMensagem());
         }
     }
 
-    private void validarTimestamp(LocalDateTime timestamp) throws Exception {
+    private void validarTimestamp(LocalDateTime timestamp) throws MyBusinessException {
         if (timestamp == null) {
-            throw new Exception(StatusPagamentoExceptions.DATA_HORA_NULO.getMensagem());
+            throw new MyBusinessException(StatusPagamentoExceptions.DATA_HORA_NULO.getMensagem());
         }
 
         if (timestamp.isBefore(Validacao.dataHoraMinima)) {
-            throw new Exception(StatusPagamentoExceptions.DATA_HORA_MIN.getMensagem());
+            throw new MyBusinessException(StatusPagamentoExceptions.DATA_HORA_MIN.getMensagem());
         }
 
         if (timestamp.isAfter(LocalDateTime.now())) {
-            throw new Exception(StatusPagamentoExceptions.DATA_HORA_MAX.getMensagem());
+            throw new MyBusinessException(StatusPagamentoExceptions.DATA_HORA_MAX.getMensagem());
         }
     }
 }

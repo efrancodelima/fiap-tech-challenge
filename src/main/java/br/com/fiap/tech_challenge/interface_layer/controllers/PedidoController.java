@@ -14,13 +14,14 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IPedidoController;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ItemPedidoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.PedidoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ItemPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusPedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.PedidoGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
@@ -52,7 +53,7 @@ public class PedidoController implements IPedidoController {
     }
 
     @Override
-    public ResponseEntity<StatusPedidoDto> fazerCheckout(PedidoDto pedidoDto) throws Exception {
+    public ResponseEntity<StatusDto> fazerCheckout(PedidoDto pedidoDto) throws Exception {
 
         Cliente cliente = null;
         Long cpfLong = pedidoDto.getCpfCliente();
@@ -71,9 +72,16 @@ public class PedidoController implements IPedidoController {
     }
 
     @Override
-    public ResponseEntity<StatusPedidoDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
+    public ResponseEntity<StatusDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
         numeroPedido = numeroPedido == null ? 0 : numeroPedido;
         Pedido pedido = pedidoUseCase.atualizarStatusPedido(numeroPedido);
-        return PedidoResponseAdapter.adaptarParaStatusPedido(pedido, HttpStatus.CREATED);
+        return PedidoResponseAdapter.adaptarParaStatusPedido(pedido, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<StatusDto> consultarStatusPagamento(Long numeroPedido) throws Exception {
+        numeroPedido = numeroPedido == null ? 0 : numeroPedido;
+        StatusPagamento statusPagamento = pedidoUseCase.consultarStatusPagamento(numeroPedido);
+        return PedidoResponseAdapter.adaptarParaStatusPagamento(numeroPedido, statusPagamento, HttpStatus.OK);
     }
 }

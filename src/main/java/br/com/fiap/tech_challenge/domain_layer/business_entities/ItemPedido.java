@@ -2,6 +2,7 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 
 import java.math.BigDecimal;
 
+import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.ItemPedidoExceptions;
 
 public class ItemPedido {
@@ -10,15 +11,10 @@ public class ItemPedido {
     private final int quantidade;
 
     // Construtor
-    public ItemPedido(Produto produto, int quantidade) throws Exception {
-        try {
-            validarCpf(produto, quantidade);
-            this.produto = produto;
-            this.quantidade = quantidade;
-        } catch (Exception e) {
-            String msg = "Erro ao instanciar o item de pedido! " + e.getMessage();
-            throw new Exception(msg);
-        }
+    public ItemPedido(Produto produto, int quantidade) throws MyBusinessException {
+        validarCpf(produto, quantidade);
+        this.produto = produto;
+        this.quantidade = quantidade;
     }
 
     // Getters
@@ -35,22 +31,22 @@ public class ItemPedido {
     }
 
     // Métodos de validação
-    private void validarCpf(Produto produto, int quantidade) throws Exception {
+    private void validarCpf(Produto produto, int quantidade) throws MyBusinessException {
         validarProduto(produto);
         validarQuantidade(quantidade);
     }
 
-    private void validarProduto(Produto produto) throws Exception {
+    private void validarProduto(Produto produto) throws MyBusinessException {
         if (produto == null) {
-            throw new Exception(ItemPedidoExceptions.PRODUTO_NULO.getMensagem());
+            throw new MyBusinessException(ItemPedidoExceptions.PRODUTO_NULO.getMensagem());
         }
     }
 
-    private void validarQuantidade(int quantidade) throws Exception {
+    private void validarQuantidade(int quantidade) throws MyBusinessException {
         if (quantidade < 0) {
-            throw new Exception(ItemPedidoExceptions.QTDE_MIN.getMensagem());
+            throw new MyBusinessException(ItemPedidoExceptions.QTDE_MIN.getMensagem());
         } else if (quantidade > 50) {
-            throw new Exception(ItemPedidoExceptions.QTDE_MAX.getMensagem());
+            throw new MyBusinessException(ItemPedidoExceptions.QTDE_MAX.getMensagem());
         }
     }
 }

@@ -21,7 +21,7 @@ public class PedidoGateway implements IPedidoGateway {
     // Atributos
     @Autowired
     private IPedidoRepository pedidoJpaRepository;
-    private final String PEDIDO_NAO_ENCONTRADO = "Não foi encontrado nenhum pedido para o código informado.";
+    private final String PEDIDO_NAO_ENCONTRADO = "Não foi encontrado nenhum pedido para o número informado.";
 
     // Métodos públicos
     @Override
