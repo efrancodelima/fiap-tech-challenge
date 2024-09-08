@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
@@ -13,6 +14,7 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNo
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.PedidoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoRepository;
 
+@Component
 public class PedidoGateway implements IPedidoGateway {
 
     // Atributos

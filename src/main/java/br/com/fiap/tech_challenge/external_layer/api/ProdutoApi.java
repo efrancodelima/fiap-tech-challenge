@@ -19,22 +19,22 @@ public class ProdutoApi implements IProdutoApi {
     private ProdutoController controller;
 
     @Override
-    public ResponseEntity<String> cadastrarProduto(@RequestBody ProdutoDto produtoDto) {
+    public ResponseEntity<String> cadastrarProduto(ProdutoDto produtoDto) {
         return controller.cadastrarProduto(produtoDto);
     }
 
     @Override
-    public ResponseEntity<String> editarProduto(@PathVariable long codigo, @RequestBody ProdutoDto produtoDto) {
+    public ResponseEntity<String> editarProduto(long codigo, ProdutoDto produtoDto) {
         return controller.editarProduto(codigo, produtoDto);
     }
 
     @Override
-    public ResponseEntity<String> removerProduto(@PathVariable long codigo) {
+    public ResponseEntity<String> removerProduto(long codigo) {
         return controller.removerProduto(codigo);
     }
 
     @Override
-    public ResponseEntity<String> buscarProdutosPorCategoria(@PathVariable String categoria) {
+    public ResponseEntity<String> buscarProdutosPorCategoria(String categoria) {
         return controller.buscarProdutosPorCategoria(categoria);
     }
 }

@@ -8,4 +8,6 @@ public interface IClienteRepository extends JpaRepository<ClienteJpa, Long> {
 
     ClienteJpa findByCpf(long cpf);
 
+    boolean existsByCpf(long cpf);
+
 }

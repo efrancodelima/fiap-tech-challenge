@@ -18,14 +18,16 @@ public class PedidoUseCase implements IPedidoUseCase {
 
     // Métodos
     @Override
+    public long fazerCheckout(Pedido pedido) throws Exception {
+        pedido.fazerCheckout();
+        pedido = gateway.gravarPedido(pedido);
+        return pedido.getNumero();
+    }
+
+    @Override
     public void atualizarStatus(Pedido pedido) throws Exception {
-        try {
-            pedido.atualizarStatusPedido();
-            gateway.atualizarPedido(pedido);
-        } catch (Exception e) {
-            String msg = "Erro ao atualizar o status do pedido! ";
-            throw new Exception(msg + e.getMessage());
-        }
+        pedido.atualizarStatusPedido();
+        gateway.atualizarPedido(pedido);
     }
 
     @Override
@@ -41,24 +43,8 @@ public class PedidoUseCase implements IPedidoUseCase {
     }
 
     @Override
-    public void fazerCheckout(Pedido pedido) throws Exception {
-        try {
-            pedido.fazerCheckout();
-            gateway.gravarPedido(pedido);
-        } catch (Exception e) {
-            String msg = "Erro ao fazer o checkout! ";
-            throw new Exception(msg + e.getMessage());
-        }
-    }
-
-    @Override
     public List<Pedido> listarPedidos() throws Exception {
-        try {
-            return gateway.listarPedidos();
-        } catch (Exception e) {
-            String msg = "Erro ao listar os pedidos! ";
-            throw new Exception(msg + e.getMessage());
-        }
+        return gateway.listarPedidos();
     }
 
 }

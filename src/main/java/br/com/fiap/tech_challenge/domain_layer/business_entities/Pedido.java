@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.domain_layer.business_entities.interfaces.IPedido;
 import br.com.fiap.tech_challenge.domain_layer.constants.Validacao;
 import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.PedidoExceptions;
-import br.com.fiap.tech_challenge.domain_layer.interfaces.IPedido;
 
 public class Pedido implements IPedido {
     private long numero;
@@ -17,34 +17,27 @@ public class Pedido implements IPedido {
     private StatusPagamento statusPagamento;
     private StatusPedido statusPedido;
 
-    // Construtor usado para criar um novo pedido
-    public Pedido(Cliente cliente) throws Exception {
-        try {
-            var status = new StatusPedido(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
-            setCliente(cliente);
-            setItens(null, null);
-            setStatusPedido(status);
-        } catch (Exception e) {
-            String msg = "Erro ao instanciar o pedido! " + e.getMessage();
-            throw new Exception(msg);
-        }
+    // Construtor usado para criar um pedido antes do checkout
+    public Pedido(Cliente cliente, List<ItemPedido> itens) throws Exception {
+
+        var statusPedido = new StatusPedido(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
+
+        setCliente(cliente);
+        setItens(itens);
+        setStatusPedido(statusPedido);
     }
 
     // Construtor usado para instanciar um pedido já existente
     public Pedido(long numero, Cliente cliente, List<ItemPedido> itens, LocalDateTime dataHoraCheckout,
-            StatusPagamento pagamento, StatusPedido status)
+            StatusPagamento pagamento, StatusPedido statusPedido)
             throws Exception {
-        try {
-            setNumero(numero);
-            setCliente(cliente);
-            setItens(itens, dataHoraCheckout);
-            setDataHoraCheckout(dataHoraCheckout, statusPedido.getStatus());
-            setStatusPagamento(pagamento);
-            setStatusPedido(status);
-        } catch (Exception e) {
-            String msg = "Erro ao instanciar o pedido! " + e.getMessage();
-            throw new Exception(msg);
-        }
+
+        setNumero(numero);
+        setCliente(cliente);
+        setItens(itens);
+        setDataHoraCheckout(dataHoraCheckout, statusPedido.getStatus());
+        setStatusPagamento(pagamento);
+        setStatusPedido(statusPedido);
     }
 
     // Getters
@@ -90,8 +83,8 @@ public class Pedido implements IPedido {
         this.cliente = cliente;
     }
 
-    private void setItens(List<ItemPedido> itens, LocalDateTime dataHoraCheckout) throws Exception {
-        validarItens(itens, dataHoraCheckout);
+    private void setItens(List<ItemPedido> itens) throws Exception {
+        validarItens(itens);
         this.itens = itens;
     }
 
@@ -117,21 +110,15 @@ public class Pedido implements IPedido {
         }
     }
 
-    private void validarItens(List<ItemPedido> itens, LocalDateTime dataHoraCheckout) throws Exception {
-        if (dataHoraCheckout != null) {
-            if (itens == null || itens.size() == 0) {
-                throw new Exception(PedidoExceptions.ITENS_VAZIO.getMensagem());
-            }
+    private void validarItens(List<ItemPedido> itens) throws Exception {
+        if (itens == null || itens.size() == 0) {
+            throw new Exception(PedidoExceptions.ITENS_VAZIO.getMensagem());
         }
     }
 
     private void validarDataHoraCheckout(LocalDateTime dataHora, StatusPedidoEnum statusPedido)
             throws Exception {
-        if (dataHora == null && statusPedido == StatusPedidoEnum.AGUARDANDO_CHECKOUT) {
-            return;
-        }
-
-        if (dataHora == null) {
+        if (dataHora == null && statusPedido != StatusPedidoEnum.AGUARDANDO_CHECKOUT) {
             throw new Exception(PedidoExceptions.DATA_CHECKOUT_NULA.getMensagem());
         }
 
@@ -220,26 +207,15 @@ public class Pedido implements IPedido {
 
     @Override
     public void fazerCheckout() throws Exception {
-        try {
-            validarCheckoutNaoRealizado();
-            validarPedidoContemItem();
-        } catch (Exception e) {
-            String msg = "Erro ao realizar o checkout! " + e.getMessage();
-            throw new Exception(msg);
-        }
-
+        validarCheckoutNaoRealizado();
+        validarPedidoContemItem();
         setDataHoraCheckout(LocalDateTime.now(), StatusPedidoEnum.AGUARDANDO_CHECKOUT);
         atualizarStatusPedido();
     }
 
     @Override
     public void atualizarStatusPedido() throws Exception {
-        try {
-            validarPedidoNaoFinalizado();
-        } catch (Exception e) {
-            String msg = "Erro ao alterar o status do pedido! " + e.getMessage();
-            throw new Exception(msg);
-        }
+        validarPedidoNaoFinalizado();
 
         StatusPedidoEnum[] statusArray = StatusPedidoEnum.values();
         int posicaoAtual = statusPedido.getStatus().ordinal();

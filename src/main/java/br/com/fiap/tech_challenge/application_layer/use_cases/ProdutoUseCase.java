@@ -31,13 +31,19 @@ public class ProdutoUseCase implements IProdutoUseCase {
     }
 
     @Override
-    public void removerProduto(long idProduto) throws ResourceNotFoundException, Exception {
-        gateway.removerProduto(idProduto);
+    public void removerProduto(long codigoProduto) throws ResourceNotFoundException, Exception {
+        gateway.removerProduto(codigoProduto);
+    }
+
+    @Override
+    public Produto buscarProdutoPorCodigo(long codigoProduto) throws ResourceNotFoundException, Exception {
+        return gateway.buscarProduto(codigoProduto);
     }
 
     @Override
     public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria)
             throws ResourceNotFoundException, Exception {
-        return gateway.buscarPorCategoria(categoria);
+        return gateway.buscarProdutosPorCategoria(categoria);
     }
+
 }

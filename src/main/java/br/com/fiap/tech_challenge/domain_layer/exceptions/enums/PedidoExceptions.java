@@ -2,7 +2,8 @@ package br.com.fiap.tech_challenge.domain_layer.exceptions.enums;
 
 public enum PedidoExceptions {
     NUMERO_MIN("O número do pedido deve ser maior que 0."),
-    ITENS_VAZIO("O pedido deve conter pelo menos um item se o checkout já foi feito."),
+    ITENS_VAZIO("O pedido deve conter pelo menos um item."),
+    ITENS_APOS_CHECKOUT("Não é possível alterar os itens do pedido após a realização do chekout."),
     DATA_NULA("A data do pedido não pode ser nula."),
     DATA_MIN("A data do pedido não pode ser menor que 01/01/2024."),
     DATA_MAX("A data do pedido não pode ser maior que a data atual."),

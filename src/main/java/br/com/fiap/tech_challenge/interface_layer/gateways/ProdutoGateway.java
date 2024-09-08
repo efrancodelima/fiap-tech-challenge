@@ -1,6 +1,7 @@
 package br.com.fiap.tech_challenge.interface_layer.gateways;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,7 @@ public class ProdutoGateway implements IProdutoGateway {
     }
 
     @Override
-    public void atualizarProduto(Produto produto) throws Exception {
+    public void atualizarProduto(Produto produto) throws ResourceNotFoundException, Exception {
         if (!produtoJpaRepository.existsById(produto.getCodigo())) {
             throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
         }
@@ -39,18 +40,30 @@ public class ProdutoGateway implements IProdutoGateway {
     }
 
     @Override
-    public void removerProduto(long codigo) throws ResourceNotFoundException, Exception {
-        if (!produtoJpaRepository.existsById(codigo)) {
+    public void removerProduto(long codigoProduto) throws ResourceNotFoundException, Exception {
+        if (!produtoJpaRepository.existsById(codigoProduto)) {
             throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
         }
-        produtoJpaRepository.deleteById(codigo);
+        produtoJpaRepository.deleteById(codigoProduto);
     }
 
     @Override
-    public List<Produto> buscarPorCategoria(CategoriaProduto categoria)
+    public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria)
             throws ResourceNotFoundException, Exception {
         List<ProdutoJpa> produtosJpa = produtoJpaRepository.findByCategoria(categoria);
         return ProdutoMapper.mapearParaEntidadesNegocio(produtosJpa);
+    }
+
+    @Override
+    public Produto buscarProduto(long codigoProduto) throws ResourceNotFoundException, Exception {
+
+        Optional<ProdutoJpa> produtoJpa = produtoJpaRepository.findById(codigoProduto);
+
+        if (produtoJpa.isPresent()) {
+            return ProdutoMapper.mapearParaEntidadeNegocio(produtoJpa.get());
+        } else {
+            throw new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO);
+        }
     }
 
 }

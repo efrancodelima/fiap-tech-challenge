@@ -4,6 +4,8 @@ import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IClienteG
 import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IClienteUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRulesException;
+import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.ResourceNotFoundException;
 
 public class ClienteUseCase implements IClienteUseCase {
 
@@ -17,23 +19,13 @@ public class ClienteUseCase implements IClienteUseCase {
 
     // Métodos
     @Override
-    public Cliente cadastrarCliente(Cliente cliente) throws Exception {
-        try {
-            return gateway.gravarCliente(cliente);
-        } catch (Exception e) {
-            String msg = "Erro ao cadastrar o cliente! ";
-            throw new Exception(msg + e.getMessage());
-        }
+    public Cliente cadastrarCliente(Cliente cliente) throws BusinessRulesException, Exception {
+        return gateway.gravarCliente(cliente);
     }
 
     @Override
-    public Cliente buscarClientePorCpf(Cpf cpf) throws Exception {
-        try {
-            return gateway.buscarClientePorCpf(cpf);
-        } catch (Exception e) {
-            String msg = "Erro ao buscar o cliente! ";
-            throw new Exception(msg + e.getMessage());
-        }
+    public Cliente buscarClientePorCpf(Cpf cpf) throws ResourceNotFoundException, Exception {
+        return gateway.buscarClientePorCpf(cpf);
     }
 
 }

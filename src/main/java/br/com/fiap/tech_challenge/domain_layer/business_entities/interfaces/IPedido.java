@@ -1,9 +1,9 @@
-package br.com.fiap.tech_challenge.domain_layer.interfaces;
+package br.com.fiap.tech_challenge.domain_layer.business_entities.interfaces;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 
 public interface IPedido {
-    
+
     public void adicionarItem(ItemPedido item) throws Exception;
 
     public void alterarItem(int numeroItem, ItemPedido item) throws Exception;

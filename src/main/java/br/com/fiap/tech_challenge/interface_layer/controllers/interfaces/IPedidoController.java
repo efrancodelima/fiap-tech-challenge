@@ -2,10 +2,10 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.interfaces;
 
 import org.springframework.http.ResponseEntity;
 
+import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
+
 public interface IPedidoController {
 
-    ResponseEntity<String> criarPedido(Long cpf);
-
-    ResponseEntity<String> criarPedido();
+    ResponseEntity<String> fazerCheckout(PedidoDto pedidoDto);
 
 }
