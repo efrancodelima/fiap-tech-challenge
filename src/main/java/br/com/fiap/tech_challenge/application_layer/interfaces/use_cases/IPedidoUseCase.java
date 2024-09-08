@@ -8,7 +8,7 @@ public interface IPedidoUseCase {
 
     Pedido fazerCheckout(Pedido pedido) throws Exception;
 
-    void atualizarStatus(Pedido pedido) throws Exception;
+    Pedido atualizarStatusPedido(long numeroPedido) throws Exception;
 
     // Para usar com o webhook
     void confirmarPagamento(Pedido pedido, boolean pagamentoProcessado) throws Exception;

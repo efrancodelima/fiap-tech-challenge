@@ -9,6 +9,7 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.external_layer.api.interfaces.IPedidoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.PedidoController;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusPedidoDto;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -18,8 +19,13 @@ public class PedidoApi implements IPedidoApi {
     private PedidoController controller;
 
     @Override
-    public ResponseEntity<Pedido> fazerCheckout(PedidoDto pedidoDto) throws Exception {
+    public ResponseEntity<StatusPedidoDto> fazerCheckout(PedidoDto pedidoDto) throws Exception {
         return controller.fazerCheckout(pedidoDto);
+    }
+
+    @Override
+    public ResponseEntity<StatusPedidoDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
+        return controller.atualizarStatusPedido(numeroPedido);
     }
 
 }

@@ -24,9 +24,11 @@ public class PedidoUseCase implements IPedidoUseCase {
     }
 
     @Override
-    public void atualizarStatus(Pedido pedido) throws Exception {
+    public Pedido atualizarStatusPedido(long numeroPedido) throws Exception {
+        Pedido pedido = gateway.buscarPedido(numeroPedido);
         pedido.atualizarStatusPedido();
         gateway.atualizarPedido(pedido);
+        return pedido;
     }
 
     @Override

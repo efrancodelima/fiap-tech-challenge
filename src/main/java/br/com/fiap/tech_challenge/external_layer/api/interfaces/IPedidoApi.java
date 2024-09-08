@@ -7,13 +7,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
+import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusPedidoDto;
 
 @Tag(name = "Pedido")
 public interface IPedidoApi {
@@ -27,13 +27,26 @@ public interface IPedidoApi {
                         @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
         @PostMapping(value = "/checkout/")
-        ResponseEntity<Pedido> fazerCheckout(@RequestBody PedidoDto pedidoDto) throws Exception;
+        ResponseEntity<StatusPedidoDto> fazerCheckout(@RequestBody PedidoDto pedidoDto) throws Exception;
+
+        // Atualizar status
+        @Operation(summary = "Atualizar o status do pedido", description = PedidoConstantes.descricaoAtualizarStatus)
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = PedidoConstantes.d200, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e200))),
+                        @ApiResponse(responseCode = "400", description = PedidoConstantes.d400, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e400))),
+                        @ApiResponse(responseCode = "404", description = PedidoConstantes.d404, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e404))),
+                        @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
+                        @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
+        @PostMapping(value = "/status/{numeroPedido}")
+        ResponseEntity<StatusPedidoDto> atualizarStatusPedido(@PathVariable("numeroPedido") Long numeroPedido)
+                        throws Exception;
 
 }
 
 final class PedidoConstantes {
 
         public static final String descricaoCheckout = "Para realizar o checkout do pedido, informe os dados do pedido conforme o schema PedidoDto no final desta página.<br>O CPF do cliente é opcional, coloque zero se não quiser identificar o cliente.";
+        public static final String descricaoAtualizarStatus = "Para atualizar o status do pedido, informe o número do pedido pelo path.<br>Os status possuem uma ordem sequencial, então ele mudará automaticamente para o valor seguinte.";
 
         public static final String d200 = "Sucesso!";
         public static final String d201 = d200;

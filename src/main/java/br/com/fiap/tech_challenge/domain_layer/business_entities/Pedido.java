@@ -167,6 +167,14 @@ public class Pedido implements IPedido {
         }
     }
 
+    // Outros métodos privados
+    private StatusPedidoEnum getNextStatusPedido() {
+        StatusPedidoEnum[] statusArray = StatusPedidoEnum.values();
+        int posicaoAtual = statusPedido.getStatus().ordinal();
+        int proximaPosicao = (posicaoAtual + 1) % statusArray.length;
+        return statusArray[proximaPosicao];
+    }
+
     // Métodos públicos
     @Override
     public void adicionarItem(ItemPedido item) throws Exception {
@@ -217,10 +225,9 @@ public class Pedido implements IPedido {
     public void atualizarStatusPedido() throws Exception {
         validarPedidoNaoFinalizado();
 
-        StatusPedidoEnum[] statusArray = StatusPedidoEnum.values();
-        int posicaoAtual = statusPedido.getStatus().ordinal();
-        int proximaPosicao = (posicaoAtual + 1) % statusArray.length;
-        var novoStatus = new StatusPedido(statusArray[proximaPosicao], LocalDateTime.now());
+        var nextStatus = getNextStatusPedido();
+        var novoStatus = new StatusPedido(nextStatus, LocalDateTime.now());
         setStatusPedido(novoStatus);
     }
+
 }

@@ -2,6 +2,7 @@ package br.com.fiap.tech_challenge.interface_layer.gateways;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ public class PedidoGateway implements IPedidoGateway {
     // Métodos públicos
     @Override
     public Pedido gravarPedido(Pedido pedido) throws Exception {
+
         PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpa = pedidoJpaRepository.save(pedidoJpa);
         return PedidoMapper.mapearParaEntidadeNegocio(pedidoJpa);
@@ -32,20 +34,39 @@ public class PedidoGateway implements IPedidoGateway {
 
     @Override
     public void atualizarPedido(Pedido pedido) throws Exception {
+
         if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
             throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
         }
+
         PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpaRepository.save(pedidoJpa);
     }
 
     @Override
     public void removerPedido(Pedido pedido) throws Exception {
+
         if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
             throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
         }
+
         PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
         pedidoJpaRepository.delete(pedidoJpa);
+    }
+
+    @Override
+    public Pedido buscarPedido(long numeroPedido) throws Exception {
+
+        PedidoJpa pedidoJpa;
+        Optional<PedidoJpa> optionalPedido = pedidoJpaRepository.findById(numeroPedido);
+
+        if (optionalPedido.isPresent()) {
+            pedidoJpa = optionalPedido.get();
+        } else {
+            throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
+        }
+
+        return PedidoMapper.mapearParaEntidadeNegocio(pedidoJpa);
     }
 
     @Override

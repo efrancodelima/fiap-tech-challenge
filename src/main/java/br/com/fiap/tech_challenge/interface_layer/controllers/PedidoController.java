@@ -3,6 +3,7 @@ package br.com.fiap.tech_challenge.interface_layer.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +14,16 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IPedidoController;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ItemPedidoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.PedidoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.dtos.ItemPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.PedidoGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 import jakarta.annotation.PostConstruct;
 
 @Component
@@ -52,7 +52,7 @@ public class PedidoController implements IPedidoController {
     }
 
     @Override
-    public ResponseEntity<Pedido> fazerCheckout(PedidoDto pedidoDto) throws Exception {
+    public ResponseEntity<StatusPedidoDto> fazerCheckout(PedidoDto pedidoDto) throws Exception {
 
         Cliente cliente = null;
         Long cpfLong = pedidoDto.getCpfCliente();
@@ -67,6 +67,13 @@ public class PedidoController implements IPedidoController {
 
         Pedido pedido = new Pedido(cliente, itens);
         pedido = pedidoUseCase.fazerCheckout(pedido);
-        return PedidoResponseAdapter.adaptar(pedido);
+        return PedidoResponseAdapter.adaptarParaStatusPedido(pedido, HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<StatusPedidoDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
+        numeroPedido = numeroPedido == null ? 0 : numeroPedido;
+        Pedido pedido = pedidoUseCase.atualizarStatusPedido(numeroPedido);
+        return PedidoResponseAdapter.adaptarParaStatusPedido(pedido, HttpStatus.CREATED);
     }
 }

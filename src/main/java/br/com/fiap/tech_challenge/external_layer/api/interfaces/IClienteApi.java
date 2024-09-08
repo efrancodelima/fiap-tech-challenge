@@ -49,7 +49,7 @@ public interface IClienteApi {
 
 final class ClienteConstantes {
 
-        public static final String descricaoCadastrar = "Para cadastrar um cliente, informe os dados do cliente conforme o schema ClienteDto no final desta página.<br>O nome e o email do cliente são opcionais, mas um dos dois precisa ser informado.";
+        public static final String descricaoCadastrar = "Para cadastrar um cliente, informe os dados do cliente conforme o schema ClienteDto no final desta página.<br>O nome e o email do cliente são opcionais, mas pelo menos um dos dois precisa ser informado.";
         public static final String descricaoBuscar = "Para buscar um cliente, informe o CPF (somente números, sem pontos e traço).";
 
         public static final String d200 = "Sucesso!";
