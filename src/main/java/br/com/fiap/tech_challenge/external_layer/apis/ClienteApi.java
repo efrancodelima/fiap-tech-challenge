@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.tech_challenge.business_layer.business_entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
 import br.com.fiap.tech_challenge.external_layer.apis.interfaces.IClienteApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.ClienteController;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
