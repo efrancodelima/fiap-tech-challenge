@@ -1,6 +1,6 @@
-# PosTech - Software Architecture
+# Tech Challenge - Fase 2
 
-#### Projeto relacionado ao Tech Challenge fornecido como atividade avaliativa do curso de pós graduação em Arquitetura de Software da FIAP.
+Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**.
 
 ## Objetivos
 
@@ -8,23 +8,36 @@ Desenvolver um sistema para uma lanchonete, seguindo os pré-requisitos do Tech 
 
 ## Requisitos do Tech Challenge
 
-#### Arquitetura:
+### Arquitetura
 
-Uma das premissas para esse projeto, foi desenvolver um sistema monolito, seguindo a arquitetura hexagonal.</br>
-Ou seja, a ideia principal é conseguir fornecer um sistema que favorece reusabilidade de código, alta coesão, baixo acoplamento, independência de tecnologia e que são mais fáceis de serem testados.
+O projeto da fase 1 deverá ser adaptado para a Clean Architecture.</br>
+XXX
 
-#### API's:
+### API's web
 
-- Cadastro do Cliente
-- Identificação do Cliente via CPF
+Produto:
+
 - Criar, editar e remover produtos
 - Buscar produtos por categoria
-- Fake checkout, apenas enviar os produtos escolhidos para a fila. O checkout é a finalização do pedido.
-- Listar os pedidos
 
-#### Banco de dados:
+Cliente
 
-De livre escolha (utilizamos o MySQL).
+- Cadastrar cliente
+- Buscar cliente pelo CPF
+
+Pedido
+
+- Fazer checkout
+  - Deverá receber os produtos e retornar a identificação do pedido
+- Atualizar o status do pedido
+- Consultar o status do pagamento
+- Listar pedidos nessa ordem: Pronto > Em Preparação > Recebido
+  - Pedidos mais antigos primeiro e mais novos depois.
+  - Pedidos finalizados não devem aparecer na lista.
+
+### Banco de dados
+
+De livre escolha (escolhi o MySQL 8.4.0).
 
 ## Pré-requisitos para executar a aplicação
 
@@ -35,6 +48,126 @@ As instruções citadas nesse documento foram testadas com:
 - Linux Ubuntu 22.04.4 LTS;
 - Docker 27.1.1;
 - Docker Compose 1.26.0.
+
+## Estrutura do projeto
+
+Decidi criar a estrutura do projeto em diretórios conforme as caamadas da Clean Architecture. \
+Nomeei as camadas como: camada de negócios, camada de aplicação, camada de interface e camada externa.
+
+- tech_challenge
+  - business_layer
+  - application_layer
+  - interface_layer
+  - external_layer
+
+### Camada de negócios
+
+- business_layer
+  - entities
+    - enums
+  - constants
+  - exceptions
+    - messages
+
+No domain layer temos as entidades de negócio.
+Temos alguns value objects entre elas (CPF, ItemPedido, StatusPedido e StatusPagamento), trabalhando com a ideia de composição.
+Temos também alguns enums: CategoriaProduto, StatusPedidoEnum e StatusPagamentoEnum.
+
+Temos uma classe constant que compartilha a data/hora mínima que o sistema aceita em suas validações.
+Temos três datas/horas no sistema: do checkout, do pagamento e do status do pedido.
+
+Em exceptions, criei uma classe customizada (BusinessRuleException) para as exceções lançadas por esta camada.
+As mensagens das exceções ficam catalogadas nos enums dentro de /exceptions/messages.
+
+### Camada de aplicação
+
+- application_layer
+  - exceptions
+    - messages
+  - interfaces
+    - gateways
+  - use_cases
+    - interfaces
+
+Aqui temos os casos de uso, todos com interface e implementação.
+Temos as interfaces dos gateways, sem a implementação, que fica em outra camada.
+As interfaces dos gateways são necessárias aqui para que os casos de uso possam saber como recuperar os dados necessários à sua função.
+
+Por fim temos as exceções, no mesmo formato da camada anterior: classes customizadas e mensagens de erro catalogadas em enums.
+
+### Camada de interface/adaptação
+
+- interface_layer
+  - controllers
+    - adapters
+    - request_adapters
+    - response_adapters
+  - dtos
+  - interfaces
+  - exception_handler
+  - gateways
+  - entities
+  - mappers
+  - repositories
+
+#### controllers
+
+Nesta camada temos a interface e implementação dos controllers.
+O controller:
+recebe a requisição da camada externa
+adpta o formato para um objeto que o caso de uso conheça (entidades de negócio)
+chama o casos de uso apropriado, passando o gateway para ele (seguindo o princípio da inversão de dependência)
+recebe a resposta do caso de uso
+adapta a resposta para a camada externa
+
+Os DTOs documentam os tipos de requisições que o Controller aceita.
+Por ser um DTO, uma classe java muito simples, não fiz a interface para eles, somente a implementação.
+
+Temos os adapters, tanto da requisição quanto da resposta.
+Os response_adapters fazem o papel do Presenter (dei outro nome, mas a função é a mesma).
+
+#### gateways
+
+Aqui temos os gateways implementados.
+Nesse projeto, usamos SpringBoot e JPA. Normalmente a conexão com o banco de dados seria feita na camada externa (de infra), mas o SpringBoot já gerencia automaticamente as conexões, então isso não foi necessário.
+
+Temos também as entidades JPA (ORM), quer não se confundem com as entidades de negócio.
+E temos as interfaces dos repositórios, para que o gateway saiba como utilizá-los.
+Normalmente, a implementação do repositório poderia ser feita pela camada externa e passada para o Gateway por meio do Controller.
+Mas como estamos usando JPA, os repositórios não necessitam ser implementados.
+Enfim, ajustamos os princípios da Clean Architecture para as tecnologias utilizadas no projeto.
+
+Finalmente, temos os mappers, que também trabalham como adaptadores: eles convertem as entidades de negócio em entidades JPA e vice-versa.
+Deixei os mappers dentro da pasta gateways e os adaptadores dentro de controllers para não confundir.
+Os dois fazem um trabalho parecido, mas cada um em um contexto diferente.
+
+#### exceptions_handler
+
+Por fim, temos uma pasta chamada exception_handler, que também faz um papel de "adaptar", só que um pouco diferente.
+Ela capturas as exceções lançadas pelo sistema e as transforma em um objeto ErrorResponse com os campos: code, status, message e timestamp.
+Depois encapsula esse objeto em um ResponseEntity, que é o mesmo usado pelos response_adapters (presenters).
+Lembra daquelas exceções customizadas que criamos nas camadas internas (domain e application)?
+Então, o handler vai usar aquelas exceções para ajustar corretamente o statusCode de cada uma.
+
+### Camada externa
+
+- external_layer
+  - apis
+    - interfaces
+  - swagger
+
+#### apis
+
+Aqui temos as APIs web (endpoints).
+Todas as APIs possuem interfaces, que, além de atender à ideia "de programar para interface", também deixa o código da API mais limpo, pois as anotações do Swagger ficam apenas na interface, não na classe (e são muitas anotações).
+
+#### swagger
+
+Na pasta do swagger temos apenas um arquivo de configuração.
+
+### Outros arquivos
+
+Ainda temos o TechChallengeApplication.java que é responsável por startar a aplicação e o diretório resources, que contém as configurações do SpringBoot.
 
 ## Roteiro para executar a aplicação
 
