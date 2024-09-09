@@ -65,6 +65,18 @@ public class PedidoUseCase implements IPedidoUseCase {
         return filtrarEOrdenarPedidos(pedidos);
     }
 
+    @Override
+    public void atualizarStatusPagamento(StatusPagamento statusPagamento) throws Exception {
+
+        Validar.notNull(statusPagamento, EnumApplicationExceptions.STATUS_PAGAMENTO_NULO);
+
+        Pedido pedido = gateway.buscarPedidoPeloCodigoPagamento(statusPagamento.getCodigo());
+        Validar.notNull(pedido, EnumNotFoundExceptions.PEDIDO_NAO_ENCONTRADO);
+
+        pedido.setStatusPagamento(statusPagamento);
+        gateway.atualizarPedido(pedido);
+    }
+
     // Métodos privados
     private void validarNumeroPedido(Long numeroPedido) throws Exception {
 

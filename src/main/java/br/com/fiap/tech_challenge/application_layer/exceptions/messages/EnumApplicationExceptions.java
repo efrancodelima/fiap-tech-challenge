@@ -11,6 +11,7 @@ public enum EnumApplicationExceptions {
     PEDIDO_NULO("O pedido não pode ser nulo."),
     PEDIDO_NUMERO_NULO("Informe o número do pedido."),
     PEDIDO_NUMERO_MIN("O número do pedido deve ser maior que zero."),
+    STATUS_PAGAMENTO_NULO("O status do pagamento não pode ser nulo."),
 
     CLIENTE_NULO("O cliente não pode ser nulo."),
     CLIENTE_JA_EXISTE("Já existe um cliente cadastrado com esse CPF."),

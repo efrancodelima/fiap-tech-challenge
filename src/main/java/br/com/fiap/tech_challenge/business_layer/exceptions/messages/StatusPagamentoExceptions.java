@@ -3,6 +3,8 @@ package br.com.fiap.tech_challenge.business_layer.exceptions.messages;
 import br.com.fiap.tech_challenge.business_layer.constants.Validacao;
 
 public enum StatusPagamentoExceptions {
+    CODIGO_NULO("O código do pagamento não pode ser nulo."),
+    CODIGO_MIN("O código do pagamento deve ser maior que zero."),
     STATUS_NULO("O status do pagamento não pode ser nulo."),
     DATA_HORA_NULO("A data/hora do pagamento não pode ser nula."),
     DATA_HORA_MIN("A data do pagamento não pode ser anterior a " + Validacao.dataMinimaString + "."),

@@ -18,11 +18,14 @@ import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoE
 @Embeddable
 public class StatusPagamentoJpa {
 
+    @Column(name = "codigo_pagamento", nullable = false)
+    private Long codigo;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_pagamento", nullable = true)
+    @Column(name = "status_pagamento", nullable = false)
     private StatusPagamentoEnum status;
 
-    @Column(name = "timestamp_status_pagamento", nullable = true)
+    @Column(name = "timestamp_status_pagamento", nullable = false)
     private LocalDateTime dataHora;
 
 }

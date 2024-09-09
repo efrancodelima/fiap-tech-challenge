@@ -15,4 +15,6 @@ public interface IPedidoUseCase {
 
     List<Pedido> listarPedidos() throws Exception;
 
+    void atualizarStatusPagamento(StatusPagamento statusPagamento) throws Exception;
+
 }

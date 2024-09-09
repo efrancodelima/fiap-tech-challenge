@@ -13,7 +13,7 @@ public final class ProdutoRequestAdapter {
         String nome = produtoDto.getNome().trim();
         String descricao = produtoDto.getDescricao();
         BigDecimal preco = produtoDto.getPreco();
-        CategoriaProduto categoria = CategoriaProduto.get(produtoDto.getCategoria());
+        CategoriaProduto categoria = CategoriaProduto.fromString(produtoDto.getCategoria());
         return new Produto(nome, descricao, preco, categoria);
     }
 
@@ -22,7 +22,7 @@ public final class ProdutoRequestAdapter {
         String nome = produtoDto.getNome().trim();
         String descricao = produtoDto.getDescricao();
         BigDecimal preco = produtoDto.getPreco();
-        CategoriaProduto categoria = CategoriaProduto.get(produtoDto.getCategoria());
+        CategoriaProduto categoria = CategoriaProduto.fromString(produtoDto.getCategoria());
         return new Produto(codigo, nome, descricao, preco, categoria);
     }
 

@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.tech_challenge.external_layer.apis.interfaces.IPedidoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.PedidoController;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -20,23 +21,28 @@ public class PedidoApi implements IPedidoApi {
     private PedidoController controller;
 
     @Override
-    public ResponseEntity<StatusDto> fazerCheckout(PedidoDto pedidoDto) throws Exception {
+    public ResponseEntity<StatusPedidoDto> fazerCheckout(PedidoDto pedidoDto) throws Exception {
         return controller.fazerCheckout(pedidoDto);
     }
 
     @Override
-    public ResponseEntity<StatusDto> atualizarStatusPedido(long numeroPedido) throws Exception {
+    public ResponseEntity<StatusPedidoDto> atualizarStatusPedido(long numeroPedido) throws Exception {
         return controller.atualizarStatusPedido(numeroPedido);
     }
 
     @Override
-    public ResponseEntity<StatusDto> consultarStatusPagamento(long numeroPedido) throws Exception {
+    public ResponseEntity<StatusPedidoDto> consultarStatusPagamento(long numeroPedido) throws Exception {
         return controller.consultarStatusPagamento(numeroPedido);
     }
 
     @Override
-    public ResponseEntity<List<StatusDto>> listarPedidos() throws Exception {
+    public ResponseEntity<List<StatusPedidoDto>> listarPedidos() throws Exception {
         return controller.listarPedidos();
+    }
+
+    @Override
+    public void webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception {
+        controller.webhookMercadoPago(pagamentoDto);
     }
 
 }

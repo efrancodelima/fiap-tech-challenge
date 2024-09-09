@@ -6,22 +6,36 @@ import br.com.fiap.tech_challenge.business_layer.constants.Validacao;
 import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
 import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleException;
 import br.com.fiap.tech_challenge.business_layer.exceptions.messages.StatusPagamentoExceptions;
-import br.com.fiap.tech_challenge.business_layer.exceptions.messages.StatusPedidoExceptions;
 
 public class StatusPagamento {
 
     // Atributos
+    private final long codigo;
     private final StatusPagamentoEnum status;
     private final LocalDateTime dataHora;
 
-    // Construtor
+    // Construtores
     public StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws BusinessRuleException {
         validarStatusPagamento(status, timestamp);
+        this.codigo = 0;
+        this.status = status;
+        this.dataHora = timestamp;
+    }
+
+    public StatusPagamento(long codigo, StatusPagamentoEnum status, LocalDateTime timestamp)
+            throws BusinessRuleException {
+        validarCodigo(codigo);
+        validarStatusPagamento(status, timestamp);
+        this.codigo = codigo;
         this.status = status;
         this.dataHora = timestamp;
     }
 
     // Getters
+    public long getCodigo() {
+        return codigo;
+    }
+
     public StatusPagamentoEnum getStatus() {
         return status;
     }
@@ -31,6 +45,15 @@ public class StatusPagamento {
     }
 
     // Métodos de validação
+    private void validarCodigo(Long codigo) throws BusinessRuleException {
+        if (codigo == null) {
+            throw new BusinessRuleException(StatusPagamentoExceptions.CODIGO_NULO.getMensagem());
+        }
+        if (codigo < 1) {
+            throw new BusinessRuleException(StatusPagamentoExceptions.CODIGO_MIN.getMensagem());
+        }
+    }
+
     private void validarStatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp)
             throws BusinessRuleException {
         validarStatus(status);
@@ -39,7 +62,7 @@ public class StatusPagamento {
 
     private void validarStatus(StatusPagamentoEnum status) throws BusinessRuleException {
         if (status == null) {
-            throw new BusinessRuleException(StatusPedidoExceptions.STATUS_NULO.getMensagem());
+            throw new BusinessRuleException(StatusPagamentoExceptions.STATUS_NULO.getMensagem());
         }
     }
 

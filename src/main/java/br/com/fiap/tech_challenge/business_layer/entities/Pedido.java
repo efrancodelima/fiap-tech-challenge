@@ -98,7 +98,7 @@ public class Pedido {
         this.dataHoraCheckout = dataHoraCheckout;
     }
 
-    private void setStatusPagamento(StatusPagamento status) throws BusinessRuleException {
+    public void setStatusPagamento(StatusPagamento status) throws BusinessRuleException {
         validarStatus(status);
         this.statusPagamento = status;
     }

@@ -12,6 +12,8 @@ public interface IPedidoGateway {
 
     Pedido buscarPedido(long numeroPedido) throws Exception;
 
+    Pedido buscarPedidoPeloCodigoPagamento(long codigoPagamento) throws Exception;
+
     List<Pedido> buscarTodosOsPedidos() throws Exception;
 
 }

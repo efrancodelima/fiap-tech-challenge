@@ -1,7 +1,7 @@
 package br.com.fiap.tech_challenge.business_layer.entities.enums;
 
 import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleException;
-import br.com.fiap.tech_challenge.business_layer.exceptions.messages.CategoriaProdutoExceptions;
+import br.com.fiap.tech_challenge.business_layer.exceptions.messages.EnumExceptions;
 
 public enum CategoriaProduto {
     LANCHE,
@@ -9,7 +9,7 @@ public enum CategoriaProduto {
     BEBIDA,
     SOBREMESA;
 
-    public static CategoriaProduto get(String categoriaStr) throws BusinessRuleException {
+    public static CategoriaProduto fromString(String categoriaStr) throws BusinessRuleException {
 
         categoriaStr = categoriaStr == null ? null : categoriaStr.toUpperCase().trim();
 
@@ -17,7 +17,7 @@ public enum CategoriaProduto {
             return CategoriaProduto.valueOf(categoriaStr);
 
         } catch (Exception e) {
-            throw new BusinessRuleException(CategoriaProdutoExceptions.CATEGORIA_INAVLIDA.getMensagem());
+            throw new BusinessRuleException(EnumExceptions.CATEGORIA_PRODUTO.getMensagem());
         }
     }
 }

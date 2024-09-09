@@ -58,7 +58,7 @@ public class ProdutoController implements IProdutoController {
     @Override
     public ResponseEntity<List<Produto>> buscarProdutosPorCategoria(String categoriaStr) throws Exception {
 
-        CategoriaProduto categoria = CategoriaProduto.get(categoriaStr);
+        CategoriaProduto categoria = CategoriaProduto.fromString(categoriaStr);
         List<Produto> produtos = produtoUseCase.buscarProdutosPorCategoria(categoria);
 
         if (produtos.size() > 0) {

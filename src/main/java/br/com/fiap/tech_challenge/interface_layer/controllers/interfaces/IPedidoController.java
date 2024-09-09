@@ -4,17 +4,20 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 
 public interface IPedidoController {
 
-    ResponseEntity<StatusDto> fazerCheckout(PedidoDto pedidoDto) throws Exception;
+    ResponseEntity<StatusPedidoDto> fazerCheckout(PedidoDto pedidoDto) throws Exception;
 
-    ResponseEntity<StatusDto> atualizarStatusPedido(Long numeroPedido) throws Exception;
+    ResponseEntity<StatusPedidoDto> atualizarStatusPedido(Long numeroPedido) throws Exception;
 
-    ResponseEntity<StatusDto> consultarStatusPagamento(Long numeroPedido) throws Exception;
+    ResponseEntity<StatusPedidoDto> consultarStatusPagamento(Long numeroPedido) throws Exception;
 
-    ResponseEntity<List<StatusDto>> listarPedidos() throws Exception;
+    ResponseEntity<List<StatusPedidoDto>> listarPedidos() throws Exception;
+
+    void webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception;
 
 }

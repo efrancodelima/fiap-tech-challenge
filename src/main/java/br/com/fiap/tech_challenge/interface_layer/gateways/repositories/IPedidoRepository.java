@@ -5,4 +5,6 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;
 
 public interface IPedidoRepository extends JpaRepository<PedidoJpa, Long> {
 
+    PedidoJpa findByStatusPagamentoCodigo(Long codigoPagamento);
+
 }

@@ -10,34 +10,35 @@ import org.springframework.http.ResponseEntity;
 
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
 import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 
 public final class PedidoResponseAdapter {
 
     // Métodos públicos
-    public static ResponseEntity<StatusDto> adaptarParaStatusPedido(Pedido pedido, HttpStatus httpStatus) {
+    public static ResponseEntity<StatusPedidoDto> adaptarParaStatusPedido(Pedido pedido, HttpStatus httpStatus) {
 
-        StatusDto response = adaptarParaStatusPedido(pedido);
+        StatusPedidoDto response = adaptarParaStatusPedido(pedido);
         return new ResponseEntity<>(response, httpStatus);
     }
 
-    public static ResponseEntity<StatusDto> adaptarParaStatusPagamento(long numeroPedido,
+    public static ResponseEntity<StatusPedidoDto> adaptarParaStatusPagamento(long numeroPedido,
             StatusPagamento statusPagamento, HttpStatus httpStatus) {
 
-        StatusDto response = adaptarParaStatusPagamento(numeroPedido, statusPagamento);
+        StatusPedidoDto response = adaptarParaStatusPagamento(numeroPedido, statusPagamento);
         return new ResponseEntity<>(response, httpStatus);
     }
 
-    public static ResponseEntity<List<StatusDto>> adaptarParaListaPedidos(List<Pedido> pedidos, HttpStatus httpStatus) {
+    public static ResponseEntity<List<StatusPedidoDto>> adaptarParaListaPedidos(List<Pedido> pedidos,
+            HttpStatus httpStatus) {
 
-        List<StatusDto> response = adaptarParaListaPedidos(pedidos);
+        List<StatusPedidoDto> response = adaptarParaListaPedidos(pedidos);
         return new ResponseEntity<>(response, httpStatus);
     }
 
     // Métodos privados
-    private static StatusDto adaptarParaStatusPedido(Pedido pedido) {
+    private static StatusPedidoDto adaptarParaStatusPedido(Pedido pedido) {
 
-        StatusDto response = new StatusDto();
+        StatusPedidoDto response = new StatusPedidoDto();
         response.setNumeroPedido(pedido.getNumero());
         response.setStatusPedido(pedido.getStatusPedido().getStatus().toString());
         response.setDataHora(adaptarLocalDateTime(pedido.getStatusPedido().getDataHora()));
@@ -45,9 +46,9 @@ public final class PedidoResponseAdapter {
         return response;
     }
 
-    public static StatusDto adaptarParaStatusPagamento(long numeroPedido, StatusPagamento statusPagamento) {
+    public static StatusPedidoDto adaptarParaStatusPagamento(long numeroPedido, StatusPagamento statusPagamento) {
 
-        var response = new StatusDto();
+        var response = new StatusPedidoDto();
         response.setNumeroPedido(numeroPedido);
         response.setStatusPedido(statusPagamento.getStatus().toString());
         response.setDataHora(adaptarLocalDateTime(statusPagamento.getDataHora()));
@@ -55,12 +56,12 @@ public final class PedidoResponseAdapter {
         return response;
     }
 
-    private static List<StatusDto> adaptarParaListaPedidos(List<Pedido> pedidos) {
+    private static List<StatusPedidoDto> adaptarParaListaPedidos(List<Pedido> pedidos) {
 
-        List<StatusDto> response = new ArrayList<>();
+        List<StatusPedidoDto> response = new ArrayList<>();
 
         for (Pedido pedido : pedidos) {
-            StatusDto status = adaptarParaStatusPedido(pedido);
+            StatusPedidoDto status = adaptarParaStatusPedido(pedido);
             response.add(status);
         }
 
