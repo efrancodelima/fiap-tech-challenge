@@ -70,15 +70,18 @@ Nomeei as camadas como: camada de negócios, camada de aplicação, camada de in
     - messages
 
 #### entities
+
 Aqui temos as entidades de negócio. \
 Temos alguns value objects entre elas (CPF, ItemPedido, StatusPedido e StatusPagamento), trabalhando com a ideia de composição. \
 Temos também alguns enums: CategoriaProduto, StatusPedidoEnum e StatusPagamentoEnum.
 
 #### constants
+
 Temos uma classe que guarda e compartilha a data/hora mínima que o sistema aceita em suas validações. \
 Temos três datas/horas no sistema: do checkout, do pagamento e do status do pedido.
 
 #### exceptions
+
 Em exceptions, criei uma classe customizada (BusinessRuleException) para as exceções lançadas por esta camada. \
 As mensagens das exceções ficam catalogadas nos enums dentro de /exceptions/messages.
 
@@ -93,14 +96,17 @@ As mensagens das exceções ficam catalogadas nos enums dentro de /exceptions/me
     - interfaces
 
 #### use_cases
+
 Aqui temos os casos de uso, todos com interface e implementação.
 
 #### interfaces / gateways
+
 Temos as interfaces dos gateways, sem a implementação, que fica em outra camada. \
 As interfaces dos gateways são necessárias aqui para que os casos de uso possam saber como recuperar os dados necessários à sua função. \
 Pesquisando, encontrei outras formas de fazer isso, mas optei por essa que me pareceu a mais robusta.
 
 #### exceptions
+
 Por fim temos as exceções, no mesmo formato da camada anterior: classes customizadas e mensagens de erro catalogadas em enums.
 
 ### Camada de interface/adaptação
@@ -119,33 +125,40 @@ Por fim temos as exceções, no mesmo formato da camada anterior: classes custom
   - repositories
 
 #### controllers
+
 Nesta camada temos a interface e a implementação dos controllers. \
 O controller:
-+ recebe a requisição da camada externa
-+ adpta o formato para um objeto que o caso de uso conheça (entidades de negócio)
-+ chama o caso de uso apropriado, passando o gateway para ele (inversão de dependência)
-+ recebe a resposta do caso de uso
-+ adapta a resposta para a camada externa (com ajuda do presenter)
+
+- recebe a requisição da camada externa
+- adpta o formato para um objeto que o caso de uso conheça (entidades de negócio)
+- chama o caso de uso apropriado, passando o gateway para ele (inversão de dependência)
+- recebe a resposta do caso de uso
+- adapta a resposta para a camada externa (com ajuda do presenter)
 
 #### controllers / dtos
+
 Os DTOs documentam os tipos de requisições que o Controller aceita. \
 Por ser um DTO, uma classe java muito simples, não fiz a interface para eles, somente a implementação.
 
 #### controllers / adapters
+
 Temos os adapters, tanto da requisição quanto da resposta. \
 Os response_adapters fazem o papel do Presenter (dei outro nome, mas a função é a mesma).
 
 #### gateways
+
 Aqui temos os gateways implementados. \
 Temos também as entidades JPA (ORM), quer não se confundem com as entidades de negócio. \
 E temos as interfaces dos repositórios, para que o gateway saiba como utilizá-los.
 
 #### gateways / mappers
+
 Os mappers também trabalham como adaptadores: eles convertem as entidades de negócio em entidades JPA e vice-versa. \
 Deixei os mappers dentro da pasta gateways e os adaptadores dentro de controllers para não confundir. \
 Os dois fazem um trabalho parecido, mas cada um em um contexto diferente.
 
 #### exceptions_handler
+
 Por fim, temos uma pasta chamada exception_handler, que também faz um papel de "adaptar", só que um pouco diferente. \
 Ela capturas as exceções lançadas pelo sistema e as transforma em objetos do tipo ErrorResponse com os campos: code, status, message e timestamp. \
 Depois encapsula esse objeto em um ResponseEntity, que é o mesmo usado pelos response_adapters (presenters). \
@@ -161,15 +174,17 @@ Lembra daquelas exceções customizadas que criamos nas camadas internas (domain
 Nesse projeto, usamos SpringBoot e JPA. \
 Normalmente a conexão com o banco de dados seria feita na camada externa (de infra), mas o SpringBoot já gerencia automaticamente as conexões, então isso não foi necessário. \
 A implementação do repositório para acesso ao banco de dados também seria feita nesta camada e depois passada para o Gateway por meio do Controller. \
-Mas, como estamos usando JPA, os repositórios  não necessitam ser implementados. Além disso, o SpringBoot injeta o repositório no gateway automaticamente. \
+Mas, como estamos usando JPA, os repositórios não necessitam ser implementados. Além disso, o SpringBoot injeta o repositório no gateway automaticamente. \
 Enfim, ajustamos os princípios da Clean Architecture para as tecnologias utilizadas no projeto. \
 
 #### apis
+
 Aqui temos as APIs web (endpoints) com interface e implementação. \
 As anotações do Swagger ficam apenas na interface, deixando o código da classe mais limpo, pois são muitas anotações. \
 Além disso, também atendemos ao princípio da "programação para interface".
 
 #### swagger
+
 Na pasta do swagger temos apenas um arquivo de configuração para a API do sistema.
 
 ## Roteiro para executar a aplicação
