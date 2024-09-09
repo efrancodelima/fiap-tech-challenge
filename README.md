@@ -28,7 +28,7 @@ Cliente
 Pedido
 
 - Fazer checkout
-  - Deverá receber os produtos e retornar a identificação do pedido
+  - Deverá retornar a identificação do pedido
 - Atualizar o status do pedido
 - Consultar o status do pagamento
 - Listar pedidos nessa ordem: Pronto > Em Preparação > Recebido
@@ -37,7 +37,7 @@ Pedido
 
 ### Banco de dados
 
-De livre escolha (escolhi o MySQL 8.4.0).
+De livre escolha (escolhemos o MySQL 8.4.0).
 
 ## Pré-requisitos para executar a aplicação
 
@@ -119,13 +119,13 @@ Por fim temos as exceções, no mesmo formato da camada anterior: classes custom
   - repositories
 
 #### controllers
-Nesta camada temos a interface e implementação dos controllers. \
+Nesta camada temos a interface e a implementação dos controllers. \
 O controller:
 + recebe a requisição da camada externa
 + adpta o formato para um objeto que o caso de uso conheça (entidades de negócio)
-+ chama o casos de uso apropriado, passando o gateway para ele (seguindo o princípio da inversão de dependência)
++ chama o caso de uso apropriado, passando o gateway para ele (inversão de dependência)
 + recebe a resposta do caso de uso
-+ adapta a resposta para a camada externa
++ adapta a resposta para a camada externa (com ajuda do presenter)
 
 #### controllers / dtos
 Os DTOs documentam os tipos de requisições que o Controller aceita. \
@@ -138,7 +138,7 @@ Os response_adapters fazem o papel do Presenter (dei outro nome, mas a função 
 #### gateways
 Aqui temos os gateways implementados. \
 Temos também as entidades JPA (ORM), quer não se confundem com as entidades de negócio. \
-E temos as interfaces dos repositórios, para que o gateway saiba como utilizá-los. \
+E temos as interfaces dos repositórios, para que o gateway saiba como utilizá-los.
 
 #### gateways / mappers
 Os mappers também trabalham como adaptadores: eles convertem as entidades de negócio em entidades JPA e vice-versa. \
@@ -160,20 +160,17 @@ Lembra daquelas exceções customizadas que criamos nas camadas internas (domain
 
 Nesse projeto, usamos SpringBoot e JPA. \
 Normalmente a conexão com o banco de dados seria feita na camada externa (de infra), mas o SpringBoot já gerencia automaticamente as conexões, então isso não foi necessário. \
-A implementação do repositório também poderia ser feita pela camada externa e passada para o Gateway por meio do Controller. \
-Mas como estamos usando JPA, os repositórios não necessitam ser implementados. \
+A implementação do repositório para acesso ao banco de dados também seria feita nesta camada e depois passada para o Gateway por meio do Controller. \
+Mas, como estamos usando JPA, os repositórios  não necessitam ser implementados. Além disso, o SpringBoot injeta o repositório no gateway automaticamente. \
 Enfim, ajustamos os princípios da Clean Architecture para as tecnologias utilizadas no projeto. \
 
 #### apis
-Aqui temos as APIs web (endpoints).
-Todas as APIs possuem interfaces, que, além de atender à ideia "de programar para interface", também deixa o código da API mais limpo, pois as anotações do Swagger ficam apenas na interface, não na classe (e são muitas anotações).
+Aqui temos as APIs web (endpoints) com interface e implementação. \
+As anotações do Swagger ficam apenas na interface, deixando o código da classe mais limpo, pois são muitas anotações. \
+Além disso, também atendemos ao princípio da "programação para interface".
 
 #### swagger
-Na pasta do swagger temos apenas um arquivo de configuração.
-
-### Outros arquivos
-
-Ainda temos o TechChallengeApplication.java que é responsável por startar a aplicação e o diretório resources, que contém as configurações do SpringBoot.
+Na pasta do swagger temos apenas um arquivo de configuração para a API do sistema.
 
 ## Roteiro para executar a aplicação
 
