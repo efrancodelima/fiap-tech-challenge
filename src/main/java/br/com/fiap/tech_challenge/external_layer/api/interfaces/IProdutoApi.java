@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 
 @Tag(name = "Produtos")
 public interface IProdutoApi {
@@ -47,7 +47,7 @@ public interface IProdutoApi {
                         @ApiResponse(responseCode = "422", description = ProdutoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = ProdutoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e500))) })
         @PutMapping("/editar/{codigo}")
-        ResponseEntity<Produto> editarProduto(@PathVariable long id, @RequestBody ProdutoDto atualizar)
+        ResponseEntity<Produto> editarProduto(@PathVariable long codigo, @RequestBody ProdutoDto atualizar)
                         throws Exception;
 
         // Remover produto
@@ -62,7 +62,7 @@ public interface IProdutoApi {
                         @ApiResponse(responseCode = "422", description = ProdutoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = ProdutoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e500))) })
         @DeleteMapping(value = "/remover/{codigo}")
-        ResponseEntity<Produto> removerProduto(@PathVariable long id) throws Exception;
+        ResponseEntity<Produto> removerProduto(@PathVariable long codigo) throws Exception;
 
         // Listar produtos por categoria
         @Operation(summary = "Buscar produtos por categoria", description = ProdutoConstantes.descricaoBuscarPorCategoria)

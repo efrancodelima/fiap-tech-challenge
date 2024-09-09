@@ -21,25 +21,25 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.StatusPedido
 public final class PedidoMapper {
 
     // Métodos públicos
-    public static PedidoJpa mapearParaEntidadeJpa(Pedido pedido) {
+    public static PedidoJpa getPedidoJpa(Pedido pedido) {
 
         ClienteJpa clienteJpa = null;
-        List<ItemPedidoJpa> itensJpa = ItemPedidoMapper.mapearParaEntidadeJpa(pedido.getItens());
+        List<ItemPedidoJpa> itensJpa = ItemPedidoMapper.getListItemPedidoJpa(pedido.getItens());
         LocalDateTime dataHoraCheckout = pedido.getDataHoraCheckout();
         StatusPagamentoJpa statusPagamentoJpa = null;
         StatusPedidoJpa statusPedidoJpa;
 
         if (pedido.getCliente() != null) {
-            clienteJpa = ClienteMapper.mapearParaEntidadeJpa(pedido.getCliente());
+            clienteJpa = ClienteMapper.getClienteJpa(pedido.getCliente());
         }
 
         if (pedido.getStatusPagamento() != null) {
             statusPagamentoJpa = StatusPagamentoMapper
-                    .mapearParaEntidadeJpa(pedido.getStatusPagamento());
+                    .getStatusPagamentoJpa(pedido.getStatusPagamento());
         }
 
         if (pedido.getStatusPedido() != null) {
-            statusPedidoJpa = StatusPedidoMapper.mapearParaEntidadeJpa(pedido.getStatusPedido());
+            statusPedidoJpa = StatusPedidoMapper.getStatusPedidoJpa(pedido.getStatusPedido());
         } else {
             statusPedidoJpa = new StatusPedidoJpa(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
         }
@@ -48,32 +48,32 @@ public final class PedidoMapper {
                 statusPagamentoJpa, statusPedidoJpa);
     }
 
-    public static Pedido mapearParaEntidadeNegocio(PedidoJpa pedidoJpa) throws Exception {
+    public static Pedido getPedido(PedidoJpa pedidoJpa) throws Exception {
 
         long id = pedidoJpa.getNumero();
         Cliente cliente = null;
-        List<ItemPedido> itens = ItemPedidoMapper.mapearParaEntidadeNegocio(pedidoJpa.getItens());
+        List<ItemPedido> itens = ItemPedidoMapper.getListItemPedido(pedidoJpa.getItensJpa());
         LocalDateTime dataHoraCheckout = pedidoJpa.getDataHoraCheckout();
         StatusPagamento statusPagamento = null;
-        StatusPedido statusPedido = StatusPedidoMapper.mapearParaEntidadeNegocio(pedidoJpa.getStatusPedido());
+        StatusPedido statusPedido = StatusPedidoMapper.getStatusPedido(pedidoJpa.getStatusPedido());
 
-        if (pedidoJpa.getCliente() != null) {
-            cliente = ClienteMapper.mapearParaEntidadeNegocio(pedidoJpa.getCliente());
+        if (pedidoJpa.getClienteJpa() != null) {
+            cliente = ClienteMapper.getCliente(pedidoJpa.getClienteJpa());
         }
 
         if (pedidoJpa.getStatusPagamento() != null) {
             statusPagamento = StatusPagamentoMapper
-                    .mapearParaEntidadeNegocio(pedidoJpa.getStatusPagamento());
+                    .getStatusPagamento(pedidoJpa.getStatusPagamento());
         }
 
         return new Pedido(id, cliente, itens, dataHoraCheckout, statusPagamento, statusPedido);
     }
 
-    public static List<Pedido> mapearParaEntidadesNegocio(List<PedidoJpa> pedidosJpa)
+    public static List<Pedido> getListPedido(List<PedidoJpa> pedidosJpa)
             throws Exception {
         List<Pedido> pedidos = new ArrayList<>();
         for (PedidoJpa pedidoJpa : pedidosJpa) {
-            Pedido pedido = mapearParaEntidadeNegocio(pedidoJpa);
+            Pedido pedido = getPedido(pedidoJpa);
             pedidos.add(pedido);
         }
         return pedidos;

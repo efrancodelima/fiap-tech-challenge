@@ -1,6 +1,5 @@
 package br.com.fiap.tech_challenge.interface_layer.gateways;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +8,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;
-import br.com.fiap.tech_challenge.interface_layer.gateways.exceptions.MyNotFoundException;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.PedidoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoRepository;
 
@@ -21,59 +18,35 @@ public class PedidoGateway implements IPedidoGateway {
     // Atributos
     @Autowired
     private IPedidoRepository pedidoJpaRepository;
-    private final String PEDIDO_NAO_ENCONTRADO = "Não foi encontrado nenhum pedido para o número informado.";
 
     // Métodos públicos
     @Override
     public Pedido gravarPedido(Pedido pedido) throws Exception {
 
-        PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
+        PedidoJpa pedidoJpa = PedidoMapper.getPedidoJpa(pedido);
         pedidoJpa = pedidoJpaRepository.save(pedidoJpa);
-        return PedidoMapper.mapearParaEntidadeNegocio(pedidoJpa);
+        return PedidoMapper.getPedido(pedidoJpa);
     }
 
     @Override
     public void atualizarPedido(Pedido pedido) throws Exception {
 
-        if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
-            throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
-        }
-
-        PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
+        PedidoJpa pedidoJpa = PedidoMapper.getPedidoJpa(pedido);
         pedidoJpaRepository.save(pedidoJpa);
-    }
-
-    @Override
-    public void removerPedido(Pedido pedido) throws Exception {
-
-        if (!pedidoJpaRepository.existsById(pedido.getNumero())) {
-            throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
-        }
-
-        PedidoJpa pedidoJpa = PedidoMapper.mapearParaEntidadeJpa(pedido);
-        pedidoJpaRepository.delete(pedidoJpa);
     }
 
     @Override
     public Pedido buscarPedido(long numeroPedido) throws Exception {
 
-        PedidoJpa pedidoJpa;
         Optional<PedidoJpa> optionalPedido = pedidoJpaRepository.findById(numeroPedido);
-
-        if (optionalPedido.isPresent()) {
-            pedidoJpa = optionalPedido.get();
-        } else {
-            throw new MyNotFoundException(PEDIDO_NAO_ENCONTRADO);
-        }
-
-        return PedidoMapper.mapearParaEntidadeNegocio(pedidoJpa);
+        return optionalPedido.isPresent() ? PedidoMapper.getPedido(optionalPedido.get()) : null;
     }
 
     @Override
-    public List<Pedido> buscarPedidos() throws Exception, Exception {
+    public List<Pedido> buscarTodosOsPedidos() throws Exception, Exception {
 
         List<PedidoJpa> pedidosJpa = pedidoJpaRepository.findAll();
-        return PedidoMapper.mapearParaEntidadesNegocio(pedidosJpa);
+        return PedidoMapper.getListPedido(pedidosJpa);
     }
 
 }

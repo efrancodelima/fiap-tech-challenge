@@ -7,14 +7,16 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.Categoria
 
 public interface IProdutoGateway {
 
-    public Produto gravarProduto(Produto produto) throws Exception;
+    Produto gravarProduto(Produto produto) throws Exception;
 
-    public void atualizarProduto(Produto produto) throws Exception;
+    void atualizarProduto(Produto produto) throws Exception;
 
-    public void removerProduto(long codigoProduto) throws Exception;
+    void removerProduto(long codigoProduto) throws Exception;
 
-    public Produto buscarProduto(long codigoProduto) throws Exception;
+    Produto buscarProduto(long codigoProduto) throws Exception;
 
-    public List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria) throws Exception;
+    List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria) throws Exception;
+
+    boolean produtoJaExiste(long codigoProduto) throws Exception;
 
 }

@@ -15,13 +15,12 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ItemPedidoRequestAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.PedidoResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ItemPedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IPedidoController;
-import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ItemPedidoRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.PedidoResponseAdapter;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ItemPedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.PedidoGateway;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
@@ -57,8 +56,8 @@ public class PedidoController implements IPedidoController {
 
         Cliente cliente = null;
         Long cpfLong = pedidoDto.getCpfCliente();
-        if (cpfLong != null && cpfLong != 0) {
-            Cpf cpf = CpfRequestAdapter.adaptar(cpfLong);
+        if (cpfLong != null) {
+            Cpf cpf = new Cpf(cpfLong);
             cliente = clienteUseCase.buscarClientePorCpf(cpf);
         }
 
@@ -73,21 +72,25 @@ public class PedidoController implements IPedidoController {
 
     @Override
     public ResponseEntity<StatusDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
-        numeroPedido = numeroPedido == null ? 0 : numeroPedido;
         Pedido pedido = pedidoUseCase.atualizarStatusPedido(numeroPedido);
         return PedidoResponseAdapter.adaptarParaStatusPedido(pedido, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<StatusDto> consultarStatusPagamento(Long numeroPedido) throws Exception {
-        numeroPedido = numeroPedido == null ? 0 : numeroPedido;
         StatusPagamento statusPagamento = pedidoUseCase.consultarStatusPagamento(numeroPedido);
         return PedidoResponseAdapter.adaptarParaStatusPagamento(numeroPedido, statusPagamento, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<StatusDto>> listarPedidos() throws Exception {
+
         List<Pedido> pedidos = pedidoUseCase.listarPedidos();
-        return PedidoResponseAdapter.adaptarParaListaPedidos(pedidos, HttpStatus.OK);
+
+        if (pedidos.size() > 0) {
+            return PedidoResponseAdapter.adaptarParaListaPedidos(pedidos, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 }

@@ -25,7 +25,7 @@ public class ProdutoJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long codigo;
+    private Long codigo;
 
     @Column(name = "nome", nullable = false)
     private String nome;

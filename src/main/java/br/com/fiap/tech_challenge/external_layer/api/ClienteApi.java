@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.external_layer.api.interfaces.IClienteApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.ClienteController;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ClienteDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
 
 @RestController
 @RequestMapping("/clientes")
@@ -23,7 +23,7 @@ public class ClienteApi implements IClienteApi {
     }
 
     @Override
-    public ResponseEntity<Cliente> buscarClientePorCpf(Long cpf) throws Exception {
+    public ResponseEntity<Cliente> buscarClientePorCpf(long cpf) throws Exception {
         return controller.buscarClientePorCpf(cpf);
     }
 

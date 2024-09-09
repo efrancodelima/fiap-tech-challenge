@@ -8,11 +8,10 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.use_cases.ClienteUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ClienteRequestAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.ClienteResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IClienteController;
-import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ClienteRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CpfRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.ClienteResponseAdapter;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ClienteDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
 import jakarta.annotation.PostConstruct;
 
@@ -43,7 +42,7 @@ public class ClienteController implements IClienteController {
     @Override
     public ResponseEntity<Cliente> buscarClientePorCpf(Long cpfLong) throws Exception {
 
-        Cpf cpf = CpfRequestAdapter.adaptar(cpfLong);
+        Cpf cpf = new Cpf(cpfLong);
         Cliente cliente = clienteUseCase.buscarClientePorCpf(cpf);
         return ClienteResponseAdapter.adaptar(cliente, HttpStatus.OK);
     }

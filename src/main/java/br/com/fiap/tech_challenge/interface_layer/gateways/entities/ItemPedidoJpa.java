@@ -17,10 +17,10 @@ import lombok.NoArgsConstructor;
 public class ItemPedidoJpa implements Serializable {
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = false)
-    private ProdutoJpa produto;
+    @JoinColumn(name = "codigo_produto", nullable = false)
+    private ProdutoJpa produtoJpa;
 
     @Column(name = "quantidade", nullable = false)
-    private int quantidade;
+    private Integer quantidade;
 
 }

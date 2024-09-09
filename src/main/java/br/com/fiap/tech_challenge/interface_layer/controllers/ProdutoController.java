@@ -9,11 +9,10 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.use_cases.ProdutoUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ProdutoRequestAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.ProdutoResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IProdutoController;
-import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.CategoriaProdutoRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.request_adapters.ProdutoRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.response_adapters.ProdutoResponseAdapter;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
 import jakarta.annotation.PostConstruct;
 
@@ -42,7 +41,7 @@ public class ProdutoController implements IProdutoController {
     }
 
     @Override
-    public ResponseEntity<Produto> editarProduto(long codigo, ProdutoDto produtoDto) throws Exception {
+    public ResponseEntity<Produto> editarProduto(Long codigo, ProdutoDto produtoDto) throws Exception {
 
         Produto produto = ProdutoRequestAdapter.adaptar(codigo, produtoDto);
         produtoUseCase.editarProduto(produto);
@@ -50,7 +49,7 @@ public class ProdutoController implements IProdutoController {
     }
 
     @Override
-    public ResponseEntity<Produto> removerProduto(long codigo) throws Exception {
+    public ResponseEntity<Produto> removerProduto(Long codigo) throws Exception {
 
         produtoUseCase.removerProduto(codigo);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -59,9 +58,14 @@ public class ProdutoController implements IProdutoController {
     @Override
     public ResponseEntity<List<Produto>> buscarProdutosPorCategoria(String categoriaStr) throws Exception {
 
-        CategoriaProduto categoria = CategoriaProdutoRequestAdapter.adaptar(categoriaStr);
+        CategoriaProduto categoria = CategoriaProduto.get(categoriaStr);
         List<Produto> produtos = produtoUseCase.buscarProdutosPorCategoria(categoria);
-        return ProdutoResponseAdapter.adaptar(produtos);
+
+        if (produtos.size() > 0) {
+            return ProdutoResponseAdapter.adaptar(produtos, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
 }

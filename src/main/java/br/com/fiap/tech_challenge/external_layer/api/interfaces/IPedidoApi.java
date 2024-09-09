@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
 
 @Tag(name = "Pedido")
 public interface IPedidoApi {
@@ -40,7 +40,7 @@ public interface IPedidoApi {
                         @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
         @PostMapping(value = "/status/{numeroPedido}")
-        ResponseEntity<StatusDto> atualizarStatusPedido(@PathVariable("numeroPedido") Long numeroPedido)
+        ResponseEntity<StatusDto> atualizarStatusPedido(@PathVariable("numeroPedido") long numeroPedido)
                         throws Exception;
 
         // Consultar status do pagamento
@@ -52,7 +52,7 @@ public interface IPedidoApi {
                         @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
         @PostMapping(value = "/pagamento/{numeroPedido}")
-        ResponseEntity<StatusDto> consultarStatusPagamento(@PathVariable("numeroPedido") Long numeroPedido)
+        ResponseEntity<StatusDto> consultarStatusPagamento(@PathVariable("numeroPedido") long numeroPedido)
                         throws Exception;
 
         // Listar pedidos
@@ -87,8 +87,8 @@ final class PedidoConstantes {
         public static final String l200 = "[ { \"numeroPedido\": 4, \"statusPedido\": \"PRONTO\", \"dataHora\": \"2024-09-08 15:31:59\" }, { \"numeroPedido\": 1, \"statusPedido\": \"EM_PREPARACAO\", \"dataHora\": \"2024-09-08 15:31:52\" }]";
         public static final String e201 = e200;
         public static final String e204 = "";
-        public static final String e400 = "{ \"timestamp\": \"2024-09-08T02:05:58.036+00:00\", \"status\": 400, \"error\": \"Bad Request\", \"path\": \"/api/v2/pedidos/checkout\" }";
-        public static final String e404 = "{ \"message\": \"Nenhum pedido foi encontrado para o número informado.\" }";
-        public static final String e422 = "{ \"message\": \"O pedido precisa conter, pelo menos, 1 item.\" }";
-        public static final String e500 = "{ \"message\": \"Ocorreu um erro inesperado no servidor.\" }";
+        public static final String e400 = "{ \"code\": 400, \"status\": \"Bad Request\", \"message\": \"JSON parse error: Cannot deserialize value of type `java.lang.Long` from String \\\"x\\\": not a valid `java.lang.Long` value\", \"timestamp\": \"2024-09-08T15:39:12.091139608\" }";
+        public static final String e404 = "{ \"code\": 404, \"status\": \"Not Found\", \"message\": \"Não foi encontrado nenhum pedido para o número informado.\", \"timestamp\": \"2024-09-08T15:37:05.129042146\"}";
+        public static final String e422 = "{ \"code\": 422, \"status\": \"Unprocessable Entity\", \"message\": \"O pedido precisa conter, pelo menos, um item.\", \"timestamp\": \"2024-09-08T15:37:05.129042146\"}";
+        public static final String e500 = "{ \"code\": 500, \"status\": \"Internal Server Error\", \"message\": \"Ocorreu um erro inesperado no servidor.\", \"timestamp\": \"2024-09-08T15:37:05.129042146\"}";
 }

@@ -4,8 +4,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumApplicationExceptions;
+import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
-import br.com.fiap.tech_challenge.application_layer.interfaces.use_cases.IPedidoUseCase;
+import br.com.fiap.tech_challenge.application_layer.use_cases.interfaces.IPedidoUseCase;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
@@ -23,32 +25,55 @@ public class PedidoUseCase implements IPedidoUseCase {
     // Métodos públicos
     @Override
     public Pedido fazerCheckout(Pedido pedido) throws Exception {
+
+        Validar.notNull(pedido, EnumApplicationExceptions.PEDIDO_NULO);
+
         pedido.fazerCheckout();
         return gateway.gravarPedido(pedido);
     }
 
     @Override
-    public Pedido atualizarStatusPedido(long numeroPedido) throws Exception {
+    public Pedido atualizarStatusPedido(Long numeroPedido) throws Exception {
+
+        validarNumeroPedido(numeroPedido);
+
         Pedido pedido = gateway.buscarPedido(numeroPedido);
+        Validar.notNull(pedido, EnumNotFoundExceptions.PEDIDO_NAO_ENCONTRADO);
+
         pedido.atualizarStatusPedido();
         gateway.atualizarPedido(pedido);
         return pedido;
     }
 
     @Override
-    public StatusPagamento consultarStatusPagamento(long numeroPedido) throws Exception {
+    public StatusPagamento consultarStatusPagamento(Long numeroPedido) throws Exception {
+
+        Validar.notNull(numeroPedido, EnumApplicationExceptions.PEDIDO_NUMERO_NULO);
+
         Pedido pedido = gateway.buscarPedido(numeroPedido);
+        Validar.notNull(pedido, EnumNotFoundExceptions.PEDIDO_NAO_ENCONTRADO);
+
         return pedido.getStatusPagamento();
     }
 
     @Override
     public List<Pedido> listarPedidos() throws Exception {
-        List<Pedido> pedidos = gateway.buscarPedidos();
+
+        List<Pedido> pedidos = gateway.buscarTodosOsPedidos();
+        Validar.listNotEmpty(pedidos, EnumNotFoundExceptions.PEDIDO_LISTA_VAZIA);
+
         return filtrarEOrdenarPedidos(pedidos);
     }
 
     // Métodos privados
+    private void validarNumeroPedido(Long numeroPedido) throws Exception {
+
+        Validar.notNull(numeroPedido, EnumApplicationExceptions.PEDIDO_NUMERO_NULO);
+        Validar.maiorQueZero(numeroPedido, EnumApplicationExceptions.PEDIDO_NUMERO_MIN);
+    }
+
     private List<Pedido> filtrarEOrdenarPedidos(List<Pedido> pedidos) {
+
         return pedidos.stream()
                 .filter(p -> p.getStatusPedido().getStatus() != StatusPedidoEnum.AGUARDANDO_CHECKOUT &&
                         p.getStatusPedido().getStatus() != StatusPedidoEnum.FINALIZADO)
@@ -59,6 +84,7 @@ public class PedidoUseCase implements IPedidoUseCase {
     }
 
     private int getStatusOrder(StatusPedidoEnum status) {
+
         switch (status) {
             case PRONTO:
                 return 1;

@@ -6,14 +6,12 @@ import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
 
 public interface IPedidoGateway {
 
-    public Pedido gravarPedido(Pedido pedido) throws Exception;
+    Pedido gravarPedido(Pedido pedido) throws Exception;
 
-    public void atualizarPedido(Pedido pedido) throws Exception;
+    void atualizarPedido(Pedido pedido) throws Exception;
 
-    public void removerPedido(Pedido pedido) throws Exception;
+    Pedido buscarPedido(long numeroPedido) throws Exception;
 
-    public Pedido buscarPedido(long numeroPedido) throws Exception;
-
-    public List<Pedido> buscarPedidos() throws Exception;
+    List<Pedido> buscarTodosOsPedidos() throws Exception;
 
 }

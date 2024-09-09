@@ -2,8 +2,8 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 
 import org.apache.commons.lang3.StringUtils;
 
-import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.CpfExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRuleException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.messages.CpfExceptions;
 
 public class Cpf {
 
@@ -11,8 +11,21 @@ public class Cpf {
     private final byte digitoVerificador;
 
     // Construtor
-    public Cpf(int numero, byte digitoVerificador) throws MyBusinessException {
-        validarCpf(numero, digitoVerificador);
+    public Cpf(Integer numero, Byte digitoVerificador) throws BusinessRuleException {
+
+        validarNumeroEDigitoVerificador(numero, digitoVerificador);
+        this.numero = numero;
+        this.digitoVerificador = digitoVerificador;
+    }
+
+    public Cpf(Long cpf) throws BusinessRuleException {
+
+        validarCpf(cpf);
+
+        int numero = (int) (cpf / 100);
+        byte digitoVerificador = (byte) (cpf % 100);
+
+        validarNumeroEDigitoVerificador(numero, digitoVerificador);
         this.numero = numero;
         this.digitoVerificador = digitoVerificador;
     }
@@ -31,22 +44,39 @@ public class Cpf {
     }
 
     // Métodos de validação
-    private void validarCpf(int numero, byte digitoVerificador) throws MyBusinessException {
+    private void validarNumeroEDigitoVerificador(Integer numero, Byte digitoVerificador) throws BusinessRuleException {
+
         validarNumero(numero);
         validarDigitoVerificador(numero, digitoVerificador);
     }
 
-    private void validarNumero(int numero) throws MyBusinessException {
+    private void validarNumero(Integer numero) throws BusinessRuleException {
+
+        if (numero == null) {
+            throw new BusinessRuleException(CpfExceptions.NUMERO_NULO.getMensagem());
+        }
         if (numero < 1) {
-            throw new MyBusinessException(CpfExceptions.NUMERO_MIN.getMensagem());
-        } else if (numero > Math.pow(10, 10) - 1) {
-            throw new MyBusinessException(CpfExceptions.NUMERO_MAX.getMensagem());
+            throw new BusinessRuleException(CpfExceptions.NUMERO_MIN.getMensagem());
+        }
+        if (numero > Math.pow(10, 10) - 1) {
+            throw new BusinessRuleException(CpfExceptions.NUMERO_MAX.getMensagem());
         }
     }
 
-    private void validarDigitoVerificador(int numero, byte digitoVerificador) throws MyBusinessException {
+    private void validarDigitoVerificador(int numero, Byte digitoVerificador) throws BusinessRuleException {
+
+        if (digitoVerificador == null) {
+            throw new BusinessRuleException(CpfExceptions.DIGITO_NULO.getMensagem());
+        }
         if (digitoVerificador != calcularDigitoVerificador(numero)) {
-            throw new MyBusinessException(CpfExceptions.DIGITO_INVALIDO.getMensagem());
+            throw new BusinessRuleException(CpfExceptions.DIGITO_INVALIDO.getMensagem());
+        }
+    }
+
+    private void validarCpf(Long cpf) throws BusinessRuleException {
+
+        if (cpf == null) {
+            throw new BusinessRuleException(CpfExceptions.CPF_NULO.getMensagem());
         }
     }
 

@@ -19,12 +19,15 @@ public class ClienteJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long codigo;
+    private Long codigo;
 
     @Column(nullable = false, unique = true)
-    private long cpf;
+    private Long cpf;
 
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "email")
     private String email;
 
 }

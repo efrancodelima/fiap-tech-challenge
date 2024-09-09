@@ -3,8 +3,8 @@ package br.com.fiap.tech_challenge.domain_layer.business_entities;
 import java.math.BigDecimal;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.MyBusinessException;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.enums.ProdutoExceptions;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRuleException;
+import br.com.fiap.tech_challenge.domain_layer.exceptions.messages.ProdutoExceptions;
 
 public class Produto {
     private long codigo;
@@ -15,19 +15,19 @@ public class Produto {
 
     // Construtores
     public Produto(String nome, String descricao, BigDecimal preco, CategoriaProduto categoria)
-            throws MyBusinessException {
+            throws BusinessRuleException {
+
         setNome(nome);
         setDescricao(descricao);
         setPreco(preco);
         setCategoria(categoria);
-
     }
 
-    public Produto(long codigo, String nome, String descricao, BigDecimal preco, CategoriaProduto categoria)
-            throws MyBusinessException {
+    public Produto(Long codigo, String nome, String descricao, BigDecimal preco, CategoriaProduto categoria)
+            throws BusinessRuleException {
+
         this(nome, descricao, preco, categoria);
         setCodigo(codigo);
-
     }
 
     // Getters
@@ -52,18 +52,18 @@ public class Produto {
     }
 
     // Setters
-    public void setCodigo(long codigo) throws MyBusinessException {
+    private void setCodigo(Long codigo) throws BusinessRuleException {
         validarCodigo(codigo);
         this.codigo = codigo;
     }
 
-    private void setNome(String nome) throws MyBusinessException {
+    private void setNome(String nome) throws BusinessRuleException {
         nome = nome == null ? null : nome.trim();
         validarNome(nome);
         this.nome = nome;
     }
 
-    private void setDescricao(String descricao) throws MyBusinessException {
+    private void setDescricao(String descricao) throws BusinessRuleException {
 
         if (descricao == null || descricao.isBlank()) {
             descricao = null;
@@ -75,56 +75,59 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    private void setPreco(BigDecimal preco) throws MyBusinessException {
+    private void setPreco(BigDecimal preco) throws BusinessRuleException {
         validarPreco(preco);
         this.preco = preco;
     }
 
-    private void setCategoria(CategoriaProduto categoria) throws MyBusinessException {
+    private void setCategoria(CategoriaProduto categoria) throws BusinessRuleException {
         validarCategoria(categoria);
         this.categoria = categoria;
     }
 
     // Métodos de validação
-    private void validarCodigo(long codigo) throws MyBusinessException {
+    private void validarCodigo(Long codigo) throws BusinessRuleException {
+        if (codigo == null) {
+            throw new BusinessRuleException(ProdutoExceptions.CODIGO_NULO.getMensagem());
+        }
         if (codigo < 1) {
-            throw new MyBusinessException(ProdutoExceptions.CODIGO_MIN.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.CODIGO_MIN.getMensagem());
         }
     }
 
-    private void validarNome(String nome) throws MyBusinessException {
+    private void validarNome(String nome) throws BusinessRuleException {
         if (nome == null || nome.isEmpty()) {
-            throw new MyBusinessException(ProdutoExceptions.NOME_VAZIO.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.NOME_VAZIO.getMensagem());
         } else if (nome.length() < 5) {
-            throw new MyBusinessException(ProdutoExceptions.NOME_MIN_CHAR.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.NOME_MIN_CHAR.getMensagem());
         } else if (nome.length() > 20) {
-            throw new MyBusinessException(ProdutoExceptions.NOME_MAX_CHAR.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.NOME_MAX_CHAR.getMensagem());
         }
     }
 
-    private void validarDescricao(String descricao) throws MyBusinessException {
+    private void validarDescricao(String descricao) throws BusinessRuleException {
         if (descricao == null) {
             return;
         } else if (descricao.length() < 20) {
-            throw new MyBusinessException(ProdutoExceptions.DESCRICAO_MIN.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.DESCRICAO_MIN.getMensagem());
         } else if (descricao.length() > 150) {
-            throw new MyBusinessException(ProdutoExceptions.DESCRICAO_MAX.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.DESCRICAO_MAX.getMensagem());
         }
     }
 
-    private void validarPreco(BigDecimal preco) throws MyBusinessException {
+    private void validarPreco(BigDecimal preco) throws BusinessRuleException {
         if (preco == null) {
-            throw new MyBusinessException(ProdutoExceptions.PRECO_NULO.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.PRECO_NULO.getMensagem());
         } else if (preco.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new MyBusinessException(ProdutoExceptions.PRECO_MIN.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.PRECO_MIN.getMensagem());
         } else if (preco.compareTo(BigDecimal.ZERO) > 300) {
-            throw new MyBusinessException(ProdutoExceptions.PRECO_MAX.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.PRECO_MAX.getMensagem());
         }
     }
 
-    private void validarCategoria(CategoriaProduto categoria) throws MyBusinessException {
+    private void validarCategoria(CategoriaProduto categoria) throws BusinessRuleException {
         if (categoria == null) {
-            throw new MyBusinessException(ProdutoExceptions.CATEGORIA_NULA.getMensagem());
+            throw new BusinessRuleException(ProdutoExceptions.CATEGORIA_NULA.getMensagem());
         }
     }
 }

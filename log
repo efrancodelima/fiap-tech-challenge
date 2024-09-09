@@ -8,3 +8,32 @@
 
  :: Spring Boot ::                (v3.3.1)
 
+2024-09-08T16:18:17.407-03:00  INFO 145919 --- [tech-challenge] [           main] b.c.f.t.TechChallengeApplication         : Starting TechChallengeApplication v2.0.0 using Java 17.0.9 with PID 145919 (/home/ederson/fiap/fiap-tech-challenge/target/tech-challenge-1-v2.0.0.jar started by ederson in /home/ederson/fiap/fiap-tech-challenge)
+2024-09-08T16:18:17.415-03:00  INFO 145919 --- [tech-challenge] [           main] b.c.f.t.TechChallengeApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-09-08T16:18:20.395-03:00  INFO 145919 --- [tech-challenge] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-08T16:18:20.544-03:00  INFO 145919 --- [tech-challenge] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 136 ms. Found 3 JPA repository interfaces.
+2024-09-08T16:18:21.874-03:00  INFO 145919 --- [tech-challenge] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-08T16:18:21.904-03:00  INFO 145919 --- [tech-challenge] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-08T16:18:21.905-03:00  INFO 145919 --- [tech-challenge] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-09-08T16:18:22.008-03:00  INFO 145919 --- [tech-challenge] [           main] o.a.c.c.C.[.[localhost].[/api/v2]        : Initializing Spring embedded WebApplicationContext
+2024-09-08T16:18:22.011-03:00  INFO 145919 --- [tech-challenge] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4296 ms
+2024-09-08T16:18:22.135-03:00  INFO 145919 --- [tech-challenge] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-08T16:18:22.907-03:00  INFO 145919 --- [tech-challenge] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-09-08T16:18:22.914-03:00  INFO 145919 --- [tech-challenge] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-08T16:18:22.955-03:00  INFO 145919 --- [tech-challenge] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-09-08T16:18:23.434-03:00  INFO 145919 --- [tech-challenge] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-08T16:18:23.584-03:00  INFO 145919 --- [tech-challenge] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-08T16:18:23.661-03:00  INFO 145919 --- [tech-challenge] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-08T16:18:24.487-03:00  INFO 145919 --- [tech-challenge] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-08T16:18:26.490-03:00  INFO 145919 --- [tech-challenge] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-08T16:18:26.604-03:00  INFO 145919 --- [tech-challenge] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-08T16:18:27.628-03:00  WARN 145919 --- [tech-challenge] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-08T16:18:28.819-03:00  INFO 145919 --- [tech-challenge] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/api/v2'
+2024-09-08T16:18:28.851-03:00  INFO 145919 --- [tech-challenge] [           main] b.c.f.t.TechChallengeApplication         : Started TechChallengeApplication in 13.27 seconds (process running for 14.57)
+2024-09-08T16:19:13.795-03:00  INFO 145919 --- [tech-challenge] [nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/api/v2]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-08T16:19:13.795-03:00  INFO 145919 --- [tech-challenge] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-08T16:19:13.798-03:00  INFO 145919 --- [tech-challenge] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-09-08T16:19:16.097-03:00  INFO 145919 --- [tech-challenge] [nio-8080-exec-8] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1161 ms
+2024-09-08T16:37:32.808-03:00  INFO 145919 --- [tech-challenge] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-08T16:37:32.815-03:00  INFO 145919 --- [tech-challenge] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-08T16:37:32.822-03:00  INFO 145919 --- [tech-challenge] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

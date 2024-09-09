@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.tech_challenge.external_layer.api.interfaces.IPedidoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.PedidoController;
-import br.com.fiap.tech_challenge.interface_layer.dtos.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.dtos.Pedido.StatusDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -25,12 +25,12 @@ public class PedidoApi implements IPedidoApi {
     }
 
     @Override
-    public ResponseEntity<StatusDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
+    public ResponseEntity<StatusDto> atualizarStatusPedido(long numeroPedido) throws Exception {
         return controller.atualizarStatusPedido(numeroPedido);
     }
 
     @Override
-    public ResponseEntity<StatusDto> consultarStatusPagamento(Long numeroPedido) throws Exception {
+    public ResponseEntity<StatusDto> consultarStatusPagamento(long numeroPedido) throws Exception {
         return controller.consultarStatusPagamento(numeroPedido);
     }
 

@@ -28,14 +28,14 @@ public class PedidoJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long numero;
+    private Long numero;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = true)
-    private ClienteJpa cliente;
+    @JoinColumn(name = "codigo_cliente", nullable = true)
+    private ClienteJpa clienteJpa;
 
     @ElementCollection
-    private List<ItemPedidoJpa> itens;
+    private List<ItemPedidoJpa> itensJpa;
 
     @Column(name = "timestamp_checkout", nullable = true)
     private LocalDateTime dataHoraCheckout;

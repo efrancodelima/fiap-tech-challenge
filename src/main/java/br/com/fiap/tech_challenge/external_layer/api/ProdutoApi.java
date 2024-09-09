@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
 import br.com.fiap.tech_challenge.external_layer.api.interfaces.IProdutoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.ProdutoController;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ProdutoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 
 @RestController
 @RequestMapping("/produtos")

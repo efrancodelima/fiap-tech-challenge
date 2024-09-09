@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
-import br.com.fiap.tech_challenge.interface_layer.dtos.ClienteDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
 
 @Tag(name = "Clientes")
 public interface IClienteApi {
@@ -43,7 +43,7 @@ public interface IClienteApi {
                         @ApiResponse(responseCode = "500", description = ClienteConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ClienteConstantes.e500))) })
         @GetMapping(value = "/buscar/{cpf}")
         ResponseEntity<Cliente> buscarClientePorCpf(
-                        @PathVariable("cpf") Long cpf) throws Exception;
+                        @PathVariable("cpf") long cpf) throws Exception;
 
 }
 
