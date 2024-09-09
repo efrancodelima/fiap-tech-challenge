@@ -1,7 +1,7 @@
 package br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
 
 public final class ClienteRequestAdapter {

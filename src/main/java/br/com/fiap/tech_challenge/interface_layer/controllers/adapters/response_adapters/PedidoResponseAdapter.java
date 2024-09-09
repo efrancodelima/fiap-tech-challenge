@@ -8,8 +8,8 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusDto;
 
 public final class PedidoResponseAdapter {

@@ -1,7 +1,7 @@
 package br.com.fiap.tech_challenge.interface_layer.gateways.mappers;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ClienteJpa;
 
 public final class ClienteMapper {

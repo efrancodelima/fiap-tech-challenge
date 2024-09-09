@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ProdutoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.ProdutoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IProdutoRepository;

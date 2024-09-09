@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPedido;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
+import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.StatusPedido;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ClienteJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ItemPedidoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;

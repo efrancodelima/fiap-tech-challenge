@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import br.com.fiap.tech_challenge.application_layer.exceptions.ApplicationException;
 import br.com.fiap.tech_challenge.application_layer.exceptions.ResourceNotFoundException;
-import br.com.fiap.tech_challenge.domain_layer.exceptions.BusinessRuleException;
+import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleException;
 
 @ControllerAdvice
 public class CustomExceptionsHandler {

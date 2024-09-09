@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IClienteGateway;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cpf;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ClienteJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.ClienteMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IClienteRepository;

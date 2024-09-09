@@ -3,7 +3,7 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
 
 public final class ClienteResponseAdapter {
 

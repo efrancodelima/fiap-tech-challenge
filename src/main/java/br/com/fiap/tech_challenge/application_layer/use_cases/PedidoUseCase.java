@@ -8,9 +8,9 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumAppl
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.application_layer.use_cases.interfaces.IPedidoUseCase;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.StatusPagamento;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
 
 public class PedidoUseCase implements IPedidoUseCase {
 

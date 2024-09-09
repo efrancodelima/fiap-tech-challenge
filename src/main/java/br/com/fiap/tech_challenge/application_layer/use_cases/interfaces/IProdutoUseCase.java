@@ -2,8 +2,8 @@ package br.com.fiap.tech_challenge.application_layer.use_cases.interfaces;
 
 import java.util.List;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
 
 public interface IProdutoUseCase {
 

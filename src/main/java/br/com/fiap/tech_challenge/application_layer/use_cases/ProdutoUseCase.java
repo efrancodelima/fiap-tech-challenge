@@ -7,8 +7,8 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumAppl
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
 import br.com.fiap.tech_challenge.application_layer.use_cases.interfaces.IProdutoUseCase;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
 
 public class ProdutoUseCase implements IProdutoUseCase {
 

@@ -2,7 +2,7 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.interfaces;
 
 import org.springframework.http.ResponseEntity;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
 
 public interface IClienteController {

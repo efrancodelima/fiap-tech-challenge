@@ -2,8 +2,8 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_
 
 import java.math.BigDecimal;
 
-import br.com.fiap.tech_challenge.domain_layer.business_entities.Produto;
-import br.com.fiap.tech_challenge.domain_layer.business_entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 
 public final class ProdutoRequestAdapter {
