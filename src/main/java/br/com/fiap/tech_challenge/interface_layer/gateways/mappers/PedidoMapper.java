@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Cliente;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.ItemPedido;
 import br.com.fiap.tech_challenge.domain_layer.business_entities.Pedido;

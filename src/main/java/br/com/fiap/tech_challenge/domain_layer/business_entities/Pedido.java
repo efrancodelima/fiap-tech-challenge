@@ -121,6 +121,10 @@ public class Pedido {
         if (itens == null || itens.size() == 0) {
             throw new BusinessRuleException(PedidoExceptions.ITENS_VAZIO.getMensagem());
         }
+
+        for (ItemPedido item : itens) {
+            validarItem(item);
+        }
     }
 
     private void validarDataHoraCheckout(LocalDateTime dataHora, StatusPedidoEnum statusPedido)
@@ -153,12 +157,6 @@ public class Pedido {
     private void validarItem(ItemPedido item) throws BusinessRuleException {
         if (item == null) {
             throw new BusinessRuleException(PedidoExceptions.ITEM_NULO.getMensagem());
-        }
-    }
-
-    private void validarNumeroItem(int numeroItem) throws BusinessRuleException {
-        if (numeroItem < 1 || numeroItem > itens.size()) {
-            throw new BusinessRuleException(PedidoExceptions.NUMERO_ITEM.getMensagem());
         }
     }
 

@@ -12,7 +12,6 @@ public enum PedidoExceptions {
     DATA_CHECKOUT_MAX("A data/hora do checkout não pode ser maior que a data/hora atual."),
     STATUS_NULO("O status do pedido não pode ser nulo."),
     ITEM_NULO("O item não pode ser nulo."),
-    NUMERO_ITEM("O número do item é inválido."),
     CHECKOUT_REALIZADO("O checkout do pedido já foi realizado."),
     PEDIDO_VAZIO("O pedido precisa conter, pelo menos, um item."),
     PEDIDO_FINALIZADO("O pedido já foi finalizado.");
