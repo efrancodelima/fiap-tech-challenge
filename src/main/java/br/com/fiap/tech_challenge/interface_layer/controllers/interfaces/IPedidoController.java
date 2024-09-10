@@ -18,6 +18,6 @@ public interface IPedidoController {
 
     ResponseEntity<List<StatusPedidoDto>> listarPedidos() throws Exception;
 
-    void webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception;
+    ResponseEntity<Void> webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception;
 
 }

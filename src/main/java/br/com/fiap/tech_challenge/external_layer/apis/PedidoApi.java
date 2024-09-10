@@ -41,8 +41,8 @@ public class PedidoApi implements IPedidoApi {
     }
 
     @Override
-    public void webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception {
-        controller.webhookMercadoPago(pagamentoDto);
+    public ResponseEntity<Void> webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception {
+        return controller.webhookMercadoPago(pagamentoDto);
     }
 
 }

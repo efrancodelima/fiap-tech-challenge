@@ -6,7 +6,7 @@ import br.com.fiap.tech_challenge.interface_layer.gateways.entities.StatusPagame
 public final class StatusPagamentoMapper {
 
     public static StatusPagamentoJpa getStatusPagamentoJpa(StatusPagamento status) {
-        return new StatusPagamentoJpa(status.getStatus(), status.getDataHora());
+        return new StatusPagamentoJpa(status.getCodigo(), status.getStatus(), status.getDataHora());
     }
 
     public static StatusPagamento getStatusPagamento(StatusPagamentoJpa status)

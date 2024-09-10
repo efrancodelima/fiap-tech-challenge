@@ -1,6 +1,7 @@
 package br.com.fiap.tech_challenge.interface_layer.controllers;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
 import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
 import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ItemPedidoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.PagamentoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.PedidoResponseAdapter;
@@ -69,6 +71,7 @@ public class PedidoController implements IPedidoController {
 
         Pedido pedido = new Pedido(cliente, itens);
         pedido = pedidoUseCase.fazerCheckout(pedido);
+
         return PedidoResponseAdapter.adaptarParaStatusPedido(pedido, HttpStatus.CREATED);
     }
 
@@ -97,8 +100,9 @@ public class PedidoController implements IPedidoController {
     }
 
     @Override
-    public void webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception {
+    public ResponseEntity<Void> webhookMercadoPago(PagamentoDto pagamentoDto) throws Exception {
         var statusPagamento = PagamentoRequestAdapter.adaptar(pagamentoDto);
         pedidoUseCase.atualizarStatusPagamento(statusPagamento);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }

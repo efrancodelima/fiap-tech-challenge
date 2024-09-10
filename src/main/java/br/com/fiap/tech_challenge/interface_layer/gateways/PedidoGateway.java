@@ -52,7 +52,7 @@ public class PedidoGateway implements IPedidoGateway {
     @Override
     public Pedido buscarPedidoPeloCodigoPagamento(long codigoPagamento) throws Exception {
         PedidoJpa pedidoJpa = pedidoJpaRepository.findByStatusPagamentoCodigo(codigoPagamento);
-        return PedidoMapper.getPedido(pedidoJpa);
+        return pedidoJpa == null ? null : PedidoMapper.getPedido(pedidoJpa);
     }
 
 }

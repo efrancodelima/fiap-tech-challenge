@@ -2,6 +2,7 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_
 
 import java.time.LocalDateTime;
 
+import br.com.fiap.tech_challenge.application_layer.exceptions.ApplicationException;
 import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
 import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
@@ -30,7 +31,8 @@ public final class PagamentoRequestAdapter {
             case "REJECTED":
                 return StatusPagamentoEnum.REPROVADO;
             default:
-                return null;
+                // Retorna erro
+                return StatusPagamentoEnum.fromString(statusRequisicao);
         }
     }
 }

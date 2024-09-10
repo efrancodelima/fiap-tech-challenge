@@ -3,6 +3,7 @@ package br.com.fiap.tech_challenge.application_layer.use_cases;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumApplicationExceptions;
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
@@ -10,6 +11,7 @@ import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGa
 import br.com.fiap.tech_challenge.application_layer.use_cases.interfaces.IPedidoUseCase;
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
 import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
 import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
 
 public class PedidoUseCase implements IPedidoUseCase {
@@ -28,8 +30,25 @@ public class PedidoUseCase implements IPedidoUseCase {
 
         Validar.notNull(pedido, EnumApplicationExceptions.PEDIDO_NULO);
 
+        // Pagamento Mercado Pago
+        // var response = criarPagamentoMercadoPago(pedido);
+        // var codigoPagamento = response.data.id;
+        // var status = StatusPagamentoEnum.APROVADO;
+        // pedido.fazerCheckout(codigoPagamento);
+        // return gateway.gravarPedido(pedido);
+
         pedido.fazerCheckout();
-        return gateway.gravarPedido(pedido);
+        pedido = gateway.gravarPedido(pedido);
+
+        // Mock
+        long codigo = pedido.getNumero() * 10;
+        var status = StatusPagamentoEnum.AGUARDANDO_PAGAMENTO;
+        var dataHora = LocalDateTime.now();
+        var mock = new StatusPagamento(codigo, status, dataHora);
+        pedido.setStatusPagamento(mock);
+        gateway.gravarPedido(pedido);
+
+        return pedido;
     }
 
     @Override
@@ -42,6 +61,7 @@ public class PedidoUseCase implements IPedidoUseCase {
 
         pedido.atualizarStatusPedido();
         gateway.atualizarPedido(pedido);
+        System.out.println("\nCodigo: " + pedido.getStatusPagamento().getCodigo());
         return pedido;
     }
 
@@ -68,9 +88,10 @@ public class PedidoUseCase implements IPedidoUseCase {
     @Override
     public void atualizarStatusPagamento(StatusPagamento statusPagamento) throws Exception {
 
-        Validar.notNull(statusPagamento, EnumApplicationExceptions.STATUS_PAGAMENTO_NULO);
+        Validar.notNull(statusPagamento, EnumApplicationExceptions.PAGAMENTO_STATUS_NULO);
 
         Pedido pedido = gateway.buscarPedidoPeloCodigoPagamento(statusPagamento.getCodigo());
+        System.out.println("\n" + statusPagamento.getCodigo());
         Validar.notNull(pedido, EnumNotFoundExceptions.PEDIDO_NAO_ENCONTRADO);
 
         pedido.setStatusPagamento(statusPagamento);
