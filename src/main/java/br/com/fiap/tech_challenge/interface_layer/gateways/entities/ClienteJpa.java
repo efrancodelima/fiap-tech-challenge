@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 public class ClienteJpa {
 
     @Id
@@ -24,10 +24,10 @@ public class ClienteJpa {
     @Column(nullable = false, unique = true)
     private Long cpf;
 
-    @Column(name = "nome")
+    @Column(name = "nome", columnDefinition = "VARCHAR(50)")
     private String nome;
 
-    @Column(name = "email")
+    @Column(name = "email", columnDefinition = "VARCHAR(40)")
     private String email;
 
 }

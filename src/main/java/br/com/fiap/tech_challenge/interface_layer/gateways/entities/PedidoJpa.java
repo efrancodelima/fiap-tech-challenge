@@ -1,5 +1,6 @@
 package br.com.fiap.tech_challenge.interface_layer.gateways.entities;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
@@ -33,6 +34,7 @@ public class PedidoJpa {
     private ClienteJpa clienteJpa;
 
     @ElementCollection
+    @CollectionTable(name = "itens_pedido", joinColumns = @JoinColumn(name = "numero_pedido"))
     private List<ItemPedidoJpa> itensJpa;
 
     @Column(name = "timestamp_checkout", nullable = true)

@@ -27,13 +27,13 @@ public class ProdutoJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "nome", nullable = false, columnDefinition = "VARCHAR(20)")
     private String nome;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", columnDefinition = "VARCHAR(150)")
     private String descricao;
 
-    @Column(name = "preco", nullable = false)
+    @Column(name = "preco", nullable = false, columnDefinition = "DECIMAL(5,2)")
     private BigDecimal preco;
 
     @Enumerated(EnumType.STRING)

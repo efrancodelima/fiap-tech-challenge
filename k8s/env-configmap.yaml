@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+  DATASOURCE_PASSWORD: password_fiap
+  DATASOURCE_URL: jdbc:mysql://bd_lanchonete:3306/lanchonete
+  DATASOURCE_USERNAME: user_fiap
+  MYSQL_DATABASE: lanchonete
+  MYSQL_PASSWORD: password_fiap
+  MYSQL_ROOT_HOST: '%'
+  MYSQL_ROOT_PASSWORD: password_root
+  MYSQL_USER: user_fiap
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: app-env
+  name: env

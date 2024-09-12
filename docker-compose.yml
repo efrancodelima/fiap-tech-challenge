@@ -1,9 +1,11 @@
-version: '3.8'
+version: "3.8"
 
 services:
   bd_lanchonete:
     container_name: bd_lanchonete
-    image: mysql:8.4.0
+    build:
+      context: .
+      dockerfile: Dockerfile.bd
     env_file:
       - .env
     ports:
@@ -19,7 +21,7 @@ services:
     container_name: app_lanchonete
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.app
     image: tech-challenge-1
     env_file:
       - .env

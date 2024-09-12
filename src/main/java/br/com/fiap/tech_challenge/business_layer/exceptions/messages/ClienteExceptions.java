@@ -3,10 +3,10 @@ package br.com.fiap.tech_challenge.business_layer.exceptions.messages;
 public enum ClienteExceptions {
     CODIGO_NULO("Informe o código do cliente."),
     CODIGO_MIN("O código do cliente deve ser maior que 0."),
-    NOME_MAX_CHAR("O nome do cliente não pode ter mais de 30 caracteres."),
+    NOME_MAX_CHAR("O nome do cliente não pode ter mais de 50 caracteres."),
     NOME_INVALIDO("O nome do cliente deve conter, no mínimo, uma palavra com três ou mais caracteres."),
     CPF_NULO("Informe o CPF do cliente."),
-    EMAIL_MAX_CHAR("O e-mail não pode ter mais de 20 caracteres."),
+    EMAIL_MAX_CHAR("O e-mail não pode ter mais de 40 caracteres."),
     EMAIL_INVALIDO("O e-mail informado é inválido."),
     NOME_EMAIL_NULOS("Informe o nome ou o email do cliente (um dos dois ou ambos).");
 

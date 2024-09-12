@@ -85,7 +85,7 @@ public class Cliente {
     private void validarnome(String nome) throws BusinessRuleException {
         if (nome == null || nome.isEmpty()) {
             return;
-        } else if (nome.length() > 30) {
+        } else if (nome.length() > 50) {
             throw new BusinessRuleException(ClienteExceptions.NOME_MAX_CHAR.getMensagem());
         } else {
             ArrayList<String> palavras = getListaPalavras(nome, 3);
@@ -98,7 +98,7 @@ public class Cliente {
     private void validarEmail(String email) throws BusinessRuleException {
         if (email == null) {
             return;
-        } else if (email.length() > 20) {
+        } else if (email.length() > 40) {
             throw new BusinessRuleException(ClienteExceptions.EMAIL_MAX_CHAR.getMensagem());
         } else {
             String emailRegexRFC5322 = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
