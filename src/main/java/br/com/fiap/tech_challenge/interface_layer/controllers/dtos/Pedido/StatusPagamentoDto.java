@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class StatusPedidoDto {
+public class StatusPagamentoDto {
 
     @Schema(description = "Número do pedido.", example = "123")
     public Long numeroPedido;
 
-    @Schema(description = "Status do pedido.", example = "RECEBIDO")
+    @Schema(description = "Status do pagamento.", example = "APROVADO")
     public String status;
 
-    @Schema(description = "Data e hora da última atualização do pedido.", example = "2024-09-08 09:10:00")
+    @Schema(description = "Data e hora da última atualização do pagamento.", example = "2024-09-08 09:10:00")
     public String dataHora;
 
 }

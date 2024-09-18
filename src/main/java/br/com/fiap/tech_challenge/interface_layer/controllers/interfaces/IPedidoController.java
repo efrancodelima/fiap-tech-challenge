@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 
 public interface IPedidoController {
@@ -14,7 +15,7 @@ public interface IPedidoController {
 
     ResponseEntity<StatusPedidoDto> atualizarStatusPedido(Long numeroPedido) throws Exception;
 
-    ResponseEntity<StatusPedidoDto> consultarStatusPagamento(Long numeroPedido) throws Exception;
+    ResponseEntity<StatusPagamentoDto> consultarStatusPagamento(Long numeroPedido) throws Exception;
 
     ResponseEntity<List<StatusPedidoDto>> listarPedidos() throws Exception;
 

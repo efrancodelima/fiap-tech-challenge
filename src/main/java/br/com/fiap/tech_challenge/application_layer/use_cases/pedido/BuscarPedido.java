@@ -5,18 +5,17 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotF
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.application_layer.services.Validar;
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
-import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
 
-public final class ConsultarStatusPagamento {
+public final class BuscarPedido {
 
-    public static StatusPagamento consultar(IPedidoGateway gateway, Long numeroPedido) throws Exception {
+    public static Pedido buscar(IPedidoGateway gateway, Long numeroPedido) throws Exception {
 
         Validar.notNull(numeroPedido, EnumApplicationExceptions.PEDIDO_NUMERO_NULO);
 
         Pedido pedido = gateway.buscarPedido(numeroPedido);
         Validar.notNull(pedido, EnumNotFoundExceptions.PEDIDO_NAO_ENCONTRADO);
 
-        return pedido.getStatusPagamento();
+        return pedido;
     }
 
 }

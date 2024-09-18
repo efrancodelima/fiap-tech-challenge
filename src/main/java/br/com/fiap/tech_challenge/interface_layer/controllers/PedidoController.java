@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import br.com.fiap.tech_challenge.application_layer.use_cases.cliente.BuscarClientePeloCpf;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.AtualizarStatusPagamento;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.AtualizarStatusPedido;
-import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.ConsultarStatusPagamento;
+import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.BuscarPedido;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.FazerCheckoutPedido;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.ListarPedidos;
 import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
@@ -18,13 +18,14 @@ import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
 import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
 import br.com.fiap.tech_challenge.business_layer.entities.Produto;
-import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ItemPedidoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.PagamentoRequestAdapter;
-import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.PedidoResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.StatusPedidoResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.StatusPagamentoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ItemPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IPedidoController;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ClienteGateway;
@@ -53,19 +54,19 @@ public class PedidoController implements IPedidoController {
         Pedido pedido = new Pedido(cliente, itens);
         pedido = FazerCheckoutPedido.fazerCheckout(pedidoGateway, pedido);
 
-        return PedidoResponseAdapter.adaptar(pedido, HttpStatus.CREATED);
+        return StatusPedidoResponseAdapter.adaptar(pedido, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<StatusPedidoDto> atualizarStatusPedido(Long numeroPedido) throws Exception {
         Pedido pedido = AtualizarStatusPedido.atualizar(pedidoGateway, numeroPedido);
-        return PedidoResponseAdapter.adaptar(pedido, HttpStatus.OK);
+        return StatusPedidoResponseAdapter.adaptar(pedido, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<StatusPedidoDto> consultarStatusPagamento(Long numeroPedido) throws Exception {
-        StatusPagamento statusPagamento = ConsultarStatusPagamento.consultar(pedidoGateway, numeroPedido);
-        return PedidoResponseAdapter.adaptar(numeroPedido, statusPagamento, HttpStatus.OK);
+    public ResponseEntity<StatusPagamentoDto> consultarStatusPagamento(Long numeroPedido) throws Exception {
+        Pedido pedido = BuscarPedido.buscar(pedidoGateway, numeroPedido);
+        return StatusPagamentoResponseAdapter.adaptar(pedido, HttpStatus.OK);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class PedidoController implements IPedidoController {
         List<Pedido> pedidos = ListarPedidos.listar(pedidoGateway);
 
         if (pedidos.size() > 0) {
-            return PedidoResponseAdapter.adaptar(pedidos, HttpStatus.OK);
+            return StatusPedidoResponseAdapter.adaptar(pedidos, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
