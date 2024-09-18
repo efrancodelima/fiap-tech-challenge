@@ -31,13 +31,7 @@ WORKDIR /app
 ## Copia o projeto compilado no builder para o diretório de trabalho da imagem
 COPY --from=builder /app/target/tech-challenge-*.jar .
 
-## Copia os scripts para o diretório de trabalho da imagem
-COPY wait-for-it.sh .
+## Copia e executa o script que inicializa a aplicação
 COPY run-project.sh .
-
-## Concede permissão de acesso aos scripts
-RUN chmod +x wait-for-it.sh
 RUN chmod +x run-project.sh
-
-## Executa a aplicação
-CMD ["sh", "-c", "./wait-for-it.sh bd_lanchonete:3306 -t 0 -- ./run-project.sh"]
+CMD ["sh", "-c", "./run-project.sh"]

@@ -52,7 +52,7 @@ public class ProdutoGateway implements IProdutoGateway {
     }
 
     @Override
-    public boolean produtoJaExiste(long codigoProduto) {
+    public boolean produtoExiste(long codigoProduto) {
         return produtoJpaRepository.existsById(codigoProduto);
     }
 

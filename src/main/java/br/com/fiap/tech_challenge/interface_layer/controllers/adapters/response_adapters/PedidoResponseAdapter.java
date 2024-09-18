@@ -15,20 +15,20 @@ import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.Status
 public final class PedidoResponseAdapter {
 
     // Métodos públicos
-    public static ResponseEntity<StatusPedidoDto> adaptarParaStatusPedido(Pedido pedido, HttpStatus httpStatus) {
+    public static ResponseEntity<StatusPedidoDto> adaptar(Pedido pedido, HttpStatus httpStatus) {
 
         StatusPedidoDto response = adaptarParaStatusPedido(pedido);
         return new ResponseEntity<>(response, httpStatus);
     }
 
-    public static ResponseEntity<StatusPedidoDto> adaptarParaStatusPagamento(long numeroPedido,
+    public static ResponseEntity<StatusPedidoDto> adaptar(long numeroPedido,
             StatusPagamento statusPagamento, HttpStatus httpStatus) {
 
         StatusPedidoDto response = adaptarParaStatusPagamento(numeroPedido, statusPagamento);
         return new ResponseEntity<>(response, httpStatus);
     }
 
-    public static ResponseEntity<List<StatusPedidoDto>> adaptarParaListaPedidos(List<Pedido> pedidos,
+    public static ResponseEntity<List<StatusPedidoDto>> adaptar(List<Pedido> pedidos,
             HttpStatus httpStatus) {
 
         List<StatusPedidoDto> response = adaptarParaListaPedidos(pedidos);

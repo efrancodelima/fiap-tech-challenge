@@ -2,7 +2,6 @@ server:
   port: 8080
   servlet:
     context-path: /api/v2
-
 spring:
   application:
     name: tech-challenge
@@ -13,6 +12,7 @@ spring:
     driverClassName: ${DATASOURCE_DRIVER_CLASS_NAME:org.h2.Driver}
   jpa:
     show-sql: false
+    open-in-view: false
     hibernate:
       ddl-auto: update
       dialect: ${JPA_DIALECT}

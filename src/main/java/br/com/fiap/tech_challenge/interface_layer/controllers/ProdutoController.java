@@ -6,7 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import br.com.fiap.tech_challenge.application_layer.use_cases.ProdutoUseCase;
+import br.com.fiap.tech_challenge.application_layer.use_cases.produto.BuscarProdutosPorCategoria;
+import br.com.fiap.tech_challenge.application_layer.use_cases.produto.CadastrarProduto;
+import br.com.fiap.tech_challenge.application_layer.use_cases.produto.EditarProduto;
+import br.com.fiap.tech_challenge.application_layer.use_cases.produto.RemoverProduto;
 import br.com.fiap.tech_challenge.business_layer.entities.Produto;
 import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ProdutoRequestAdapter;
@@ -14,7 +17,6 @@ import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.interfaces.IProdutoController;
 import br.com.fiap.tech_challenge.interface_layer.gateways.ProdutoGateway;
-import jakarta.annotation.PostConstruct;
 
 @Component
 public class ProdutoController implements IProdutoController {
@@ -22,21 +24,13 @@ public class ProdutoController implements IProdutoController {
     // Atributos
     @Autowired
     ProdutoGateway gateway;
-    ProdutoUseCase produtoUseCase;
-
-    // Método de inicialização
-    // A partir de um atributo injetado, inicializa um atributo não injetado
-    @PostConstruct
-    private void init() {
-        this.produtoUseCase = new ProdutoUseCase(gateway);
-    }
 
     // Métodos públicos
     @Override
     public ResponseEntity<Produto> cadastrarProduto(ProdutoDto produtoDto) throws Exception {
 
         Produto produto = ProdutoRequestAdapter.adaptar(produtoDto);
-        produto = produtoUseCase.cadastrarProduto(produto);
+        produto = CadastrarProduto.cadastrar(gateway, produto);
         return ProdutoResponseAdapter.adaptar(produto, HttpStatus.CREATED);
     }
 
@@ -44,14 +38,14 @@ public class ProdutoController implements IProdutoController {
     public ResponseEntity<Produto> editarProduto(Long codigo, ProdutoDto produtoDto) throws Exception {
 
         Produto produto = ProdutoRequestAdapter.adaptar(codigo, produtoDto);
-        produtoUseCase.editarProduto(produto);
+        EditarProduto.editar(gateway, produto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Override
     public ResponseEntity<Produto> removerProduto(Long codigo) throws Exception {
 
-        produtoUseCase.removerProduto(codigo);
+        RemoverProduto.remover(gateway, codigo);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -59,7 +53,7 @@ public class ProdutoController implements IProdutoController {
     public ResponseEntity<List<Produto>> buscarProdutosPorCategoria(String categoriaStr) throws Exception {
 
         CategoriaProduto categoria = CategoriaProduto.fromString(categoriaStr);
-        List<Produto> produtos = produtoUseCase.buscarProdutosPorCategoria(categoria);
+        List<Produto> produtos = BuscarProdutosPorCategoria.buscar(gateway, categoria);
 
         if (produtos.size() > 0) {
             return ProdutoResponseAdapter.adaptar(produtos, HttpStatus.OK);

@@ -1,25 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.34.0 (cbf2835db)
-  labels:
-    io.kompose.service: app
   name: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: app
+      app: app
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.34.0 (cbf2835db)
       labels:
-        io.kompose.service: app
+        app: app
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z bd-lanchonete 3306; do echo "Aguardando banco de dados..."; sleep 5; done;',
+            ]
       containers:
         - env:
             - name: DATASOURCE_DRIVER_CLASS_NAME
@@ -67,9 +68,29 @@ spec:
                 configMapKeyRef:
                   key: MYSQL_USER
                   name: env
-          image: tech-challenge-1
+          image: efrancodelima/app-lanchonete:latest
           name: app-lanchonete
           ports:
             - containerPort: 8080
               protocol: TCP
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "400m"
+            limits:
+              memory: "2Gi"
+              cpu: "800m"
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 8080
+          #   initialDelaySeconds: 300
+          #   periodSeconds: 3
+          #   failureThreshold: 500
+          # readinessProbe:
+          #   httpGet:
+          #     path: /ready
+          #     port: 8080
+          #   initialDelaySeconds: 300
+          #   periodSeconds: 3
       restartPolicy: Always

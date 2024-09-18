@@ -17,6 +17,6 @@ public interface IProdutoGateway {
 
     List<Produto> buscarProdutosPorCategoria(CategoriaProduto categoria) throws Exception;
 
-    boolean produtoJaExiste(long codigoProduto) throws Exception;
+    boolean produtoExiste(long codigoProduto) throws Exception;
 
 }

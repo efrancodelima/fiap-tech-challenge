@@ -111,7 +111,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>tech-challenge-1-v${project.version}</finalName>
+		<finalName>tech-challenge-2-v${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

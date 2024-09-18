@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.application_layer.use_cases;
+package br.com.fiap.tech_challenge.application_layer.services;
 
 import java.util.List;
 
@@ -9,28 +9,26 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotF
 
 public final class Validar {
 
-    // ApplicationException
     public static void notNull(Object objeto, EnumApplicationExceptions excecao)
-            throws ApplicationException {
+            throws Exception {
+
+        if (excecao instanceof EnumApplicationExceptions) {
+            throw new ApplicationException(excecao.getMensagem());
+        }
+    }
+
+    public static void notNull(Object objeto, EnumNotFoundExceptions excecao)
+            throws Exception {
 
         if (objeto == null) {
-            throw new ApplicationException(excecao.getMensagem());
+            throw new ResourceNotFoundException(excecao.getMensagem());
         }
     }
 
     public static void maiorQueZero(long numero, EnumApplicationExceptions excecao) throws ApplicationException {
 
         if (numero <= 0) {
-            throw new ApplicationException(EnumApplicationExceptions.PEDIDO_NUMERO_MIN.getMensagem());
-        }
-    }
-
-    // ResourceNotFoundException
-    public static void notNull(Object objeto, EnumNotFoundExceptions excecao)
-            throws ResourceNotFoundException {
-
-        if (objeto == null) {
-            throw new ResourceNotFoundException(excecao.getMensagem());
+            throw new ApplicationException(excecao.getMensagem());
         }
     }
 

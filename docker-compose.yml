@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  bd_lanchonete:
-    container_name: bd_lanchonete
+  bd-lanchonete:
+    container_name: bd-lanchonete
     build:
       context: .
       dockerfile: Dockerfile.bd
@@ -10,31 +10,31 @@ services:
       - .env
     ports:
       ## host:container
-      - "4050:3306"
+      - "3306:3306"
     networks:
-      - net_lanchonete
+      - net-lanchonete
     volumes:
-      - dados_lanchonete:/var/lib/mysql
+      - dados-lanchonete:/var/lib/mysql
     command: ["mysqld"]
 
   app:
-    container_name: app_lanchonete
+    container_name: app-lanchonete
     build:
       context: .
       dockerfile: Dockerfile.app
-    image: tech-challenge-1
+    image: tech-challenge-2
     env_file:
       - .env
     ports:
       - "8080:8080"
     networks:
-      - net_lanchonete
+      - net-lanchonete
     depends_on:
-      - bd_lanchonete
+      - bd-lanchonete
 
 volumes:
-  dados_lanchonete:
+  dados-lanchonete:
 
 networks:
-  net_lanchonete:
+  net-lanchonete:
     driver: bridge

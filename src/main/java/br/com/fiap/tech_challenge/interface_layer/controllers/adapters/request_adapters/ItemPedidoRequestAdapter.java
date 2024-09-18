@@ -3,26 +3,18 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.tech_challenge.application_layer.use_cases.ProdutoUseCase;
 import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
 import br.com.fiap.tech_challenge.business_layer.entities.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ItemPedidoDto;
 
 public final class ItemPedidoRequestAdapter {
 
-    // Métodos públicos
-    public static ItemPedido adaptar(ProdutoUseCase produtoUseCase, ItemPedidoDto itemPedidoDto) throws Exception {
-        Produto produto = produtoUseCase.buscarProduto(itemPedidoDto.getCodigoProduto());
-        return new ItemPedido(produto, itemPedidoDto.getQuantidade());
-    }
-
-    public static List<ItemPedido> adaptar(ProdutoUseCase produtoUseCase, List<ItemPedidoDto> itensPedidoDto)
+    public static List<ItemPedido> adaptar(List<ItemPedidoDto> itens, List<Produto> produtos)
             throws Exception {
-
         List<ItemPedido> result = new ArrayList<>();
 
-        for (ItemPedidoDto itemDto : itensPedidoDto) {
-            ItemPedido item = ItemPedidoRequestAdapter.adaptar(produtoUseCase, itemDto);
+        for (int i = 0; i < itens.size(); i++) {
+            ItemPedido item = new ItemPedido(produtos.get(i), itens.get(i).getQuantidade());
             result.add(item);
         }
         return result;

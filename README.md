@@ -1,29 +1,32 @@
 # Tech Challenge - Fase 2
 
-Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**.
+Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**. \
+
+Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge<br><br>
+Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html<br><br>
+Link do vídeo demonstrando a arquitetura: pendente
 
 ## Objetivos
 
-Desenvolver um sistema para uma lanchonete, seguindo os pré-requisitos do Tech Challenge.
+Desenvolver um sistema para uma lanchonete, seguindo os pré-requisitos especificados no Tech Challenge.
 
-## Requisitos do Tech Challenge
+## Requisitos do negócio
 
 ### Arquitetura
 
-O projeto da fase 1 deverá ser adaptado para a Clean Architecture.</br>
-XXX
+O projeto da fase 1 (arquitetura hexagonal) deverá ser adaptado para a Clean Architecture.
 
 ### API's web
-
-Produto:
-
-- Criar, editar e remover produtos
-- Buscar produtos por categoria
 
 Cliente
 
 - Cadastrar cliente
 - Buscar cliente pelo CPF
+
+Produto:
+
+- Criar, editar e remover produtos
+- Buscar produtos por categoria
 
 Pedido
 
@@ -35,24 +38,24 @@ Pedido
   - Pedidos mais antigos primeiro e mais novos depois.
   - Pedidos finalizados não devem aparecer na lista.
 
-### Banco de dados
+### Infraestrutura
 
-De livre escolha (escolhemos o MySQL 8.4.0).
+XXX. \
+Usamos o minikube para rodar os containeres local. \
+Para o banco de dados, foi utilizado o MySQL 8.4.0.
 
 ## Pré-requisitos para executar a aplicação
 
-Você precisa ter o docker e o docker-compose instalados na sua máquina para poder rodar o projeto.<br>
+XXX.<br>
 Também vai precisar do git para poder clonar o projeto.<br>
 As instruções citadas nesse documento foram testadas com:
 
 - Linux Ubuntu 22.04.4 LTS;
-- Docker 27.1.1;
-- Docker Compose 1.26.0.
 
 ## Estrutura do projeto
 
-Decidi criar a estrutura do projeto em diretórios conforme as camadas da Clean Architecture. \
-Nomeei as camadas como: camada de negócios, camada de aplicação, camada de interface e camada externa.
+O projeto foi estruturado em diretórios e subdiretórios conforme as camadas da Clean Architecture. \
+As camadas foram nomeadas como: "business layer", "application layer", "interface layer" e "external layer".
 
 - tech_challenge
   - business_layer
@@ -71,8 +74,8 @@ Nomeei as camadas como: camada de negócios, camada de aplicação, camada de in
 
 #### entities
 
-Aqui temos as entidades de negócio. \
-Temos alguns value objects entre elas (CPF, ItemPedido, StatusPedido e StatusPagamento), trabalhando com a ideia de composição. \
+Aqui temos as entidades de negócio, construídas como POJOs (Plain Old Java Objects). \
+Temos alguns VOs (Value Objects) entre elas (CPF, ItemPedido, StatusPedido e StatusPagamento), trabalhando com a ideia de composição. \
 Temos também alguns enums: CategoriaProduto, StatusPedidoEnum e StatusPagamentoEnum.
 
 #### constants
@@ -147,7 +150,7 @@ Os response_adapters fazem o papel do Presenter (dei outro nome, mas a função 
 
 #### gateways
 
-Aqui temos os gateways implementados. \
+Aqui temos os gateways implementados. Os gateways ligam os use cases com os repositórios para persistência de dados. Use cases > gateways > repositórios. Aplicação > interface > camada externa. \
 Temos também as entidades JPA (ORM), quer não se confundem com as entidades de negócio. \
 E temos as interfaces dos repositórios, para que o gateway saiba como utilizá-los.
 
@@ -224,10 +227,10 @@ docker-compose restart
 
 ```sh
 # Log do banco de dados
-docker logs bd_lanchonete
+docker logs bd-lanchonete
 
 # Log da aplicação
-docker logs app_lanchonete
+docker logs app-lanchonete
 ```
 
 #### 3. [Banco de dados] Testar o banco de dados individualmente
@@ -236,7 +239,7 @@ Suba o container do banco de dados, abra o terminal e execute o comando abaixo.
 
 ```sh
 # Executa o mysql pela interface de linha de comando (CLI)
-docker exec -it bd_lanchonete mysql -u user_fiap -p
+docker exec -it bd-lanchonete mysql -u user_fiap -p
 # Após inserir a senha, selecione o database
 use lanchonete;
 ```
