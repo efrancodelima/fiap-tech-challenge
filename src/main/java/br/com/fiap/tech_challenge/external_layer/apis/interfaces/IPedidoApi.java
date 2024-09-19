@@ -22,7 +22,7 @@ import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.Pedido
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 
-@Tag(name = "Pedido")
+@Tag(name = "Pedidos")
 public interface IPedidoApi {
 
         // Fazer checkout

@@ -13,6 +13,7 @@ import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.AtualizarSt
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.BuscarPedido;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.FazerCheckoutPedido;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.ListarPedidos;
+import br.com.fiap.tech_challenge.application_layer.use_cases.produto.BuscarProduto;
 import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
 import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
 import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
@@ -105,7 +106,7 @@ public class PedidoController implements IPedidoController {
         List<ItemPedidoDto> itensDto = pedidoDto.getItens();
 
         for (ItemPedidoDto item : itensDto) {
-            var produto = produtoGateway.buscarProduto(item.codigoProduto);
+            var produto = BuscarProduto.buscar(produtoGateway, item.codigoProduto);
             produtos.add(produto);
         }
         return ItemPedidoRequestAdapter.adaptar(itensDto, produtos);
