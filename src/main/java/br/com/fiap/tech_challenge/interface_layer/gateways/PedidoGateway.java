@@ -3,6 +3,7 @@ package br.com.fiap.tech_challenge.interface_layer.gateways;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +45,6 @@ public class PedidoGateway implements IPedidoGateway {
 
     @Override
     public List<Pedido> buscarTodosOsPedidos() throws Exception, Exception {
-
         List<PedidoJpa> pedidosJpa = pedidoJpaRepository.findAll();
         return PedidoMapper.getListPedido(pedidosJpa);
     }

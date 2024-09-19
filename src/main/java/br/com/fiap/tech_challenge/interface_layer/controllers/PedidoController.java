@@ -21,6 +21,7 @@ import br.com.fiap.tech_challenge.business_layer.entities.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ItemPedidoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.PagamentoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.StatusPedidoResponseAdapter;
+import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.PedidoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.StatusPagamentoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ItemPedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
@@ -70,11 +71,11 @@ public class PedidoController implements IPedidoController {
     }
 
     @Override
-    public ResponseEntity<List<StatusPedidoDto>> listarPedidos() throws Exception {
+    public ResponseEntity<List<Pedido>> listarPedidos() throws Exception {
         List<Pedido> pedidos = ListarPedidos.listar(pedidoGateway);
 
         if (pedidos.size() > 0) {
-            return StatusPedidoResponseAdapter.adaptar(pedidos, HttpStatus.OK);
+            return PedidoResponseAdapter.adaptar(pedidos, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

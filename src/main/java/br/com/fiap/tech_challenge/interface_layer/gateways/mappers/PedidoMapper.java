@@ -71,6 +71,7 @@ public final class PedidoMapper {
             throws Exception {
         List<Pedido> pedidos = new ArrayList<>();
         for (PedidoJpa pedidoJpa : pedidosJpa) {
+
             Pedido pedido = getPedido(pedidoJpa);
             pedidos.add(pedido);
         }

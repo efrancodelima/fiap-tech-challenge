@@ -11,9 +11,9 @@ import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.Status
 public final class StatusPagamentoResponseAdapter {
 
     public static ResponseEntity<StatusPagamentoDto> adaptar(Pedido pedido, HttpStatus httpStatus) {
-        String status = pedido.getStatusPagamento().getStatus().toString();
+        var status = pedido.getStatusPagamento().getStatus().toString();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataHora = pedido.getStatusPagamento().getDataHora().format(formatter);
 
         var response = new StatusPagamentoDto();

@@ -18,7 +18,6 @@ public final class AtualizarStatusPedido {
 
         pedido.atualizarStatusPedido();
         gateway.atualizarPedido(pedido);
-        System.out.println("\nCodigo: " + pedido.getStatusPagamento().getCodigo());
         return pedido;
     }
 

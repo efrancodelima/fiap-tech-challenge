@@ -5,9 +5,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
@@ -29,11 +31,11 @@ public class PedidoJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long numero;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigo_cliente", nullable = true)
     private ClienteJpa clienteJpa;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "itens_pedido", joinColumns = @JoinColumn(name = "numero_pedido"))
     private List<ItemPedidoJpa> itensJpa;
 

@@ -15,7 +15,6 @@ public final class AtualizarStatusPagamento {
         Validar.notNull(statusPagamento, EnumApplicationExceptions.PAGAMENTO_STATUS_NULO);
 
         Pedido pedido = gateway.buscarPedidoPeloCodigoPagamento(statusPagamento.getCodigo());
-        System.out.println("\n" + statusPagamento.getCodigo());
         Validar.notNull(pedido, EnumNotFoundExceptions.PEDIDO_NAO_ENCONTRADO);
 
         pedido.setStatusPagamento(statusPagamento);

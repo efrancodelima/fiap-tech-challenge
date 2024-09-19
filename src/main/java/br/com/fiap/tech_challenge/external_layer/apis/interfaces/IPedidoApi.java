@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
 
 @Tag(name = "Pedido")
@@ -55,7 +57,7 @@ public interface IPedidoApi {
                         @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
         @GetMapping(value = "/pagamento/{numeroPedido}")
-        ResponseEntity<StatusPedidoDto> consultarStatusPagamento(@PathVariable("numeroPedido") long numeroPedido)
+        ResponseEntity<StatusPagamentoDto> consultarStatusPagamento(@PathVariable("numeroPedido") long numeroPedido)
                         throws Exception;
 
         // Listar pedidos
@@ -67,7 +69,7 @@ public interface IPedidoApi {
                         @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
         @GetMapping(value = "/listar")
-        ResponseEntity<List<StatusPedidoDto>> listarPedidos() throws Exception;
+        ResponseEntity<List<Pedido>> listarPedidos() throws Exception;
 
         // Webhook do Mercado Pago
         @Operation(summary = "Webhook para receber notificações de pagamento", description = PedidoConstantes.descricaoWebhook)

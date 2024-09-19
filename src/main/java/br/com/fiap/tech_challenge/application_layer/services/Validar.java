@@ -12,7 +12,7 @@ public final class Validar {
     public static void notNull(Object objeto, EnumApplicationExceptions excecao)
             throws Exception {
 
-        if (excecao instanceof EnumApplicationExceptions) {
+        if (objeto == null) {
             throw new ApplicationException(excecao.getMensagem());
         }
     }
