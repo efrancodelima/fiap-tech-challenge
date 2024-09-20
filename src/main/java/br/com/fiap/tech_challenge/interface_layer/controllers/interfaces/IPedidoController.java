@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago.PagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPedidoDto;
 
 public interface IPedidoController {
 

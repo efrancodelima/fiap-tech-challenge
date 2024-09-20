@@ -11,10 +11,10 @@ import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
 import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
 import br.com.fiap.tech_challenge.external_layer.apis.interfaces.IPedidoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.PedidoController;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago.PagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPedidoDto;
 
 @RestController
 @RequestMapping("/pedidos")

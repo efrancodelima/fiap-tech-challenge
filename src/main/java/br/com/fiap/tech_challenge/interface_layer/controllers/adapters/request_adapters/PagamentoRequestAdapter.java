@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import br.com.fiap.tech_challenge.application_layer.exceptions.ApplicationException;
 import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
 import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago.PagamentoDto;
 
 public final class PagamentoRequestAdapter {
 

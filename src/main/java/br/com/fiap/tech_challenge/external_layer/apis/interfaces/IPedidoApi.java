@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.PagamentoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.PedidoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPagamentoDto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido.StatusPedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago.PagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.PedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPagamentoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPedidoDto;
 
 @Tag(name = "Pedidos")
 public interface IPedidoApi {
@@ -63,7 +63,7 @@ public interface IPedidoApi {
         // Listar pedidos
         @Operation(summary = "Listar pedidos", description = PedidoConstantes.descricaoListarPedidos)
         @ApiResponses(value = {
-                        @ApiResponse(responseCode = "200", description = PedidoConstantes.d200, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.l200))),
+                        @ApiResponse(responseCode = "200", description = PedidoConstantes.d200, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e200listar))),
                         @ApiResponse(responseCode = "400", description = PedidoConstantes.d400, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e400))),
                         @ApiResponse(responseCode = "404", description = PedidoConstantes.d404, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e404))),
                         @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
@@ -101,11 +101,12 @@ final class PedidoConstantes {
         public static final String d500 = "Erro!";
 
         public static final String e200 = "{ \"numeroPedido\": 4, \"statusPedido\": \"PRONTO\", \"dataHora\": \"2024-09-08 15:31:59\" }";
-        public static final String l200 = "[ { \"numeroPedido\": 4, \"statusPedido\": \"PRONTO\", \"dataHora\": \"2024-09-08 15:31:59\" }, { \"numeroPedido\": 1, \"statusPedido\": \"EM_PREPARACAO\", \"dataHora\": \"2024-09-08 15:31:52\" }]";
+        public static final String e200listar = "[ { \"numero\": 1, \"cliente\": null, \"itens\": [ { \"produto\": { \"codigo\": 1, \"nome\": \"X-Monstrão\", \"descricao\": null, \"preco\": 20, \"categoria\": \"LANCHE\" }, \"quantidade\": 1, \"valorItem\": 20 } ], \"dataHoraCheckout\": \"2024-09-20T10:22:09.175124\", \"statusPagamento\": { \"codigo\": 0, \"status\": \"AGUARDANDO_PAGAMENTO\", \"dataHora\": \"2024-09-20T10:22:09.246543\" }, \"statusPedido\": { \"status\": \"RECEBIDO\", \"dataHora\": \"2024-09-20T10:22:09.175173\" }, \"valorPedido\": 20 }, { \"numero\": 2, \"cliente\": null, \"itens\": [ { \"produto\": { \"codigo\": 2, \"nome\": \"X-Monstrinho\", \"descricao\": null, \"preco\": 20, \"categoria\": \"LANCHE\" }, \"quantidade\": 2, \"valorItem\": 40 } ], \"dataHoraCheckout\": \"2024-09-20T10:22:15.888514\", \"statusPagamento\": { \"codigo\": 0, \"status\": \"AGUARDANDO_PAGAMENTO\", \"dataHora\": \"2024-09-20T10:22:15.899493\" }, \"statusPedido\": { \"status\": \"RECEBIDO\", \"dataHora\": \"2024-09-20T10:22:15.888543\" }, \"valorPedido\": 40 }]";
         public static final String e201 = e200;
         public static final String e204 = "";
         public static final String e400 = "{ \"code\": 400, \"status\": \"Bad Request\", \"message\": \"JSON parse error: Cannot deserialize value of type `java.lang.Long` from String \\\"x\\\": not a valid `java.lang.Long` value\", \"timestamp\": \"2024-09-08T15:39:12.091139608\" }";
         public static final String e404 = "{ \"code\": 404, \"status\": \"Not Found\", \"message\": \"Não foi encontrado nenhum pedido para o número informado.\", \"timestamp\": \"2024-09-08T15:37:05.129042146\"}";
         public static final String e422 = "{ \"code\": 422, \"status\": \"Unprocessable Entity\", \"message\": \"O pedido precisa conter, pelo menos, um item.\", \"timestamp\": \"2024-09-08T15:37:05.129042146\"}";
         public static final String e500 = "{ \"code\": 500, \"status\": \"Internal Server Error\", \"message\": \"Ocorreu um erro inesperado no servidor.\", \"timestamp\": \"2024-09-08T15:37:05.129042146\"}";
+
 }

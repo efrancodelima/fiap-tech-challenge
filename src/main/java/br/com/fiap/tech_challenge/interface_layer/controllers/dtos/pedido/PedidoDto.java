@@ -1,8 +1,7 @@
-package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido;
+package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido;
 
 import java.util.List;
 
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ItemPedidoDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;

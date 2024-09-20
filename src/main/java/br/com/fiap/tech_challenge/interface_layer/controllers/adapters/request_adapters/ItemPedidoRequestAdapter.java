@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
 import br.com.fiap.tech_challenge.business_layer.entities.Produto;
-import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ItemPedidoDto;
+import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.ItemPedidoDto;
 
 public final class ItemPedidoRequestAdapter {
 

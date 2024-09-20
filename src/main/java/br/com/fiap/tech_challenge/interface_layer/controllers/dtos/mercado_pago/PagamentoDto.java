@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.interface_layer.controllers.dtos;
+package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

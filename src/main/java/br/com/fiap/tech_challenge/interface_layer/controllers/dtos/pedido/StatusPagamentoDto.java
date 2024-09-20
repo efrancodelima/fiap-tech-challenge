@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.Pedido;
+package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido;
 
 import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
