@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.Pedido;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago.PagamentoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.PedidoDto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.StatusPagamentoDto;

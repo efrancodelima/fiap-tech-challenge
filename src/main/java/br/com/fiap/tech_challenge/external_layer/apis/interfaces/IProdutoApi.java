@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 
 @Tag(name = "Produtos")

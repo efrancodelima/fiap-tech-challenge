@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import br.com.fiap.tech_challenge.application_layer.use_cases.cliente.BuscarClientePeloCpf;
 import br.com.fiap.tech_challenge.application_layer.use_cases.cliente.CadastrarCliente;
-import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
-import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cpf;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ClienteRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.ClienteResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;

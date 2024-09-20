@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
-import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPagamento;
 import br.com.fiap.tech_challenge.external_layer.apis.interfaces.IPedidoApi;
 import br.com.fiap.tech_challenge.interface_layer.controllers.PedidoController;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.mercado_pago.PagamentoDto;

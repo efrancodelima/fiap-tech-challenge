@@ -1,10 +1,9 @@
-package br.com.fiap.tech_challenge.business_layer.entities;
+package br.com.fiap.tech_challenge.business_layer.entities.pedido;
 
 import java.util.List;
 
 import br.com.fiap.tech_challenge.business_layer.constants.Validacao;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cliente;
 import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleException;
 import br.com.fiap.tech_challenge.business_layer.exceptions.messages.PedidoExceptions;
 

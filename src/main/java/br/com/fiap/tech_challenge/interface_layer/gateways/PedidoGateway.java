@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
-import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.Pedido;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.PedidoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.mappers.PedidoMapper;
 import br.com.fiap.tech_challenge.interface_layer.gateways.repositories.IPedidoRepository;

@@ -4,7 +4,7 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumAppl
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.application_layer.services.Validar;
-import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.Pedido;
 
 public final class AtualizarStatusPedido {
 

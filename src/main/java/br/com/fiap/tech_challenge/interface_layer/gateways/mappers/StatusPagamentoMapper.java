@@ -1,6 +1,6 @@
 package br.com.fiap.tech_challenge.interface_layer.gateways.mappers;
 
-import br.com.fiap.tech_challenge.business_layer.entities.StatusPagamento;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPagamento;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.StatusPagamentoJpa;
 
 public final class StatusPagamentoMapper {

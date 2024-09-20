@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.business_layer.entities;
+package br.com.fiap.tech_challenge.business_layer.entities.cliente;
 
 import org.apache.commons.lang3.StringUtils;
 

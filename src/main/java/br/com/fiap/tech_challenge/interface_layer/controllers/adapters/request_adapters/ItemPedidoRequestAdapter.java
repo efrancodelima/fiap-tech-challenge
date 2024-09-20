@@ -3,8 +3,8 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.ItemPedido;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido.ItemPedidoDto;
 
 public final class ItemPedidoRequestAdapter {

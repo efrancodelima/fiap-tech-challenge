@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cliente;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ClienteDto;
 
 @Tag(name = "Clientes")

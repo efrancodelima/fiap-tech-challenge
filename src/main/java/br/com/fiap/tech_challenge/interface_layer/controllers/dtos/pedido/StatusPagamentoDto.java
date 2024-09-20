@@ -1,6 +1,6 @@
 package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido;
 
-import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPagamentoEnum;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPagamentoEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;

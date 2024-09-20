@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;
 
 public interface IProdutoController {

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPedidoEnum;
 
 @Data
 @NoArgsConstructor

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.CategoriaProduto;
 
 @Data
 @NoArgsConstructor

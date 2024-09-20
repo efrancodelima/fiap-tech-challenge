@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.business_layer.entities;
+package br.com.fiap.tech_challenge.business_layer.entities.cliente;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;

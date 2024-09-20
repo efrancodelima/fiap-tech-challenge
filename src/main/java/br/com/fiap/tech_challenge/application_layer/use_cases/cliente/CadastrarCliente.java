@@ -4,7 +4,7 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.ApplicationExcept
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumApplicationExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IClienteGateway;
 import br.com.fiap.tech_challenge.application_layer.services.Validar;
-import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cliente;
 
 public final class CadastrarCliente {
 

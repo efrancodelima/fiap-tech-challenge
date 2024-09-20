@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IPedidoGateway;
 import br.com.fiap.tech_challenge.application_layer.services.Validar;
-import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPedidoEnum;
 
 public final class ListarPedidos {
 

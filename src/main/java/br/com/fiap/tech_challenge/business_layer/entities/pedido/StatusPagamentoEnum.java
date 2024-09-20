@@ -1,4 +1,4 @@
-package br.com.fiap.tech_challenge.business_layer.entities.enums;
+package br.com.fiap.tech_challenge.business_layer.entities.pedido;
 
 import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleException;
 import br.com.fiap.tech_challenge.business_layer.exceptions.messages.EnumExceptions;

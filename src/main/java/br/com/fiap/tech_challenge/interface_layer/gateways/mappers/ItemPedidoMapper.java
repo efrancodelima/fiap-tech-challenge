@@ -3,8 +3,8 @@ package br.com.fiap.tech_challenge.interface_layer.gateways.mappers;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.ItemPedido;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ItemPedidoJpa;
 import br.com.fiap.tech_challenge.interface_layer.gateways.entities.ProdutoJpa;
 

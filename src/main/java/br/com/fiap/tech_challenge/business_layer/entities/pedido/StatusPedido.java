@@ -1,9 +1,8 @@
-package br.com.fiap.tech_challenge.business_layer.entities;
+package br.com.fiap.tech_challenge.business_layer.entities.pedido;
 
 import java.time.LocalDateTime;
 
 import br.com.fiap.tech_challenge.business_layer.constants.Validacao;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.StatusPedidoEnum;
 import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleException;
 import br.com.fiap.tech_challenge.business_layer.exceptions.messages.StatusPedidoExceptions;
 

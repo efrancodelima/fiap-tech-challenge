@@ -6,8 +6,8 @@ import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumAppl
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;
 import br.com.fiap.tech_challenge.application_layer.services.Validar;
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 
 public final class BuscarProdutosPorCategoria {
 

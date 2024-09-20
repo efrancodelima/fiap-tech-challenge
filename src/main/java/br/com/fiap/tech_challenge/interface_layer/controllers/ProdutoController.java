@@ -10,8 +10,8 @@ import br.com.fiap.tech_challenge.application_layer.use_cases.produto.BuscarProd
 import br.com.fiap.tech_challenge.application_layer.use_cases.produto.CadastrarProduto;
 import br.com.fiap.tech_challenge.application_layer.use_cases.produto.EditarProduto;
 import br.com.fiap.tech_challenge.application_layer.use_cases.produto.RemoverProduto;
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ProdutoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.ProdutoResponseAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.dtos.ProdutoDto;

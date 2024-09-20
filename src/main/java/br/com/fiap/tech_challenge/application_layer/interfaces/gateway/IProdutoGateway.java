@@ -2,8 +2,8 @@ package br.com.fiap.tech_challenge.application_layer.interfaces.gateway;
 
 import java.util.List;
 
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
-import br.com.fiap.tech_challenge.business_layer.entities.enums.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.CategoriaProduto;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 
 public interface IProdutoGateway {
 

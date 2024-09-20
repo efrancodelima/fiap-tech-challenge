@@ -14,11 +14,11 @@ import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.BuscarPedid
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.FazerCheckoutPedido;
 import br.com.fiap.tech_challenge.application_layer.use_cases.pedido.ListarPedidos;
 import br.com.fiap.tech_challenge.application_layer.use_cases.produto.BuscarProduto;
-import br.com.fiap.tech_challenge.business_layer.entities.Cliente;
-import br.com.fiap.tech_challenge.business_layer.entities.Cpf;
-import br.com.fiap.tech_challenge.business_layer.entities.ItemPedido;
-import br.com.fiap.tech_challenge.business_layer.entities.Pedido;
-import br.com.fiap.tech_challenge.business_layer.entities.Produto;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cliente;
+import br.com.fiap.tech_challenge.business_layer.entities.cliente.Cpf;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.ItemPedido;
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.Pedido;
+import br.com.fiap.tech_challenge.business_layer.entities.produto.Produto;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.ItemPedidoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.request_adapters.PagamentoRequestAdapter;
 import br.com.fiap.tech_challenge.interface_layer.controllers.adapters.response_adapters.StatusPedidoResponseAdapter;
