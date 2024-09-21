@@ -3,7 +3,6 @@ package br.com.fiap.tech_challenge.interface_layer.gateways;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

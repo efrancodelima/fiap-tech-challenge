@@ -15,7 +15,6 @@ public class SwaggerConfig {
         var tagClientes = new Tag().name("Clientes").description("Operações relacionadas a clientes");
         var tagProdutos = new Tag().name("Produtos").description("Operações relacionadas a produtos");
         var tagPedidos = new Tag().name("Pedidos").description("Operações relacionadas a pedidos");
-        var tagProbes = new Tag().name("Probes").description("Operações relacionadas a probes");
 
         return new OpenAPI()
                 .info(new Info()
@@ -25,7 +24,7 @@ public class SwaggerConfig {
                                 + "<br>FIAP | Pós-tech | Software Architecture"))
                 .addTagsItem(tagClientes)
                 .addTagsItem(tagProdutos)
-                .addTagsItem(tagPedidos)
-                .addTagsItem(tagProbes);
+                .addTagsItem(tagPedidos);
     }
+
 }

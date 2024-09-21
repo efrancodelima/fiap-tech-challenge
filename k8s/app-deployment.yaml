@@ -22,7 +22,12 @@ spec:
               'until nc -z bd-lanchonete 3306; do echo "Aguardando banco de dados..."; sleep 5; done;',
             ]
       containers:
-        - env:
+        - name: app-lanchonete
+          image: efrancodelima/app-lanchonete:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
             - name: DATASOURCE_DRIVER_CLASS_NAME
               valueFrom:
                 configMapKeyRef:
@@ -68,29 +73,32 @@ spec:
                 configMapKeyRef:
                   key: MYSQL_USER
                   name: env
-          image: efrancodelima/app-lanchonete:latest
-          name: app-lanchonete
-          ports:
-            - containerPort: 8080
-              protocol: TCP
           resources:
             requests:
-              memory: "1Gi"
+              memory: "2Gi"
               cpu: "400m"
             limits:
-              memory: "2Gi"
+              memory: "4Gi"
               cpu: "800m"
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 8080
-          #   initialDelaySeconds: 300
-          #   periodSeconds: 3
-          #   failureThreshold: 500
-          # readinessProbe:
-          #   httpGet:
-          #     path: /ready
-          #     port: 8080
-          #   initialDelaySeconds: 300
-          #   periodSeconds: 3
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8081
+            initialDelaySeconds: 120
+            periodSeconds: 6
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8081
+            initialDelaySeconds: 120
+            periodSeconds: 6
+            failureThreshold: 20
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8081
+            initialDelaySeconds: 120
+            periodSeconds: 6
+            failureThreshold: 20
       restartPolicy: Always

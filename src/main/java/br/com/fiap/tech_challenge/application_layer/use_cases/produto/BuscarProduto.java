@@ -1,6 +1,5 @@
 package br.com.fiap.tech_challenge.application_layer.use_cases.produto;
 
-import br.com.fiap.tech_challenge.application_layer.exceptions.ResourceNotFoundException;
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumApplicationExceptions;
 import br.com.fiap.tech_challenge.application_layer.exceptions.messages.EnumNotFoundExceptions;
 import br.com.fiap.tech_challenge.application_layer.interfaces.gateway.IProdutoGateway;

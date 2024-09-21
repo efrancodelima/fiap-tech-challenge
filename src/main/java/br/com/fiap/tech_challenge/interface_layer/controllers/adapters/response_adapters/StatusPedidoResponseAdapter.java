@@ -26,12 +26,12 @@ public final class StatusPedidoResponseAdapter {
 
     // Métodos privados
     private static StatusPedidoDto adaptarParaStatusPedido(Pedido pedido) {
-        String status = pedido.getStatusPedido().getStatus().toString();
+        var status = pedido.getStatusPedido().getStatus();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataHora = pedido.getStatusPedido().getDataHora().format(formatter);
 
-        StatusPedidoDto response = new StatusPedidoDto();
+        var response = new StatusPedidoDto();
         response.setNumeroPedido(pedido.getNumero());
         response.setStatus(status);
         response.setDataHora(dataHora);

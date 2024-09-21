@@ -13,7 +13,7 @@ public class StatusPagamentoDto {
     public Long numeroPedido;
 
     @Schema(description = "Status do pagamento.", example = "APROVADO")
-    public String status;
+    public StatusPagamentoEnum status;
 
     @Schema(description = "Data e hora da última atualização do pagamento.", example = "2024-09-08 09:10:00")
     public String dataHora;

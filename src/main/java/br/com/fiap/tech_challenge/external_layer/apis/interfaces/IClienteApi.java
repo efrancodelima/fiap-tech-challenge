@@ -61,7 +61,7 @@ final class ClienteConstantes {
 
         public static final String e200 = "{ \"codigo\": 1, \"cpf\": { \"digitoVerificador\": 96, \"numeroSemDigito\": 111222333 }, \"nome\": \"Arthur Conan Doyle\", \"email\": \"conanad@gmail.com\" }";
         public static final String e201 = e200;
-        public static final String e400 = "{ \"timestamp\": \"2024-09-08T02:05:58.036+00:00\", \"status\": 400, \"error\": \"Bad Request\", \"path\": \"/api/v2/clientes/cadastrar\" }";
+        public static final String e400 = "{ \"timestamp\": \"2024-09-08T02:05:58.036+00:00\", \"status\": 400, \"error\": \"Bad Request\", \"path\": \"/api/v1/clientes/cadastrar\" }";
         public static final String e404 = "{ \"message\": \"Nenhum cliente foi encontrado para o CPF informado.\" }";
         public static final String e422 = "{ \"message\": \"O número do CPF deve ser maior que 0.\" }";
         public static final String e500 = "{ \"message\": \"Ocorreu um erro inesperado no servidor.\" }";

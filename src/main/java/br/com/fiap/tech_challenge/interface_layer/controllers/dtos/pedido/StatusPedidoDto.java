@@ -1,5 +1,6 @@
 package br.com.fiap.tech_challenge.interface_layer.controllers.dtos.pedido;
 
+import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPedidoEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ public class StatusPedidoDto {
     public Long numeroPedido;
 
     @Schema(description = "Status do pedido.", example = "RECEBIDO")
-    public String status;
+    public StatusPedidoEnum status;
 
     @Schema(description = "Data e hora da última atualização do pedido.", example = "2024-09-08 09:10:00")
     public String dataHora;
