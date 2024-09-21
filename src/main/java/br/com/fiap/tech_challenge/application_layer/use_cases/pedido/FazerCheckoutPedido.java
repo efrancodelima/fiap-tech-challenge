@@ -18,8 +18,9 @@ public final class FazerCheckoutPedido {
         pedido.fazerCheckout();
         pedido = gateway.gravarPedido(pedido);
 
-        // Mock
-        long codigo = pedido.getNumero() * 10;
+        // Por ora, o código do pagamento é igual ao do pedido
+        // Após a integração com o Mercado Pago isso vai mudar
+        long codigo = pedido.getNumero();
         var status = StatusPagamentoEnum.AGUARDANDO_PAGAMENTO;
         var dataHora = LocalDateTime.now();
         var mock = new StatusPagamento(codigo, status, dataHora);

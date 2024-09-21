@@ -1,5 +1,6 @@
 package br.com.fiap.tech_challenge.external_layer.apis.interfaces;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -72,13 +73,7 @@ public interface IPedidoApi {
         ResponseEntity<List<Pedido>> listarPedidos() throws Exception;
 
         // Webhook do Mercado Pago
-        @Operation(summary = "Webhook para receber notificações de pagamento", description = PedidoConstantes.descricaoWebhook)
-        @ApiResponses(value = {
-                        @ApiResponse(responseCode = "204", description = PedidoConstantes.d204, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e204))),
-                        @ApiResponse(responseCode = "400", description = PedidoConstantes.d400, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e400))),
-                        @ApiResponse(responseCode = "404", description = PedidoConstantes.d404, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e404))),
-                        @ApiResponse(responseCode = "422", description = PedidoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e422))),
-                        @ApiResponse(responseCode = "500", description = PedidoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = PedidoConstantes.e500))) })
+        @Hidden
         @PutMapping(value = "/webhook/")
         ResponseEntity<Void> webhookMercadoPago(@RequestBody PagamentoDto pagamentoDto) throws Exception;
 
@@ -90,7 +85,6 @@ final class PedidoConstantes {
         public static final String descricaoAtualizarStatusPedido = "Para atualizar o status do pedido, informe o número do pedido pelo path.<br>Os status possuem uma ordem sequencial, então ele mudará automaticamente para o valor seguinte.";
         public static final String descricaoConsultarStatusPagamento = "Para consultar o status do pagamento, informe o número do pedido pelo path.";
         public static final String descricaoListarPedidos = "Lista os pedidos recebidos, em preparação e prontos.<br>Os pedidos mais antigos são exibidos primeiro e os mais novos depois.<br>A lista também é ordenada pelo status do pedido: pedidos prontos no topo da lista e recebidos no final.";
-        public static final String descricaoWebhook = "Webhook criado para receber notificações de pagamento enviadas pelo Mercado Pago.<br>A notificação do Mercado pago tem muitos campos, mas nós só mapeamos aqueles que iremos usar na lógica do nosso sistema.<br>Status possíveis: pending, in process, approved e rejected.<br>O id do pagamento é o número do pedido * 10 (mock).";
 
         public static final String d200 = "Sucesso!";
         public static final String d201 = d200;
