@@ -42,7 +42,7 @@ CREATE TABLE itens_pedido (
 );
 
 -- Clientes
-INSERT INTO cliente (cpf, email, nome) VALUES (12345678909, 'joao_silva@gmail.com', 'João Pedro da Silva');
+INSERT INTO cliente (cpf, email, nome) VALUES (12345678909, 'joao_silva@gmail.com', 'Joï¿½o Pedro da Silva');
 INSERT INTO cliente (cpf, email, nome) VALUES (23456789092, 'maria_oliveira@gmail.com', 'Maria Clara de Oliveira');
 INSERT INTO cliente (cpf, email, nome) VALUES (34567890175, 'carlos_souza@gmail.com', 'Carlos Eduardo de Souza');
 INSERT INTO cliente (cpf, email, nome) VALUES (45678901249, 'ana_pereira@gmail.com', 'Ana Paula Pereira');
@@ -50,25 +50,25 @@ INSERT INTO cliente (cpf, email, nome) VALUES (56789012303, 'lucas_fernandes@gma
 
 -- Acompanhamentos
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Batata Frita', 'Batata frita crocante', 'ACOMPANHAMENTO', 5.50);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Anéis de Cebola', 'Anéis de cebola empanados', 'ACOMPANHAMENTO', 6.00);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Nuggets de Frango', 'Porção de nuggets de frango', 'ACOMPANHAMENTO', 7.00);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Mandioca Frita', 'Porção de mandioca frita', 'ACOMPANHAMENTO', 5.00);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Anï¿½is de Cebola', 'Anï¿½is de cebola empanados', 'ACOMPANHAMENTO', 6.00);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Nuggets de Frango', 'Porï¿½ï¿½o de nuggets de frango', 'ACOMPANHAMENTO', 7.00);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Mandioca Frita', 'Porï¿½ï¿½o de mandioca frita', 'ACOMPANHAMENTO', 5.00);
 
 -- Bebidas
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Refrigerante Cola', 'Refrigerante de cola 350ml', 'BEBIDA', 3.50);
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Suco de Laranja', 'Suco de laranja natural 300ml', 'BEBIDA', 4.00);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Água Mineral', 'Água mineral sem gás 500ml', 'BEBIDA', 2.50);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Chá Gelado', 'Chá gelado de limão 300ml', 'BEBIDA', 3.00);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('ï¿½gua Mineral', 'ï¿½gua mineral sem gï¿½s 500ml', 'BEBIDA', 2.50);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Chï¿½ Gelado', 'Chï¿½ gelado de limï¿½o 300ml', 'BEBIDA', 3.00);
 
 -- Lanches
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Cheeseburger Bacon', 'Hambúrguer com queijo e bacon', 'LANCHE', 12.00);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Sanduíche de Frango', 'Sanduíche de frango grelhado', 'LANCHE', 10.00);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Cheeseburger Bacon', 'Hambï¿½rguer com queijo e bacon', 'LANCHE', 12.00);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Sanduï¿½che de Frango', 'Sanduï¿½che de frango grelhado', 'LANCHE', 10.00);
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Wrap Vegetariano', 'Wrap vegetariano com legumes', 'LANCHE', 9.00);
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Hot Dog', 'Hot dog com molho especial', 'LANCHE', 8.00);
 
 -- Sobremesas
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Sorvete de Chocolate', 'Sorvete de chocolate 2 bolas', 'SOBREMESA', 6.50);
-INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Torta de Maçã', 'Torta de maçã com canela', 'SOBREMESA', 5.50);
+INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Torta de Maï¿½ï¿½', 'Torta de maï¿½ï¿½ com canela', 'SOBREMESA', 5.50);
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Brownie', 'Brownie de chocolate com nozes', 'SOBREMESA', 7.00);
 INSERT INTO produto (nome, descricao, categoria, preco) VALUES ('Pudim', 'Pudim de leite condensado', 'SOBREMESA', 4.50);
 
