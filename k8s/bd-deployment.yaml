@@ -27,7 +27,15 @@ spec:
             - mountPath: /var/lib/mysql
               name: dados-lanchonete
       containers:
-        - args:
+        - name: bd-lanchonete
+          image: efrancodelima/bd-lanchonete:latest
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: dados-lanchonete
+          args:
             - mysqld
           env:
             - name: DATASOURCE_DRIVER_CLASS_NAME
@@ -75,29 +83,22 @@ spec:
                 configMapKeyRef:
                   key: MYSQL_USER
                   name: env
-          image: efrancodelima/bd-lanchonete:latest
-          name: bd-lanchonete
-          ports:
-            - containerPort: 3306
-              protocol: TCP
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: dados-lanchonete
           livenessProbe:
             exec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 20
+            periodSeconds: 6
+            failureThreshold: 50
           readinessProbe:
             exec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 5
-            periodSeconds: 10
-      restartPolicy: Always
+            initialDelaySeconds: 20
+            periodSeconds: 6
+            failureThreshold: 50
       volumes:
         - name: dados-lanchonete
           persistentVolumeClaim:

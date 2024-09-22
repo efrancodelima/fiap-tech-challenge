@@ -75,11 +75,11 @@ spec:
                   name: env
           resources:
             requests:
-              memory: "2Gi"
+              memory: "1Gi"
               cpu: "300m"
             limits:
               memory: "2Gi"
-              cpu: "500m"
+              cpu: "400m"
           startupProbe:
             httpGet:
               path: /startup
@@ -101,4 +101,3 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 6
             failureThreshold: 20
-      restartPolicy: Always
