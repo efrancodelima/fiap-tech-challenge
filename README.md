@@ -130,7 +130,7 @@ watch -n 2 minikube kubectl -- get pods
 Essa aplicação roda na máquina local e os health checks foram configurados conforme os recursos do ambiente local. \
 É possível que, em outra máquina, com cpu e memória diferentes, os PODs demorem mais para responder e talvez seja necessário um ajuste nos tempos da configuração dos health checks. \
 Verifique a descrição detalhada do POD com o comando abaixo. Se alguma probe falhar, irá aparecer nessa descrição. \
-O `<nome_pod>` deve ser igual ao que foi mostrado na etapa anterior (get pods).
+O `<nome_pod>` deve ser igual ao que foi mostrado na etapa anterior, com o comando get pods.
 
 ```
 minikube kubectl -- describe pod <nome_pod>
