@@ -8,4 +8,4 @@ spec:
   ports:
     - port: 3306 # Porta externa do pod
       targetPort: 3306 # Porta interna do pod
-  type: LoadBalancer
+  type: ClusterIP
