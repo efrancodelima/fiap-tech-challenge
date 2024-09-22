@@ -130,7 +130,7 @@ watch -n 2 minikube kubectl -- get pods
 Essa aplicação roda na máquina local e os health checks foram configurados conforme os recursos do ambiente local. \
 É possível que, em outra máquina, com cpu e memória diferentes, os PODs demorem mais para responder e talvez seja necessário um ajuste nos tempos da configuração dos health checks. \
 Verifique a descrição detalhada do POD com o comando abaixo. Se alguma probe falhar, irá aparecer nessa descrição. \
-O <nome_pod> deve ser igual ao que foi mostrado na etapa anterior (get pods).
+O `<nome_pod>` deve ser igual ao que foi mostrado na etapa anterior (get pods).
 
 ```
 minikube kubectl -- describe pod <nome_pod>
@@ -144,14 +144,14 @@ minikube kubectl -- logs -f <nome_pod>
 
 #### 8. Acesse a aplicação pelo navegador.
 
-Use o comando abaixo para expor o serviço para acesso externo. Uma <URL> será gerada. \
-Esse é um comando não responsivo, digite CTRL+C quando quiser sair. Note que ao liberar o terminal, o comando não estará mais executando e o acesso externo será cortado (a <URL> vai parar de funcionar).
+Use o comando abaixo para expor o serviço para acesso externo. Uma `<URL>` será gerada. \
+Esse é um comando não responsivo, digite CTRL+C quando quiser sair. Note que ao liberar o terminal, o comando não estará mais executando e o acesso externo será cortado (a `<URL>` vai parar de funcionar).
 
 ```
 minikube service app --url
 ```
 
-Abra o navegador e acesse: <URL>/api/v2/ \
+Abra o navegador e acesse: `<URL>`/api/v2/ \
 Esse link deverá abrir o Swagger da aplicação.
 
 #### 9. Acesse o dashboard do minikube.
