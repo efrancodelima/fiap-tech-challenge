@@ -6,31 +6,24 @@ import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleExceptio
 import br.com.fiap.tech_challenge.business_layer.exceptions.messages.ProdutoExceptions;
 
 public class Produto {
-    private long codigo;
+    private Long codigo;
     private String nome;
     private String descricao;
     private BigDecimal preco;
     private CategoriaProduto categoria;
 
-    // Construtores
-    public Produto(String nome, String descricao, BigDecimal preco, CategoriaProduto categoria)
+    // Construtor
+    public Produto(Long codigo, String nome, String descricao, BigDecimal preco, CategoriaProduto categoria)
             throws BusinessRuleException {
-
+        setCodigo(codigo);
         setNome(nome);
         setDescricao(descricao);
         setPreco(preco);
         setCategoria(categoria);
     }
 
-    public Produto(Long codigo, String nome, String descricao, BigDecimal preco, CategoriaProduto categoria)
-            throws BusinessRuleException {
-
-        this(nome, descricao, preco, categoria);
-        setCodigo(codigo);
-    }
-
     // Getters
-    public long getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
@@ -86,10 +79,7 @@ public class Produto {
 
     // Métodos de validação
     private void validarCodigo(Long codigo) throws BusinessRuleException {
-        if (codigo == null) {
-            throw new BusinessRuleException(ProdutoExceptions.CODIGO_NULO.getMensagem());
-        }
-        if (codigo < 1) {
+        if (codigo != null && codigo < 1) {
             throw new BusinessRuleException(ProdutoExceptions.CODIGO_MIN.getMensagem());
         }
     }

@@ -23,10 +23,9 @@ public final class FazerCheckoutPedido {
         long codigo = pedido.getNumero();
         var status = StatusPagamentoEnum.AGUARDANDO_PAGAMENTO;
         var dataHora = LocalDateTime.now();
-        var mock = new StatusPagamento(codigo, status, dataHora);
-        pedido.setStatusPagamento(mock);
+        var pagamento = new StatusPagamento(codigo, status, dataHora);
+        pedido.setStatusPagamento(pagamento);
         gateway.gravarPedido(pedido);
-
         return pedido;
     }
 

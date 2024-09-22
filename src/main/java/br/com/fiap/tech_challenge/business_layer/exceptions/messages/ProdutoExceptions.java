@@ -1,7 +1,6 @@
 package br.com.fiap.tech_challenge.business_layer.exceptions.messages;
 
 public enum ProdutoExceptions {
-    CODIGO_NULO("Informe o código do produto."),
     CODIGO_MIN("O código do produto deve ser maior que 0."),
     NOME_VAZIO("Informe o nome do produto!"),
     NOME_MIN_CHAR("O nome do produto precisa ter, no mínimo, 5 caracteres."),

@@ -11,7 +11,7 @@ public final class StatusPagamentoMapper {
 
     public static StatusPagamento getStatusPagamento(StatusPagamentoJpa status)
             throws Exception {
-        return new StatusPagamento(status.getStatus(), status.getDataHora());
+        return new StatusPagamento(status.getCodigo(), status.getStatus(), status.getDataHora());
     }
 
 }

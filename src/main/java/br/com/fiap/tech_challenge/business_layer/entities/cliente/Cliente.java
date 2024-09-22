@@ -7,27 +7,22 @@ import br.com.fiap.tech_challenge.business_layer.exceptions.BusinessRuleExceptio
 import br.com.fiap.tech_challenge.business_layer.exceptions.messages.ClienteExceptions;
 
 public class Cliente {
-    private long codigo;
+    private Long codigo;
     private Cpf cpf;
     private String nome;
     private String email;
 
-    // Construtor usado para criar um cliente novo
-    public Cliente(Cpf cpf, String nome, String email) throws BusinessRuleException {
+    // Construtor
+    public Cliente(Long codigo, Cpf cpf, String nome, String email) throws BusinessRuleException {
+        setCodigo(codigo);
         setCpf(cpf);
         setNome(nome);
         setEmail(email);
         validarCliente(nome, email);
     }
 
-    // Construtor usado para instanciar um cliente do banco de dados
-    public Cliente(Long codigo, Cpf cpf, String nome, String email) throws BusinessRuleException {
-        this(cpf, nome, email);
-        setCodigo(codigo);
-    }
-
     // Getters
-    public long getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
@@ -68,10 +63,7 @@ public class Cliente {
 
     // Métodos de validação
     private void validarCodigo(Long codigo) throws BusinessRuleException {
-        if (codigo == null) {
-            throw new BusinessRuleException(ClienteExceptions.CODIGO_NULO.getMensagem());
-        }
-        if (codigo < 1) {
+        if (codigo != null && codigo < 1) {
             throw new BusinessRuleException(ClienteExceptions.CODIGO_MIN.getMensagem());
         }
     }

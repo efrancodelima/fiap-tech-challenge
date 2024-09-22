@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Pedido {
-    private long numero;
+    private Long numero;
     private Cliente cliente;
     private List<ItemPedido> itens;
     private LocalDateTime dataHoraCheckout;
@@ -21,7 +21,7 @@ public class Pedido {
     // Construtor usado para criar um pedido antes do checkout
     public Pedido(Cliente cliente, List<ItemPedido> itens) throws BusinessRuleException {
 
-        var statusPagamento = new StatusPagamento(StatusPagamentoEnum.AGUARDANDO_PAGAMENTO, LocalDateTime.now());
+        var statusPagamento = new StatusPagamento(null, StatusPagamentoEnum.AGUARDANDO_PAGAMENTO, LocalDateTime.now());
         var statusPedido = new StatusPedido(StatusPedidoEnum.AGUARDANDO_CHECKOUT, LocalDateTime.now());
 
         setCliente(cliente);
@@ -44,7 +44,7 @@ public class Pedido {
     }
 
     // Getters
-    public long getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
@@ -109,10 +109,7 @@ public class Pedido {
 
     // Métodos de validação
     private void validarNumero(Long numero) throws BusinessRuleException {
-        if (numero == null) {
-            throw new BusinessRuleException(PedidoExceptions.NUMERO_NULO.getMensagem());
-        }
-        if (numero < 1) {
+        if (numero != null && numero < 1) {
             throw new BusinessRuleException(PedidoExceptions.NUMERO_MIN.getMensagem());
         }
     }
@@ -178,6 +175,14 @@ public class Pedido {
         }
     }
 
+    private void validarPagamentoSeRecebido() throws BusinessRuleException {
+        boolean pedidoRecebido = this.statusPedido.getStatus() == StatusPedidoEnum.RECEBIDO;
+        boolean naoPago = this.statusPagamento.getStatus() != StatusPagamentoEnum.APROVADO;
+        if (pedidoRecebido && naoPago) {
+            throw new BusinessRuleException(PedidoExceptions.PEDIDO_NAO_PAGO.getMensagem());
+        }
+    }
+
     // Outros métodos privados
     private StatusPedidoEnum getNextStatusPedido() {
         StatusPedidoEnum[] statusArray = StatusPedidoEnum.values();
@@ -196,6 +201,7 @@ public class Pedido {
 
     public void atualizarStatusPedido() throws BusinessRuleException {
         validarPedidoNaoFinalizado();
+        validarPagamentoSeRecebido();
 
         var nextStatus = getNextStatusPedido();
         var novoStatus = new StatusPedido(nextStatus, LocalDateTime.now());

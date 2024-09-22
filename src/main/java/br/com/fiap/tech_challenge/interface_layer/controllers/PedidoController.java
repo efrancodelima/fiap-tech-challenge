@@ -74,7 +74,6 @@ public class PedidoController implements IPedidoController {
     @Override
     public ResponseEntity<List<Pedido>> listarPedidos() throws Exception {
         List<Pedido> pedidos = ListarPedidos.listar(pedidoGateway);
-
         if (pedidos.size() > 0) {
             return PedidoResponseAdapter.adaptar(pedidos, HttpStatus.OK);
         } else {

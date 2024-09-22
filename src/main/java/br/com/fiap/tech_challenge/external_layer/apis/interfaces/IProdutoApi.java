@@ -75,7 +75,7 @@ public interface IProdutoApi {
                         @ApiResponse(responseCode = "400", description = ProdutoConstantes.d400, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e400))),
                         @ApiResponse(responseCode = "422", description = ProdutoConstantes.d422, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e422))),
                         @ApiResponse(responseCode = "500", description = ProdutoConstantes.d500, content = @Content(mediaType = "application/json", examples = @ExampleObject(value = ProdutoConstantes.e500))) })
-        @GetMapping(value = "/listar/{categoria}")
+        @GetMapping(value = "/buscar/{categoria}")
         ResponseEntity<List<Produto>> buscarProdutosPorCategoria(
                         @PathVariable("categoria") String categoria) throws Exception;
 

@@ -9,19 +9,12 @@ import br.com.fiap.tech_challenge.business_layer.exceptions.messages.StatusPagam
 public class StatusPagamento {
 
     // Atributos
-    private final long codigo;
-    private final StatusPagamentoEnum status;
-    private final LocalDateTime dataHora;
+    private Long codigo;
+    private StatusPagamentoEnum status;
+    private LocalDateTime dataHora;
 
     // Construtores
-    public StatusPagamento(StatusPagamentoEnum status, LocalDateTime timestamp) throws BusinessRuleException {
-        validarStatusPagamento(status, timestamp);
-        this.codigo = 0;
-        this.status = status;
-        this.dataHora = timestamp;
-    }
-
-    public StatusPagamento(long codigo, StatusPagamentoEnum status, LocalDateTime timestamp)
+    public StatusPagamento(Long codigo, StatusPagamentoEnum status, LocalDateTime timestamp)
             throws BusinessRuleException {
         validarCodigo(codigo);
         validarStatusPagamento(status, timestamp);
@@ -30,9 +23,18 @@ public class StatusPagamento {
         this.dataHora = timestamp;
     }
 
-    // Getters
-    public long getCodigo() {
+    // Getters e setters
+    public Long getCodigo() {
         return codigo;
+    }
+
+    public void setCodigo(Long codigo) throws BusinessRuleException {
+        if (this.codigo != null) {
+            throw new BusinessRuleException(StatusPagamentoExceptions.CODIGO_ALTERADO.getMensagem());
+        } else {
+            validarCodigo(codigo);
+            this.codigo = codigo;
+        }
     }
 
     public StatusPagamentoEnum getStatus() {
@@ -45,10 +47,7 @@ public class StatusPagamento {
 
     // Métodos de validação
     private void validarCodigo(Long codigo) throws BusinessRuleException {
-        if (codigo == null) {
-            throw new BusinessRuleException(StatusPagamentoExceptions.CODIGO_NULO.getMensagem());
-        }
-        if (codigo < 1) {
+        if (codigo != null && codigo < 1) {
             throw new BusinessRuleException(StatusPagamentoExceptions.CODIGO_MIN.getMensagem());
         }
     }

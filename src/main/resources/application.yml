@@ -25,6 +25,8 @@ management:
     port: 8081
   endpoints:
     web:
+      exposure:
+        include: "health,startup"
       base-path: /
   endpoint:
     health:
@@ -35,7 +37,9 @@ management:
       enabled: true
     readinessState:
       enabled: true
-    startup:
-      enabled: true
+  startup:
+    enabled: true
+  info:
+    enabled: true
   security:
     enabled: false

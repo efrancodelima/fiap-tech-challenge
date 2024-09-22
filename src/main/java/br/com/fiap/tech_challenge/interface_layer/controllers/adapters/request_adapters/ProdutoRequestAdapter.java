@@ -14,7 +14,7 @@ public final class ProdutoRequestAdapter {
         String descricao = produtoDto.getDescricao();
         BigDecimal preco = produtoDto.getPreco();
         CategoriaProduto categoria = CategoriaProduto.fromString(produtoDto.getCategoria());
-        return new Produto(nome, descricao, preco, categoria);
+        return new Produto(null, nome, descricao, preco, categoria);
     }
 
     public static Produto adaptar(long codigo, ProdutoDto produtoDto) throws Exception {

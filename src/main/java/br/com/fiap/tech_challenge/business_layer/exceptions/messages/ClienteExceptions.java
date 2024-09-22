@@ -1,7 +1,6 @@
 package br.com.fiap.tech_challenge.business_layer.exceptions.messages;
 
 public enum ClienteExceptions {
-    CODIGO_NULO("Informe o código do cliente."),
     CODIGO_MIN("O código do cliente deve ser maior que 0."),
     NOME_MAX_CHAR("O nome do cliente não pode ter mais de 50 caracteres."),
     NOME_INVALIDO("O nome do cliente deve conter, no mínimo, uma palavra com três ou mais caracteres."),

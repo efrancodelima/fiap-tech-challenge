@@ -10,7 +10,7 @@ public final class ClienteRequestAdapter {
         Cpf cpf = new Cpf(clienteDto.getCpf());
         String nome = clienteDto.getNome();
         String email = clienteDto.getEmail();
-        return new Cliente(cpf, nome, email);
+        return new Cliente(null, cpf, nome, email);
     }
 
 }

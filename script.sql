@@ -24,10 +24,10 @@ CREATE TABLE pedido (
     numero BIGINT NOT NULL AUTO_INCREMENT,
     codigo_cliente BIGINT,
     timestamp_checkout DATETIME(6),
-    codigo_pagamento BIGINT NOT NULL,
+    codigo_pagamento BIGINT,
     status_pagamento ENUM('AGUARDANDO_PAGAMENTO', 'APROVADO', 'REPROVADO') NOT NULL,
     timestamp_status_pagamento DATETIME(6) NOT NULL,
-    status_pedido ENUM('AGUARDANDO_CHECKOUT', 'EM_PREPARACAO', 'FINALIZADO', 'PRONTO', 'RECEBIDO') NOT NULL,
+    status_pedido ENUM('RECEBIDO', 'EM_PREPARACAO', 'PRONTO', 'FINALIZADO') NOT NULL,
     timestamp_status_pedido DATETIME(6) NOT NULL,
     PRIMARY KEY (numero),
     FOREIGN KEY (codigo_cliente) REFERENCES cliente(codigo)

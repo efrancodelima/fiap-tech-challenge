@@ -18,7 +18,7 @@ import br.com.fiap.tech_challenge.business_layer.entities.pedido.StatusPagamento
 @Embeddable
 public class StatusPagamentoJpa {
 
-    @Column(name = "codigo_pagamento", nullable = false)
+    @Column(name = "codigo_pagamento", nullable = true)
     private Long codigo;
 
     @Enumerated(EnumType.STRING)
