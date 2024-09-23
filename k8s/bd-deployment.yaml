@@ -83,7 +83,7 @@ spec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 180
+            initialDelaySeconds: 120
             periodSeconds: 6
             failureThreshold: 50
           readinessProbe:
@@ -91,7 +91,7 @@ spec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 180
+            initialDelaySeconds: 120
             periodSeconds: 6
             failureThreshold: 50
       volumes:

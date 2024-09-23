@@ -39,8 +39,8 @@ minikube kubectl -- apply -f bd-deployment.yaml
 minikube kubectl -- apply -f bd-service.yaml
 
 # Inicia a aplicação
-# echo "Iniciando a aplicação..."
-# minikube kubectl -- apply -f app-deployment.yaml
-# minikube kubectl -- apply -f app-service.yaml
+echo "Iniciando a aplicação..."
+minikube kubectl -- apply -f app-deployment.yaml
+minikube kubectl -- apply -f app-service.yaml
 
 echo "Script concluído com sucesso!"
