@@ -79,25 +79,25 @@ spec:
               cpu: "400m"
             limits:
               memory: "1Gi"
-              cpu: "600m"
+              cpu: "800m"
           startupProbe:
             httpGet:
               path: /startup
               port: 8081
-            initialDelaySeconds: 20
+            initialDelaySeconds: 120
             periodSeconds: 6
-            failureThreshold: 100
+            failureThreshold: 50
           livenessProbe:
             httpGet:
               path: /health/liveness
               port: 8081
-            initialDelaySeconds: 20
+            initialDelaySeconds: 120
             periodSeconds: 6
-            failureThreshold: 100
+            failureThreshold: 50
           readinessProbe:
             httpGet:
               path: /health/readiness
               port: 8081
-            initialDelaySeconds: 20
+            initialDelaySeconds: 120
             periodSeconds: 6
-            failureThreshold: 100
+            failureThreshold: 50

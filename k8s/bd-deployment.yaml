@@ -14,21 +14,9 @@ spec:
       labels:
         app: bd-lanchonete
     spec:
-      initContainers:
-        - name: init-mysql
-          image: busybox
-          command:
-            [
-              "sh",
-              "-c",
-              "until [ -e /var/lib/mysql ]; do echo esperando pelo volume de dados; sleep 2; done",
-            ]
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: dados-lanchonete
       containers:
         - name: bd-lanchonete
-          image: efrancodelima/bd-lanchonete:latest
+          image: mysql:8.4.0
           ports:
             - containerPort: 3306
               protocol: TCP
@@ -89,23 +77,23 @@ spec:
               cpu: "400m"
             limits:
               memory: "1Gi"
-              cpu: "600m"
+              cpu: "800m"
           livenessProbe:
             exec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 20
+            initialDelaySeconds: 180
             periodSeconds: 6
-            failureThreshold: 100
+            failureThreshold: 50
           readinessProbe:
             exec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 20
+            initialDelaySeconds: 180
             periodSeconds: 6
-            failureThreshold: 100
+            failureThreshold: 50
       volumes:
         - name: dados-lanchonete
           persistentVolumeClaim:

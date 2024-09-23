@@ -49,10 +49,11 @@ Para o banco de dados, foi utilizado o MySQL 8.4.0.
 
 As instruções citadas nesse documento foram testadas com:
 
-- Linux Ubuntu versão 22.04.4 LTS;
-- Docker versão 27.2.1
-- Minikube versão 1.34.0
-- Git versão 2.34.1
+- Linux Ubuntu 22.04.4 LTS;
+- Docker 27.2.1
+- Minikube 1.34.0
+- helm 3.16.1
+- Git 2.34.1
 
 ### Alguns esclarecimentos antes de iniciar
 

@@ -3,11 +3,13 @@ package br.com.fiap.tech_challenge.interface_layer.controllers.dtos;
 import java.math.BigDecimal;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProdutoDto {
 
     @Schema(description = "Nome do produto.", example = "X-Monstrão")

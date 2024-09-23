@@ -10,7 +10,9 @@ public class TechChallengeApplication {
 	public static void main(String[] args) {
 		var application = new SpringApplication(TechChallengeApplication.class);
 		application.setApplicationStartup(new BufferingApplicationStartup(1024));
-		application.run(args);
+		var context = application.run(args);
+
+		PopularBD.popular(context);
 	}
 
 }
