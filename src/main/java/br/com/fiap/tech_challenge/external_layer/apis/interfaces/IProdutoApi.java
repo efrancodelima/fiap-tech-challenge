@@ -99,7 +99,7 @@ final class ProdutoConstantes {
         public static final String e200 = "{ \"codigo\": 1,\"nome\": \"X-Monstrão\",\"descricao\": \"O lanche do marombeiro, repleto de whey e creatina.\",\"preco\": 35.9,\"categoria\": \"LANCHE\" }";
         public static final String e201 = e200;
         public static final String e204 = "";
-        public static final String e400 = "{ \"timestamp\": \"2024-09-08T02:05:58.036+00:00\", \"status\": 400, \"error\": \"Bad Request\", \"path\": \"/api/v1/produtos/cadastrar\" }";
+        public static final String e400 = "{ \"timestamp\": \"2024-09-08T02:05:58.036+00:00\", \"status\": 400, \"error\": \"Bad Request\", \"path\": \"/api/v2/produtos/cadastrar\" }";
         public static final String e404 = "{ \"message\": \"Nenhum produto foi encontrado para o código informado.\" }";
         public static final String e422 = "{ \"message\": \"O preço do produto deve ser maior que 0.\" }";
         public static final String e500 = "{ \"message\": \"Ocorreu um erro inesperado no servidor.\" }";

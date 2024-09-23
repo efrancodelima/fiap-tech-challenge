@@ -3,7 +3,7 @@
 Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**. \
 
 Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge<br><br>
-Link do Swagger: http://localhost:8080/api/v1/swagger-ui/index.html<br><br>
+Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html<br><br>
 Link do vídeo demonstrando a arquitetura: pendente
 
 ## Objetivos
@@ -81,7 +81,7 @@ minikube delete
 
 Inicie o minikube com o comando abaixo. \
 Ajuste os valores de cpu e memória, se necessário. \
-CPU se refere à quantidade de núcleos e memory está em MB.
+CPU se refere à quantidade de núcleos e memory está em MiB.
 
 ```
 minikube start --driver=docker --cpus=3 --memory=3870

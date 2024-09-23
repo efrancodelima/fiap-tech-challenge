@@ -83,6 +83,13 @@ spec:
                 configMapKeyRef:
                   key: MYSQL_USER
                   name: env
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "400m"
+            limits:
+              memory: "1Gi"
+              cpu: "600m"
           livenessProbe:
             exec:
               command:
@@ -90,7 +97,7 @@ spec:
                 - ping
             initialDelaySeconds: 20
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 100
           readinessProbe:
             exec:
               command:
@@ -98,7 +105,7 @@ spec:
                 - ping
             initialDelaySeconds: 20
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 100
       volumes:
         - name: dados-lanchonete
           persistentVolumeClaim:

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+  name: app-lanchonete
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app
+      app: app-lanchonete
   template:
     metadata:
       labels:
-        app: app
+        app: app-lanchonete
     spec:
       initContainers:
         - name: wait-for-db
@@ -75,29 +75,29 @@ spec:
                   name: env
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "300m"
-            limits:
-              memory: "2Gi"
+              memory: "512Mi"
               cpu: "400m"
+            limits:
+              memory: "1Gi"
+              cpu: "600m"
           startupProbe:
             httpGet:
               path: /startup
               port: 8081
-            initialDelaySeconds: 60
+            initialDelaySeconds: 20
             periodSeconds: 6
-            failureThreshold: 20
+            failureThreshold: 100
           livenessProbe:
             httpGet:
               path: /health/liveness
               port: 8081
-            initialDelaySeconds: 60
+            initialDelaySeconds: 20
             periodSeconds: 6
-            failureThreshold: 20
+            failureThreshold: 100
           readinessProbe:
             httpGet:
               path: /health/readiness
               port: 8081
-            initialDelaySeconds: 60
+            initialDelaySeconds: 20
             periodSeconds: 6
-            failureThreshold: 20
+            failureThreshold: 100
