@@ -1,9 +1,13 @@
 # Tech Challenge - Fase 2
 
-Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**. \
+Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**.
 
-Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge<br><br>
-Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html<br><br>
+Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge
+
+Link da imagem Docker do projeto: https://hub.docker.com/repository/docker/efrancodelima/app-lanchonete/general
+
+Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html
+
 Link do vídeo demonstrando a arquitetura: pendente
 
 ## Objetivos
@@ -57,44 +61,55 @@ As instruções citadas nesse documento foram testadas com:
 
 ### Alguns esclarecimentos antes de iniciar
 
-O minikube irá trabalhar com as imagens do DockerHub, que foram construídas a partir deste projeto. \
-Poderíamos trabalhar com imagens locais, mas preferimos colocar no DockerHub para deixar salvo na nuvem. \
-Se desejar, você pode fazer o build da aplicação local com os comandos abaixo:
+A imagem docker do projeto está disponível no DockerHub conforme o link no início deste documento.
+
+O minikube irá trabalhar com essa imagem do DockerHub.
+
+Poderíamos usar imagens locais, mas preferimos colocar no DockerHub para deixar salvo na nuvem.
+
+Se desejar, você pode fazer o build da aplicação rodando o comando abaixo na pasta raiz deste projeto:
 
 ```
 docker build -t app-lanchonete -f Dockerfile.app .
-docker build -t bd-lanchonete -f Dockerfile.bd .
 ```
 
-Como você pode perceber, nós temos dois arquivos dockerfile: um para a aplicação e outro para o banco de dados. \
-Criamos uma imagem customizada para o banco de dados a fim de poder populá-lo com dados de exemplo. \
-Em uma aplicação real, o banco de dados não viria pré-populado, mas aqui fizemos desta forma porque facilita na hora de testar e conhecer a aplicação.
+Esse build é multi-staged, ou seja, ele irá usar um container intermediário e temporário para compilar o projeto e depois, usando o arquivo compilado, criará a imagem final.
+
+Separamos o processo de construção do aplicativo do processo de criação da imagem, reduzindo o tamanho da imagem final e garantindo que o processo seja sempre idêntico, independente do build ser realizado em uma máquina ou outra.
 
 ### Rodando a aplicação
 
 #### 1. Inicie o Minikube.
 
-Apague o cluster anterior, se já tiver um, pois o minikube não trabalha com mais de um cluster simultâneo.
+Ao iniciar o minikube, se não tiver nenhum cluster criado ainda, ele irá criar um.
+
+O minikube não trabalha com mais de um cluster simultâneo. Então, se necessário, apague o cluster anterior.
 
 ```
 minikube delete
 ```
 
-Inicie o minikube com o comando abaixo. \
-Ajuste os valores de cpu e memória, se necessário. \
-CPU se refere à quantidade de núcleos e memory está em MiB.
+O comando abaixo inicia o minikube e cria um cluster com as especificações de CPU e memória passadas.
+
+Ajuste os valores, se necessário. CPU se refere à quantidade de núcleos e memory está em MiB.
 
 ```
 minikube start --driver=docker --cpus=3 --memory=3870
 ```
 
-#### 2. Habilite os addons necessários para a aplicação.
+#### 2. Habilite o dashboard e o coletor de métricas.
 
-Iremos utilizar o metrics para que o HPA possa funcionar e o dashboard para analisar o cluster.
+Habilite o dashboard do minikube e o metrics-server.
+
+O metrics-server é o coletor de métricas, necessário para que o HPA possa funcionar.
+
+Temos uma branch em que iniciamos a configuração do Prometheus, mas voltamos para o metrics-server, pois o Prometheus estava pesando muito na máquina local e deixando os pods muito lentos para iniciar, além de superaquecer o processador.
+
+O Prometheus é mais robusto, com mais opções de configuração, porém o metrics-server é mais leve. Como iremos testar a escalabilidade da aplicação, a nossa escolha foi pelo mais leve.
 
 ```
-minikube addons enable metrics-server
 minikube addons enable dashboard
+minikube addons enable metrics-server
 ```
 
 #### 3. Abra um terminal e clone o projeto.
@@ -103,34 +118,46 @@ minikube addons enable dashboard
 git clone https://github.com/efrancodelima/fiap-tech-challenge.git
 ```
 
-#### 4. Vá para o diretório onde estão os arquivos manifestos.
+#### 4. Inicie a aplicação.
 
-No nosso caso, é o diretório k8s, que fica na raiz do projeto
+A criação dos recursos precisa ser feita em uma ordem específica, por exemplo: precisamos que as variáveis de ambiente estejam disponíveis antes de iniciar a aplicação; precisamos iniciar o volume de dados antes do banco de dados, etc.
 
-#### 5. Inicie a aplicação.
+Há várias formas de aplicar essa ordem, cada uma com suas vantagens e desvantagens: jobs, initContainers, helm, scripts bash, entre outras. Nesse projeto usamos um misto de script bash e initContainer.
 
-O comando abaixo cria ou atualiza os recursos existentes. \
-Não instalamos o kubectl diretamente, pois ele já vem incluído no minikube.
+Devido à baixa complexidade do projeto, poderíamos usar apenas o script bash e teríamos até um ganho de perfomance com isso, mas optamos por demonstrar também o funcionamento do initContainer.
+
+Tomamos o cuidado de não usar comandos específicos do linux nesse script, que necessitem de instalação adicional. O script trabalha basicamente com comandos do minikube.
+
+Se for a primeira vez que estiver rodando o projeto no cluster, vai demorar um pouco mais, pois o kubernetes precisa baixar as imagens.
 
 ```
-minikube kubectl -- apply -f .
+# Caso seja necessário, conceda a permissão de execução para o script
+chmod +x k8s/run-apply.sh
+
+# Executa os applys necessários para rodar a aplicação
+./k8s/run-apply.sh
 ```
 
-#### 6. Acompanhe a inicialização dos PODs.
+#### 5. Acompanhe a inicialização dos PODs.
 
-O comando abaixo exibe os pods e atualiza a tela a cada 2 segundos. \
-Esse é um comando não responsivo, ou seja, ele irá usar/ocupar o terminal enquanto estiver rodando. Digite CTRL+C quando quiser sair. \
+O comando abaixo exibe os pods e atualiza a tela a cada 2 segundos.
+
+Esse é um comando não responsivo, ou seja, ele irá usar/ocupar o terminal enquanto estiver rodando. Digite CTRL+C quando quiser sair.
+
 Se tudo estiver ok, os PODs irão subir e após algum tempo deverão estar com "STATUS Running" e "READY 1/1".
 
 ```
 watch -n 2 minikube kubectl -- get pods
 ```
 
-#### 7. Em caso de erro no POD.
+#### 6. Em caso de erro no POD.
 
-Essa aplicação roda na máquina local e os health checks foram configurados conforme os recursos do ambiente local. \
-É possível que, em outra máquina, com cpu e memória diferentes, os PODs demorem mais para responder e talvez seja necessário um ajuste nos tempos da configuração dos health checks. \
-Verifique a descrição detalhada do POD com o comando abaixo. Se alguma probe falhar, irá aparecer nessa descrição. \
+Essa aplicação roda na máquina local e os health checks foram configurados conforme os recursos do ambiente local.
+
+É possível que, em outra máquina, com cpu e memória diferentes, os PODs demorem mais para responder e talvez seja necessário um ajuste nos tempos da configuração dos health checks.
+
+Verifique a descrição detalhada do POD com o comando abaixo. Se alguma probe falhar, irá aparecer nessa descrição.
+
 O `<nome_pod>` deve ser igual ao que foi mostrado na etapa anterior, com o comando get pods.
 
 ```
@@ -143,9 +170,10 @@ Se não resolver, verifique o log do pod.
 minikube kubectl -- logs -f <nome_pod>
 ```
 
-#### 8. Acesse a aplicação pelo navegador.
+#### 7. Acesse a aplicação pelo navegador.
 
-Use o comando abaixo para expor o serviço para acesso externo. Uma `<URL>` será gerada. \
+Use o comando abaixo para expor o serviço para acesso externo. Uma `<URL>` será gerada.
+
 Esse é um comando não responsivo, digite CTRL+C quando quiser sair. Note que ao liberar o terminal, o comando não estará mais executando e o acesso externo será cortado (a `<URL>` vai parar de funcionar).
 
 ```
@@ -155,28 +183,14 @@ minikube service app --url
 Abra o navegador e acesse: `<URL>`/api/v2/ \
 Esse link deverá abrir o Swagger da aplicação.
 
-#### 9. Acesse o dashboard do minikube.
+#### 8. Acesse o dashboard do minikube.
 
-Veja informações mais detalhadas sobre a aplicação no dashboard do minikube. \
+Veja informações mais detalhadas sobre a aplicação no dashboard do minikube.
+
 Use o comando abaixo para gerar o link para o dashboard.
 
 ```
 minikube dashboard --url
-```
-
-#### 10. Encerre a aplicação e libere os recursos.
-
-Se precisar encerrar a aplicação e liberar (apagar) os recursos criados, execute:
-
-```
-# Apaga os recursos criados com o 'apply'.
-minikube kubectl -- delete -f .
-
-# Apaga o cluster
-minikube delete
-
-# Para o minikube
-minikube stop
 ```
 
 ## Estrutura do projeto
