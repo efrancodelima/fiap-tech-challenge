@@ -3,6 +3,7 @@
 Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**. \
 
 Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge<br><br>
+Link da imagem Docker do projeto: https://hub.docker.com/repository/docker/efrancodelima/app-lanchonete/general<br><br>
 Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html<br><br>
 Link do vídeo demonstrando a arquitetura: pendente
 
@@ -57,44 +58,64 @@ As instruções citadas nesse documento foram testadas com:
 
 ### Alguns esclarecimentos antes de iniciar
 
-O minikube irá trabalhar com as imagens do DockerHub, que foram construídas a partir deste projeto. \
-Poderíamos trabalhar com imagens locais, mas preferimos colocar no DockerHub para deixar salvo na nuvem. \
-Se desejar, você pode fazer o build da aplicação local com os comandos abaixo:
+O projeto foi buildado em uma imagem docker, disponível no DockerHub conforme o link no início deste documento. \
+O minikube irá trabalhar com essa imagem do DockerHub. Poderíamos usar imagens locais, mas preferimos colocar no DockerHub para deixar salvo na nuvem. \
+Se desejar, você pode fazer o build da aplicação rodando o comando abaixo na pasta raiz deste projeto:
 
 ```
 docker build -t app-lanchonete -f Dockerfile.app .
-docker build -t bd-lanchonete -f Dockerfile.bd .
 ```
 
-Como você pode perceber, nós temos dois arquivos dockerfile: um para a aplicação e outro para o banco de dados. \
-Criamos uma imagem customizada para o banco de dados a fim de poder populá-lo com dados de exemplo. \
-Em uma aplicação real, o banco de dados não viria pré-populado, mas aqui fizemos desta forma porque facilita na hora de testar e conhecer a aplicação.
+Esse build é multi-staged, ou seja, ele irá usar um container intermediário para compilar o projeto e depois, usando o arquivo compilado, criará a imagem final. \
+Separamos o processo de construção do aplicativo do processo de criação da imagem, reduzindo o tamanho da imagem final e garantindo que o processo seja sempre idêntico, independente do build ser realizado em uma máquina ou outra.
 
 ### Rodando a aplicação
 
 #### 1. Inicie o Minikube.
 
-Apague o cluster anterior, se já tiver um, pois o minikube não trabalha com mais de um cluster simultâneo.
+Ao iniciar o minikube, se não tiver nenhum cluster criado ainda, ele irá criar um. \
+O minikube não trabalha com mais de um cluster simultâneo. Então, se necessário, apague o cluster anterior.
 
 ```
 minikube delete
 ```
 
-Inicie o minikube com o comando abaixo. \
-Ajuste os valores de cpu e memória, se necessário. \
-CPU se refere à quantidade de núcleos e memory está em MiB.
+O comando seguinte inicia o minikube e cria um cluster com as especificações de CPU e memória passadas. \
+Ajuste os valores, se necessário. CPU se refere à quantidade de núcleos e memory está em MiB.
 
 ```
+# Inicia o minikube e cria um cluster
 minikube start --driver=docker --cpus=3 --memory=3870
 ```
 
-#### 2. Habilite os addons necessários para a aplicação.
-
-Iremos utilizar o metrics para que o HPA possa funcionar e o dashboard para analisar o cluster.
+Habilite o dashboard do minikube.
 
 ```
-minikube addons enable metrics-server
+# Habilita o dashboard do minikube
 minikube addons enable dashboard
+```
+
+#### 2. Instale o Helm e o Prometheus.
+
+Iremos utilizar o Prometheus para coletar métricas e o HPA para realizar a escalabilidade da aplicação. \
+O HPA precisa de um coletor de métricas, sem o qual ele não funciona.
+A instalação do Helm e a adição do repositório só precisa ser feita uma vez. \
+Já a instalação do Prometheus é feita no cluster: se você apagá-lo, terá que instalar novamente.
+
+```
+# Instala o Helm
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+# Adiciona o repositório do Prometheus
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+# Instala o Prometheus e o Prometeus Adapter
+helm install prometheus prometheus-community/prometheus
+helm install prometheus-adapter prometheus-community/prometheus-adapter
+
+# Expõe o serviço do Prometeus na porta 9090
+minikube kubectl -- port-forward deploy/prometheus-server 9090
 ```
 
 #### 3. Abra um terminal e clone o projeto.
@@ -109,11 +130,18 @@ No nosso caso, é o diretório k8s, que fica na raiz do projeto
 
 #### 5. Inicie a aplicação.
 
-O comando abaixo cria ou atualiza os recursos existentes. \
-Não instalamos o kubectl diretamente, pois ele já vem incluído no minikube.
+A criação dos recursos precisa ser feita em uma ordem específica, por exemplo: precisamos que as variáveis de ambiente estejam disponíveis antes de iniciar a aplicação; precisamos iniciar o volume de dados antes do banco de dados, etc. \
+Há várias formas de aplicar essa ordem, cada uma com suas vantagens e desvantagens: jobs, initContainers, helm, scripts bash, entre outras. Nesse projeto usamos um misto de script bash e initContainer. \
+Devido à baixa complexidade do projeto, poderíamos usar apenas o script bash e teríamos até um ganho de perfomance com isso, mas optamos por demonstrar também o funcionamento do initContainer. \
+Tomamos o cuidado de não usar comandos específicos do linux nesse script, que necessitem de instalação adicional. O script trabalha basicamente com comandos do minikube. \
+Se for a primeira vez que estiver rodando o projeto no cluster, vai demorar um pouco mais, pois o kubernetes precisa baixar as imagens.
 
 ```
-minikube kubectl -- apply -f .
+# Caso seja necessário, conceda a permissão de execução para o script
+chmod +x run-apply.sh
+
+# Executa os applys necessários para rodar a aplicação
+./run-apply.sh
 ```
 
 #### 6. Acompanhe a inicialização dos PODs.
