@@ -1,46 +1,61 @@
 #!/bin/bash
 
-# Aplica os ConfigMaps
-echo "Aplicando os ConfigMaps..."
-minikube kubectl -- apply -f env-configmap.yaml
-minikube kubectl -- apply -f metrics-server-config.yaml
+LOG_FILE="run-log.txt"
+TIMEOUT=600 # 10 minutos
+LOCK_FILE="/tmp/script.lock"
 
-# Verifica se os ConfigMaps estão prontos
-while true; do
-  configmap_status=$(minikube kubectl -- get configmap env -o jsonpath='{.metadata.name}')
-  if [ "$configmap_status" == "env" ]; then
-    echo "Variáveis de ambiente OK."
-    break
-  else
-    echo "Aguardando..."
-    sleep 2
-  fi
-done
+# Importa as funções auxiliares
+source ./run-functions.sh
 
-# Inicia o volume de dados
-echo "Iniciando o volume de dados..."
-minikube kubectl -- apply -f dados-pvc.yaml
+main() {
+  # Cria o arquivo de bloqueio
+  touch $LOCK_FILE
 
-# Verifica se o volume está pronto
-while true; do
-  status=$(minikube kubectl -- get pvc dados-lanchonete -o jsonpath='{.status.phase}')
-  if [ "$status" == "Bound" ]; then
-    echo "Volume de dados OK."
-    break
-  else
-    echo "Aguardando o volume de dados."
-    sleep 2
-  fi
-done
+  # Inicia o timeout
+  (sleep $TIMEOUT && [ -f $LOCK_FILE ] && echo "$(date '+%Y-%m-%d %H:%M:%S') - Timeout atingido!" | tee -a $LOG_FILE && kill $$) &
 
-# Inicia o banco de dados
-echo "Iniciando o banco de dados..."
-minikube kubectl -- apply -f bd-deployment.yaml
-minikube kubectl -- apply -f bd-service.yaml
+  # Baixa as imagens docker necessárias
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Verificando as imagens do DockerHub..." | tee -a $LOG_FILE
+  load_image_if_not_exists "mysql:8.4.0"
+  load_image_if_not_exists "efrancodelima/app-lanchonete:latest"
 
-# Inicia a aplicação
-echo "Iniciando a aplicação..."
-minikube kubectl -- apply -f app-deployment.yaml
-minikube kubectl -- apply -f app-service.yaml
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Imagens docker OK." | tee -a $LOG_FILE
 
-echo "Script concluído com sucesso!"
+  # Inicia as variáveis de ambiente
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando as variáveis de ambiente..." | tee -a $LOG_FILE
+  minikube kubectl -- apply -f env-configmap.yaml >> $LOG_FILE 2>&1
+  wait_for_resource "configmap" "env-config" "default" "Variáveis de ambiente OK."
+
+  # Inicia o volume de dados
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o volume de dados..." | tee -a $LOG_FILE
+  minikube kubectl -- apply -f dados-pvc.yaml >> $LOG_FILE 2>&1
+  wait_for_resource "pvc" "dados-lanchonete" "default" "Volume de dados OK."
+
+  # Inicia o banco de dados
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o banco de dados..." | tee -a $LOG_FILE
+  minikube kubectl -- apply -f bd-deployment.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f bd-service.yaml >> $LOG_FILE 2>&1
+
+  # Inicia a aplicação
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando a aplicação..." | tee -a $LOG_FILE
+  minikube kubectl -- apply -f app-deployment.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f app-service.yaml >> $LOG_FILE 2>&1
+  wait_for_pod "app=app-lanchonete" "default" "Aplicação OK."
+
+  # Aplica o metrics-server
+  minikube kubectl -- apply -f metrics-server-config.yaml >> $LOG_FILE 2>&1
+  wait_for_resource "configmap" "metrics-server-config" "kube-system" "Metrics server OK."
+
+  # Aplica o HPA
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o HPA..." | tee -a $LOG_FILE
+  minikube kubectl -- apply -f app-hpa.yaml >> $LOG_FILE 2>&1
+  wait_for_hpa "app-hpa" "default" "HPA OK."
+
+  # Finaliza o script
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Script concluído com sucesso!" | tee -a $LOG_FILE
+
+  # Remove o arquivo de bloqueio
+  rm -f $LOCK_FILE
+}
+
+main 2>>$LOG_FILE

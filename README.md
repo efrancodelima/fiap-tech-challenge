@@ -131,11 +131,14 @@ Tomamos o cuidado de não usar comandos específicos do linux nesse script, que 
 Se for a primeira vez que estiver rodando o projeto no cluster, vai demorar um pouco mais, pois o kubernetes precisa baixar as imagens.
 
 ```
-# Caso seja necessário, conceda a permissão de execução para o script
-chmod +x k8s/run-apply.sh
+# Mova para o diretório onde estão os arquivos manifestos
+cd k8s
 
-# Executa os applys necessários para rodar a aplicação
-./k8s/run-apply.sh
+# Caso seja necessário, conceda permissão de execução para o script
+chmod +x run-apply.sh
+
+# Execute o script run-apply para rodar a aplicação
+./run-apply.sh
 ```
 
 #### 5. Acompanhe a inicialização dos PODs.
