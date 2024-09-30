@@ -5,19 +5,18 @@ load_image_if_not_exists() {
   if minikube image ls | grep -q "$image"; then
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Imagem $image já está presente." | tee -a $LOG_FILE
   else
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Baixando a imagem $image..." | tee -a $LOG_FILE
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o download da imagem $image." | tee -a $LOG_FILE
     load_image_with_message "$image"
   fi
 }
 
 load_image_with_message() {
   local image=$1
-  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o download da imagem $image..." | tee -a $LOG_FILE
   {
     minikube image load $image &
     pid=$!
     while kill -0 $pid 2>/dev/null; do
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Baixando a imagem $image..." | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Baixando a imagem $image." | tee -a $LOG_FILE
       sleep 5
     done
     wait $pid
@@ -41,7 +40,7 @@ wait_for_resource() {
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $resource_type $resource_name no namespace $namespace..." | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $resource_type $resource_name no namespace $namespace." | tee -a $LOG_FILE
       sleep 2
     fi
   done
@@ -57,7 +56,7 @@ wait_for_pod() {
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $selector no namespace $namespace..." | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $selector no namespace $namespace." | tee -a $LOG_FILE
       sleep 5
     fi
   done
@@ -73,7 +72,7 @@ wait_for_hpa() {
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $hpa_name no namespace $namespace..." | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $hpa_name no namespace $namespace." | tee -a $LOG_FILE
       sleep 5
     fi
   done
