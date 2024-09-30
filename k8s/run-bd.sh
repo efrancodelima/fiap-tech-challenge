@@ -56,54 +56,37 @@ while true; do
   fi
 done
 
+# Baixa as imagens necessárias
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Baixando as imagens..."
+docker pull efrancodelima/app-lanchonete:latest
+docker pull mysql:8.4.0
+
+# Verifica se as imagens foram baixadas
+while true; do
+  app_image_status=$(docker images -q efrancodelima/app-lanchonete:latest)
+  mysql_image_status=$(docker images -q mysql:8.4.0)
+  if [ -n "$app_image_status" ] && [ -n "$mysql_image_status" ]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Imagens baixadas com sucesso."
+    break
+  else
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando o download das imagens..."
+    sleep 5
+  fi
+done
+
 # Inicia o banco de dados
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o banco de dados..."
 minikube kubectl -- apply -f bd-deployment.yaml
 minikube kubectl -- apply -f bd-service.yaml
 
 # Verifica se o banco de dados está pronto
-# while true; do
-#   pod_status=$(minikube kubectl -- get pods --selector=app=bd-lanchonete -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
-#   if [ "$pod_status" == "true" ]; then
-#     echo "$(date '+%Y-%m-%d %H:%M:%S') - Aplicação OK."
-#     break
-#   else
-#     echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando o banco de dados..."
-#     sleep 5
-#   fi
-# done
-
-# Inicia a aplicação
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando a aplicação..."
-minikube kubectl -- apply -f app-deployment.yaml
-minikube kubectl -- apply -f app-service.yaml
-
-# Verifica se a aplicação está pronta
 while true; do
-  pod_status=$(minikube kubectl -- get pods --selector=app=app-lanchonete -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
+  pod_status=$(minikube kubectl -- get pods --selector=app=bd-lanchonete -o jsonpath='{.items[0].status.containerStatuses[0].ready}')
   if [ "$pod_status" == "true" ]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Aplicação OK."
     break
   else
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando a aplicação..."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando o banco de dados..."
     sleep 5
   fi
 done
-
-# Aplica o HPA
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o HPA..."
-minikube kubectl -- apply -f app-hpa.yaml
-
-# Verifica se o HPA está pronto
-while true; do
-  hpa_status=$(minikube kubectl -- get hpa app-hpa -o jsonpath='{.status.conditions[?(@.type=="AbleToScale")].status}')
-  if [ "$hpa_status" == "True" ]; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - HPA OK."
-    break
-  else
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando o HPA..."
-    sleep 5
-  fi
-done
-
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Script concluído com sucesso!"

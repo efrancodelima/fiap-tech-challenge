@@ -30,54 +30,54 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: DATASOURCE_DRIVER_CLASS_NAME
-                  name: env
+                  name: env-config
             - name: DATASOURCE_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: DATASOURCE_PASSWORD
-                  name: env
+                  name: env-config
             - name: DATASOURCE_URL
               valueFrom:
                 configMapKeyRef:
                   key: DATASOURCE_URL
-                  name: env
+                  name: env-config
             - name: DATASOURCE_USERNAME
               valueFrom:
                 configMapKeyRef:
                   key: DATASOURCE_USERNAME
-                  name: env
+                  name: env-config
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
                   key: MYSQL_DATABASE
-                  name: env
+                  name: env-config
             - name: MYSQL_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: MYSQL_PASSWORD
-                  name: env
+                  name: env-config
             - name: MYSQL_ROOT_HOST
               valueFrom:
                 configMapKeyRef:
                   key: MYSQL_ROOT_HOST
-                  name: env
+                  name: env-config
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: MYSQL_ROOT_PASSWORD
-                  name: env
+                  name: env-config
             - name: MYSQL_USER
               valueFrom:
                 configMapKeyRef:
                   key: MYSQL_USER
-                  name: env
+                  name: env-config
           resources:
             requests:
               memory: "512Mi"
-              cpu: "400m"
+              cpu: "300m"
             limits:
               memory: "1Gi"
-              cpu: "800m"
+              cpu: "600m"
           livenessProbe:
             exec:
               command:
