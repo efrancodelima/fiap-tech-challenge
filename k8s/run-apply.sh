@@ -4,11 +4,9 @@ LOG_FILE="run-log.txt"
 TIMEOUT=600 # 10 minutos
 LOCK_FILE="/tmp/script.lock"
 
-# Importa as funções auxiliares
 source ./run-functions.sh
 
 main() {
-  # Cria o arquivo de bloqueio
   touch $LOCK_FILE
 
   # Inicia o timeout
@@ -52,8 +50,7 @@ main() {
 
   # Finaliza o script
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Script concluído com sucesso!" | tee -a $LOG_FILE
-
-  # Remove o arquivo de bloqueio
+  echo -e "\n\n" >> $LOG_FILE
   rm -f $LOCK_FILE
 }
 
