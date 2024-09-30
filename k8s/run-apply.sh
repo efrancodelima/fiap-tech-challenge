@@ -19,8 +19,6 @@ main() {
   load_image_if_not_exists "mysql:8.4.0"
   load_image_if_not_exists "efrancodelima/app-lanchonete:latest"
 
-  echo "$(date '+%Y-%m-%d %H:%M:%S') - Imagens docker OK." | tee -a $LOG_FILE
-
   # Inicia as variáveis de ambiente
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando as variáveis de ambiente..." | tee -a $LOG_FILE
   minikube kubectl -- apply -f env-configmap.yaml >> $LOG_FILE 2>&1
@@ -42,11 +40,12 @@ main() {
   minikube kubectl -- apply -f app-service.yaml >> $LOG_FILE 2>&1
   wait_for_pod "app=app-lanchonete" "default" "Aplicação OK."
 
-  # Aplica o metrics-server
+  # Inicia o metrics-server
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o metrics server..." | tee -a $LOG_FILE
   minikube kubectl -- apply -f metrics-server-config.yaml >> $LOG_FILE 2>&1
   wait_for_resource "configmap" "metrics-server-config" "kube-system" "Metrics server OK."
 
-  # Aplica o HPA
+  # Inicia o HPA
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o HPA..." | tee -a $LOG_FILE
   minikube kubectl -- apply -f app-hpa.yaml >> $LOG_FILE 2>&1
   wait_for_hpa "app-hpa" "default" "HPA OK."
