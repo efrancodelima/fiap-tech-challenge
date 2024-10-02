@@ -10,6 +10,13 @@ Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html
 
 Link do vídeo demonstrando a arquitetura: pendente
 
+# Índice
+
+- [Objetivos](#objetivos)
+- [Requisitos do negócio](#requisitos-do-negócio)
+- [Instruções para executar a aplicação](#instruções-para-executar-a-aplicação)
+- [Estrutura do projeto](#estrutura-do-projeto)
+
 ## Objetivos
 
 Desenvolver um sistema para uma lanchonete, seguindo os pré-requisitos especificados no Tech Challenge.
@@ -56,7 +63,6 @@ As instruções citadas nesse documento foram testadas com:
 - Linux Ubuntu 22.04.4 LTS;
 - Docker 27.2.1
 - Minikube 1.34.0
-- helm 3.16.1
 - Git 2.34.1
 
 ### Alguns esclarecimentos antes de iniciar
@@ -79,7 +85,13 @@ Separamos o processo de construção do aplicativo do processo de criação da i
 
 ### Rodando a aplicação
 
-#### 1. Inicie o Minikube.
+#### 1. Abra um terminal e clone o projeto.
+
+```
+git clone https://github.com/efrancodelima/fiap-tech-challenge.git
+```
+
+#### 2. Inicie o Minikube.
 
 Ao iniciar o minikube, se não tiver nenhum cluster criado ainda, ele irá criar um.
 
@@ -97,7 +109,7 @@ Ajuste os valores, se necessário. CPU se refere à quantidade de núcleos e mem
 minikube start --driver=docker --cpus=3 --memory=3870
 ```
 
-#### 2. Habilite o dashboard e o coletor de métricas.
+#### 3. Habilite o dashboard e o coletor de métricas.
 
 Habilite o dashboard do minikube e o metrics-server.
 
@@ -112,13 +124,18 @@ minikube addons enable dashboard
 minikube addons enable metrics-server
 ```
 
-#### 3. Abra um terminal e clone o projeto.
+#### 4. baixe as imagens necessárias.
+
+Antes de continuarmos, baixe as imagens do banco de dados e da aplicação para que depois a aplicação possa subir mais rápido.
+
+Iremos baixá-las usando um comando do minikube, pois queremos que elas fiquem disponíveis no contexto do cluster kubernetes e não na nossa máquina local.
 
 ```
-git clone https://github.com/efrancodelima/fiap-tech-challenge.git
+minikube image load mysql:8.4.0
+minikube image load efrancodelima/app-lanchonete:latest
 ```
 
-#### 4. Inicie a aplicação.
+#### 5. Inicie a aplicação.
 
 A criação dos recursos precisa ser feita em uma ordem específica, por exemplo: precisamos que as variáveis de ambiente estejam disponíveis antes de iniciar a aplicação; precisamos iniciar o volume de dados antes do banco de dados, etc.
 
@@ -141,7 +158,7 @@ chmod +x run-apply.sh
 ./run-apply.sh
 ```
 
-#### 5. Acompanhe a inicialização dos PODs.
+#### 6. Acompanhe a inicialização dos PODs.
 
 O comando abaixo exibe os pods e atualiza a tela a cada 2 segundos.
 
@@ -153,7 +170,7 @@ Se tudo estiver ok, os PODs irão subir e após algum tempo deverão estar com "
 watch -n 2 minikube kubectl -- get pods
 ```
 
-#### 6. Em caso de erro no POD.
+#### 7. Em caso de erro no POD.
 
 Essa aplicação roda na máquina local e os health checks foram configurados conforme os recursos do ambiente local.
 
@@ -173,7 +190,7 @@ Se não resolver, verifique o log do pod.
 minikube kubectl -- logs -f <nome_pod>
 ```
 
-#### 7. Acesse a aplicação pelo navegador.
+#### 8. Acesse a aplicação pelo navegador.
 
 Use o comando abaixo para expor o serviço para acesso externo. Uma `<URL>` será gerada.
 
@@ -186,7 +203,7 @@ minikube service app --url
 Abra o navegador e acesse: `<URL>`/api/v2/ \
 Esse link deverá abrir o Swagger da aplicação.
 
-#### 8. Acesse o dashboard do minikube.
+#### 9. Acesse o dashboard do minikube.
 
 Veja informações mais detalhadas sobre a aplicação no dashboard do minikube.
 

@@ -12,11 +12,6 @@ main() {
   # Inicia o timeout
   (sleep $TIMEOUT && [ -f $LOCK_FILE ] && echo "$(date '+%Y-%m-%d %H:%M:%S') - Timeout atingido!" | tee -a $LOG_FILE && kill $$) &
 
-  # Baixa as imagens docker necessárias
-  echo "$(date '+%Y-%m-%d %H:%M:%S') - Verificando as imagens do DockerHub" | tee -a $LOG_FILE
-  load_image_if_not_exists "mysql:8.4.0"
-  load_image_if_not_exists "efrancodelima/app-lanchonete:latest"
-
   # Inicia as variáveis de ambiente
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando as variáveis de ambiente" | tee -a $LOG_FILE
   minikube kubectl -- apply -f env-configmap.yaml >> $LOG_FILE 2>&1

@@ -1,0 +1,481 @@
+2024-10-02 19:14:49 - Verificando as imagens do DockerHub
+2024-10-02 19:14:50 - Iniciando o download da imagem mysql:8.4.0
+2024-10-02 19:14:50 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:14:55 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:00 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:05 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:10 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:15 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:20 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:25 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:30 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:35 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:40 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:45 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:50 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:15:55 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:00 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:06 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:11 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:16 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:21 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:27 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:32 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:37 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:42 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:47 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:52 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:16:57 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:02 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:07 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:12 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:17 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:22 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:27 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:32 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:37 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:42 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:47 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:52 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:17:57 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:03 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:08 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:13 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:18 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:23 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:28 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:33 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:38 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:43 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:48 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:53 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:18:58 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:03 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:08 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:13 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:18 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:23 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:28 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:34 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:39 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:44 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:49 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:54 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:19:59 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:20:04 - Baixando a imagem mysql:8.4.0
+2024-10-02 19:20:09 - Imagem mysql:8.4.0 baixada com sucesso
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 3.442274084s
+* Restarting the docker service may improve performance.
+2024-10-02 19:20:21 - Iniciando o download da imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:21 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:26 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:31 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:36 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:41 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:46 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:51 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:20:56 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:01 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:06 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:11 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:16 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:21 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:26 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:31 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:36 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:41 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:46 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:51 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:21:56 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:01 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:06 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:12 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:17 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:22 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:27 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:32 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:37 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:42 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:47 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:53 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:22:58 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:03 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:08 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:13 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:18 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:23 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:28 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:33 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:38 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:43 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:48 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:53 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:23:58 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:03 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:08 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:13 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:18 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:23 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:28 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:33 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:38 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:43 - Baixando a imagem efrancodelima/app-lanchonete:latest
+2024-10-02 19:24:48 - Imagem efrancodelima/app-lanchonete:latest baixada com sucesso
+2024-10-02 19:24:48 - Iniciando as variáveis de ambiente
+2024-10-02 19:24:50 - Timeout atingido!
+configmap/env-config created
+2024-10-02 19:25:52 - Verificando as imagens do DockerHub
+2024-10-02 19:25:54 - Imagem mysql:8.4.0 já está presente
+2024-10-02 19:25:56 - Imagem efrancodelima/app-lanchonete:latest já está presente
+2024-10-02 19:25:56 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 19:25:59 - Variáveis de ambiente OK
+2024-10-02 19:25:59 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete created
+2024-10-02 19:26:03 - Volume de dados OK
+2024-10-02 19:26:03 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete created
+service/bd-lanchonete created
+2024-10-02 19:26:13 - Iniciando a aplicação
+deployment.apps/app-lanchonete created
+service/app-service created
+2024-10-02 19:26:22 - Aguardando app=app-lanchonete
+2024-10-02 19:26:29 - Aguardando app=app-lanchonete
+2024-10-02 19:26:36 - Aguardando app=app-lanchonete
+2024-10-02 19:26:44 - Aguardando app=app-lanchonete
+2024-10-02 19:26:53 - Aguardando app=app-lanchonete
+2024-10-02 19:27:00 - Aguardando app=app-lanchonete
+2024-10-02 19:27:06 - Aguardando app=app-lanchonete
+2024-10-02 19:27:13 - Aguardando app=app-lanchonete
+2024-10-02 19:27:21 - Aguardando app=app-lanchonete
+2024-10-02 19:27:27 - Aguardando app=app-lanchonete
+2024-10-02 19:27:33 - Aguardando app=app-lanchonete
+2024-10-02 19:27:39 - Aguardando app=app-lanchonete
+2024-10-02 19:27:45 - Aguardando app=app-lanchonete
+2024-10-02 19:27:52 - Aguardando app=app-lanchonete
+2024-10-02 19:28:00 - Aguardando app=app-lanchonete
+2024-10-02 19:28:06 - Aguardando app=app-lanchonete
+2024-10-02 19:28:12 - Aguardando app=app-lanchonete
+2024-10-02 19:28:18 - Aguardando app=app-lanchonete
+2024-10-02 19:28:24 - Aguardando app=app-lanchonete
+2024-10-02 19:28:30 - Aguardando app=app-lanchonete
+2024-10-02 19:28:37 - Aguardando app=app-lanchonete
+2024-10-02 19:28:43 - Aguardando app=app-lanchonete
+2024-10-02 19:28:49 - Aguardando app=app-lanchonete
+2024-10-02 19:28:55 - Aguardando app=app-lanchonete
+2024-10-02 19:29:01 - Aguardando app=app-lanchonete
+2024-10-02 19:29:08 - Aguardando app=app-lanchonete
+2024-10-02 19:29:15 - Aguardando app=app-lanchonete
+2024-10-02 19:29:22 - Aguardando app=app-lanchonete
+2024-10-02 19:29:28 - Aguardando app=app-lanchonete
+2024-10-02 19:29:34 - Aguardando app=app-lanchonete
+2024-10-02 19:29:40 - Aguardando app=app-lanchonete
+2024-10-02 19:29:47 - Aguardando app=app-lanchonete
+2024-10-02 19:29:53 - Aguardando app=app-lanchonete
+2024-10-02 19:29:58 - Aguardando app=app-lanchonete
+2024-10-02 19:30:04 - Aguardando app=app-lanchonete
+2024-10-02 19:30:10 - Aguardando app=app-lanchonete
+2024-10-02 19:30:16 - Aguardando app=app-lanchonete
+2024-10-02 19:30:21 - Aguardando app=app-lanchonete
+2024-10-02 19:30:27 - Aguardando app=app-lanchonete
+2024-10-02 19:30:34 - Aguardando app=app-lanchonete
+2024-10-02 19:30:40 - Aguardando app=app-lanchonete
+2024-10-02 19:30:45 - Aguardando app=app-lanchonete
+2024-10-02 19:30:51 - Aguardando app=app-lanchonete
+2024-10-02 19:30:57 - Aguardando app=app-lanchonete
+2024-10-02 19:31:02 - Aguardando app=app-lanchonete
+2024-10-02 19:31:08 - Aplicação OK
+2024-10-02 19:31:08 - Iniciando o metrics server
+error: the path "metrics-server-config.yaml" does not exist
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:12 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:16 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:19 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:22 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:25 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:28 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:31 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:34 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:38 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:41 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:43 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:46 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:49 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:51 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:54 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:57 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:31:59 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:02 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:04 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:07 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:10 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:13 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:15 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:18 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:21 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:24 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:27 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:30 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:33 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:35 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:39 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:42 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:45 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:47 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:50 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:53 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:55 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:32:58 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:00 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:04 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:07 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:10 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:13 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:15 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:18 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:21 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:23 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:26 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:29 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:32 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:34 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:37 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:40 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:42 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:45 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:48 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:50 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:53 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:56 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:33:59 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:03 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:06 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:09 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:13 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:16 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:20 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:24 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:27 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:30 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:33 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:36 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:39 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:42 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:44 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:47 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:53 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:34:57 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:01 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:06 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:10 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:14 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:18 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:22 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:25 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:28 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:31 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:33 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:36 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:39 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:42 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:45 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:49 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:35:52 - Aguardando metrics-server-config
+2024-10-02 19:35:52 - Timeout atingido!
+2024-10-02 19:36:49 - Verificando as imagens do DockerHub
+2024-10-02 19:36:50 - Imagem mysql:8.4.0 já está presente
+2024-10-02 19:36:51 - Imagem efrancodelima/app-lanchonete:latest já está presente
+2024-10-02 19:36:51 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 19:36:53 - Variáveis de ambiente OK
+2024-10-02 19:36:53 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 19:36:55 - Volume de dados OK
+2024-10-02 19:36:55 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 19:36:57 - Iniciando a aplicação
+deployment.apps/app-lanchonete unchanged
+service/app-service unchanged
+2024-10-02 19:37:01 - Aplicação OK
+2024-10-02 19:37:01 - Iniciando o metrics server
+error: the path "metrics-server-config.yaml" does not exist
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:04 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:07 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:10 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:12 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:15 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:18 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:20 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:23 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:26 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:28 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:31 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:33 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:36 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:39 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:42 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:44 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:47 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:50 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:53 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:37:57 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:00 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:03 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:05 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:08 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:11 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:14 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:17 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:20 - Aguardando metrics-server-config
+Error from server (NotFound): configmaps "metrics-server-config" not found
+2024-10-02 19:38:23 - Aguardando metrics-server-config
+2024-10-02 19:38:57 - Verificando as imagens do DockerHub
+2024-10-02 19:38:58 - Imagem mysql:8.4.0 já está presente
+2024-10-02 19:38:59 - Imagem efrancodelima/app-lanchonete:latest já está presente
+2024-10-02 19:38:59 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 19:39:01 - Variáveis de ambiente OK
+2024-10-02 19:39:01 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 19:39:05 - Volume de dados OK
+2024-10-02 19:39:05 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 19:39:08 - Iniciando a aplicação
+deployment.apps/app-lanchonete configured
+service/app-service unchanged
+2024-10-02 19:39:14 - Aplicação OK
+2024-10-02 19:39:14 - Iniciando o metrics server
+configmap/metrics-server-config created
+2024-10-02 19:39:18 - Metrics server OK
+2024-10-02 19:39:18 - Iniciando o HPA
+horizontalpodautoscaler.autoscaling/app-hpa created
+2024-10-02 19:39:21 - Aguardando app-hpa
+2024-10-02 19:39:28 - Aguardando app-hpa
+2024-10-02 19:39:33 - Aguardando app-hpa
+2024-10-02 19:39:39 - HPA OK
+2024-10-02 19:39:39 - Script concluído com sucesso!
+
+
+
