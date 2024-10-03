@@ -14,13 +14,13 @@ main() {
 
   # Inicia as variáveis de ambiente
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando as variáveis de ambiente" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f env-configmap.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f env-config.yaml >> $LOG_FILE 2>&1
   wait_for_resource "configmap" "env-config" "default" "Variáveis de ambiente OK"
 
   # Inicia o volume de dados
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o volume de dados" | tee -a $LOG_FILE
   minikube kubectl -- apply -f dados-pvc.yaml >> $LOG_FILE 2>&1
-  wait_for_resource "pvc" "dados-lanchonete" "default" "Volume de dados OK"
+  wait_for_resource "pvc" "dados-pvc" "default" "Volume de dados OK"
 
   # Inicia o banco de dados
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o banco de dados" | tee -a $LOG_FILE
@@ -31,7 +31,7 @@ main() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando a aplicação" | tee -a $LOG_FILE
   minikube kubectl -- apply -f app-deployment.yaml >> $LOG_FILE 2>&1
   minikube kubectl -- apply -f app-service.yaml >> $LOG_FILE 2>&1
-  wait_for_pod "app-lanchonete" "default" "Aplicação OK"
+  wait_for_pod "app" "default" "Aplicação OK"
 
   # Inicia o metrics-server
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o metrics server" | tee -a $LOG_FILE

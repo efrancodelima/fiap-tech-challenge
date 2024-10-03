@@ -12,7 +12,7 @@ wait_for_resource() {
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $resource_name" | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $resource_name..." | tee -a $LOG_FILE
       sleep 2
     fi
   done
@@ -28,7 +28,7 @@ wait_for_pod() {
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $app_name" | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando a aplicação..." | tee -a $LOG_FILE
       sleep 5
     fi
   done
@@ -44,7 +44,7 @@ wait_for_hpa() {
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $hpa_name" | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $hpa_name..." | tee -a $LOG_FILE
       sleep 5
     fi
   done

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-lanchonete
+  name: app-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-lanchonete
+      app: app
   template:
     metadata:
       labels:
-        app: app-lanchonete
+        app: app
     spec:
       initContainers:
         - name: wait-for-db
@@ -20,10 +20,10 @@ spec:
             [
               "sh",
               "-c",
-              'until nc -z bd-lanchonete 3306; do echo "Aguardando banco de dados..."; sleep 5; done;',
+              'until nc -z app-service 3306; do echo "Aguardando banco de dados..."; sleep 5; done;',
             ]
       containers:
-        - name: app-lanchonete
+        - name: app-deployment
           image: app-lanchonete
           imagePullPolicy: IfNotPresent
           ports:

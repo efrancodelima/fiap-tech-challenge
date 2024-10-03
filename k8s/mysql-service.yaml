@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bd-lanchonete
+  name: mysql-service
 spec:
   selector:
-    app: bd-lanchonete
+    app: mysql
   ports:
     - port: 3306 # Porta externa do pod
       targetPort: 3306 # Porta interna do pod

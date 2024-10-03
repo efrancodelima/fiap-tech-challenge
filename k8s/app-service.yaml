@@ -4,7 +4,7 @@ metadata:
   name: app-service
 spec:
   selector:
-    app: app-lanchonete
+    app: app
   ports:
     - port: 8080 # Porta externa do pod
       targetPort: 8080 # Porta interna do pod

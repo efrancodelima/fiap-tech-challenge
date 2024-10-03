@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dados-lanchonete
+  name: dados-pvc
 spec:
   accessModes:
     - ReadWriteOnce
