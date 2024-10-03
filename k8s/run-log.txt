@@ -733,3 +733,52 @@ service/app-service unchanged
 configmap/env-config created
 2024-10-02 23:03:35 - Variáveis de ambiente OK
 2024-10-02 23:03:35 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete created
+2024-10-02 23:03:38 - Volume de dados OK
+2024-10-02 23:03:38 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete created
+service/bd-lanchonete created
+2024-10-02 23:03:40 - Iniciando a aplicação
+deployment.apps/app-lanchonete created
+service/app-service created
+2024-10-02 23:03:43 - Aguardando app-lanchonete
+2024-10-02 23:03:49 - Aguardando app-lanchonete
+2024-10-02 23:03:56 - Aguardando app-lanchonete
+2024-10-02 23:04:02 - Aguardando app-lanchonete
+2024-10-02 23:04:08 - Aguardando app-lanchonete
+2024-10-02 23:04:14 - Aguardando app-lanchonete
+2024-10-02 23:04:21 - Aguardando app-lanchonete
+2024-10-02 23:04:27 - Aguardando app-lanchonete
+2024-10-02 23:04:34 - Aguardando app-lanchonete
+2024-10-02 23:04:40 - Aguardando app-lanchonete
+2024-10-02 23:04:46 - Aguardando app-lanchonete
+2024-10-02 23:04:54 - Aguardando app-lanchonete
+2024-10-02 23:05:01 - Aguardando app-lanchonete
+2024-10-02 23:05:07 - Aguardando app-lanchonete
+2024-10-02 23:05:13 - Aguardando app-lanchonete
+2024-10-02 23:05:19 - Aguardando app-lanchonete
+2024-10-02 23:05:29 - Aguardando app-lanchonete
+2024-10-02 23:05:42 - Aguardando app-lanchonete
+2024-10-02 23:05:48 - Aguardando app-lanchonete
+2024-10-02 23:05:53 - Aguardando app-lanchonete
+2024-10-02 23:05:59 - Aguardando app-lanchonete
+2024-10-02 23:06:05 - Aguardando app-lanchonete
+2024-10-02 23:06:11 - Aguardando app-lanchonete
+2024-10-02 23:06:17 - Aguardando app-lanchonete
+2024-10-02 23:06:23 - Aguardando app-lanchonete
+2024-10-02 23:06:29 - Aguardando app-lanchonete
+2024-10-02 23:06:34 - Aguardando app-lanchonete
+2024-10-02 23:06:40 - Aguardando app-lanchonete
+2024-10-02 23:06:46 - Aguardando app-lanchonete
+2024-10-02 23:06:52 - Aguardando app-lanchonete
+2024-10-02 23:06:58 - Aguardando app-lanchonete
+2024-10-02 23:07:03 - Aguardando app-lanchonete
+2024-10-02 23:07:10 - Aguardando app-lanchonete
+2024-10-02 23:07:24 - Aguardando app-lanchonete
+2024-10-02 23:07:30 - Aguardando app-lanchonete
+2024-10-02 23:07:36 - Aguardando app-lanchonete
+2024-10-02 23:07:41 - Aguardando app-lanchonete
+2024-10-02 23:07:47 - Aguardando app-lanchonete
+2024-10-02 23:07:53 - Aguardando app-lanchonete
+2024-10-02 23:07:59 - Aguardando app-lanchonete
+2024-10-02 23:08:05 - Aguardando app-lanchonete

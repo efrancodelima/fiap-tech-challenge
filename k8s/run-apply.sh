@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOG_FILE="run-log.txt"
-TIMEOUT=600 # 10 minutos
+TIMEOUT=360 # 6 minutos
 LOCK_FILE="/tmp/script.lock"
 
 source ./run-functions.sh
