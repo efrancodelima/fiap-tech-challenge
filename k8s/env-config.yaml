@@ -5,7 +5,7 @@ metadata:
 data:
   DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
   DATASOURCE_PASSWORD: password_fiap
-  DATASOURCE_URL: jdbc:mysql://bd-lanchonete:3306/lanchonete
+  DATASOURCE_URL: jdbc:mysql://mysql-service:3306/lanchonete
   DATASOURCE_USERNAME: user_fiap
   JPA_DIALECT: org.hibernate.dialect.MySQL8Dialect
   MYSQL_DATABASE: lanchonete

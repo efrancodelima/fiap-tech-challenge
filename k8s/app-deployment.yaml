@@ -20,11 +20,11 @@ spec:
             [
               "sh",
               "-c",
-              'until nc -z app-service 3306; do echo "Aguardando banco de dados..."; sleep 5; done;',
+              'until nc -z mysql-service 3306; do echo "Aguardando banco de dados..."; sleep 5; done;',
             ]
       containers:
         - name: app-deployment
-          image: app-lanchonete
+          image: app-lanchonete:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

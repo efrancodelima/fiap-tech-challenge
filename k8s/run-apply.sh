@@ -13,39 +13,38 @@ main() {
   (sleep $TIMEOUT && [ -f $LOCK_FILE ] && echo "$(date '+%Y-%m-%d %H:%M:%S') - Timeout atingido!" | tee -a $LOG_FILE && kill $$) &
 
   # Inicia as variáveis de ambiente
-  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando as variáveis de ambiente" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f env-config.yaml >> $LOG_FILE 2>&1
+  echo -e "\n$(date '+%Y-%m-%d %H:%M:%S') - Iniciando as variáveis de ambiente" | tee -a $LOG_FILE
+  minikube kubectl -- apply -f env-config.yaml | tee -a $LOG_FILE
   wait_for_resource "configmap" "env-config" "default" "Variáveis de ambiente OK"
 
   # Inicia o volume de dados
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o volume de dados" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f dados-pvc.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f dados-pvc.yaml | tee -a $LOG_FILE
   wait_for_resource "pvc" "dados-pvc" "default" "Volume de dados OK"
 
   # Inicia o banco de dados
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o banco de dados" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f bd-deployment.yaml >> $LOG_FILE 2>&1
-  minikube kubectl -- apply -f bd-service.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f mysql-deployment.yaml | tee -a $LOG_FILE
+  minikube kubectl -- apply -f mysql-service.yaml | tee -a $LOG_FILE
 
   # Inicia a aplicação
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando a aplicação" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f app-deployment.yaml >> $LOG_FILE 2>&1
-  minikube kubectl -- apply -f app-service.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f app-deployment.yaml | tee -a $LOG_FILE
+  minikube kubectl -- apply -f app-service.yaml | tee -a $LOG_FILE
   wait_for_pod "app" "default" "Aplicação OK"
 
   # Inicia o metrics-server
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o metrics server" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f metrics-server-config.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f metrics-server-config.yaml | tee -a $LOG_FILE
   wait_for_resource "configmap" "metrics-server-config" "kube-system" "Metrics server OK"
 
   # Inicia o HPA
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o HPA" | tee -a $LOG_FILE
-  minikube kubectl -- apply -f app-hpa.yaml >> $LOG_FILE 2>&1
+  minikube kubectl -- apply -f app-hpa.yaml | tee -a $LOG_FILE
   wait_for_hpa "app-hpa" "default" "HPA OK"
 
   # Finaliza o script
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Script concluído com sucesso!" | tee -a $LOG_FILE
-  echo -e "\n\n" >> $LOG_FILE
   rm -f $LOCK_FILE
 }
 
