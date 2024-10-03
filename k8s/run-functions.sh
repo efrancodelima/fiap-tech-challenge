@@ -19,16 +19,16 @@ wait_for_resource() {
 }
 
 wait_for_pod() {
-  local selector=$1
+  local app_name=$1
   local namespace=$2
   local success_message=$3
   while true; do
-    pod_status=$(minikube kubectl -- get pods --selector=$selector -n $namespace -o jsonpath='{.items[0].status.containerStatuses[0].ready}' 2>>$LOG_FILE)
+    pod_status=$(minikube kubectl -- get pods --selector=app=$app_name -n $namespace -o jsonpath='{.items[0].status.containerStatuses[0].ready}' 2>>$LOG_FILE)
     if [ "$pod_status" == "true" ]; then
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
     else
-      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $selector" | tee -a $LOG_FILE
+      echo "$(date '+%Y-%m-%d %H:%M:%S') - Aguardando $app_name" | tee -a $LOG_FILE
       sleep 5
     fi
   done

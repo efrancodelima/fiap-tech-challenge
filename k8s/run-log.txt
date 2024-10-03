@@ -479,3 +479,257 @@ horizontalpodautoscaler.autoscaling/app-hpa created
 
 
 
+2024-10-02 21:11:08 - Iniciando as variáveis de ambiente
+configmap/env-config created
+2024-10-02 21:11:12 - Variáveis de ambiente OK
+2024-10-02 21:11:12 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete created
+2024-10-02 21:11:14 - Volume de dados OK
+2024-10-02 21:11:14 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete created
+service/bd-lanchonete created
+2024-10-02 21:11:16 - Iniciando a aplicação
+deployment.apps/app-lanchonete created
+service/app-service created
+2024-10-02 21:11:21 - Aguardando app=app-lanchonete
+2024-10-02 21:11:29 - Aguardando app=app-lanchonete
+2024-10-02 21:11:36 - Aguardando app=app-lanchonete
+2024-10-02 21:11:45 - Aguardando app=app-lanchonete
+2024-10-02 21:11:52 - Aguardando app=app-lanchonete
+2024-10-02 21:12:00 - Aguardando app=app-lanchonete
+2024-10-02 21:12:07 - Aguardando app=app-lanchonete
+2024-10-02 21:12:15 - Aguardando app=app-lanchonete
+2024-10-02 21:12:21 - Aguardando app=app-lanchonete
+2024-10-02 21:12:28 - Aguardando app=app-lanchonete
+2024-10-02 21:12:34 - Aguardando app=app-lanchonete
+2024-10-02 21:12:40 - Aguardando app=app-lanchonete
+2024-10-02 21:12:46 - Aguardando app=app-lanchonete
+2024-10-02 21:12:52 - Aguardando app=app-lanchonete
+2024-10-02 21:12:58 - Aguardando app=app-lanchonete
+2024-10-02 21:13:05 - Aguardando app=app-lanchonete
+2024-10-02 21:13:11 - Aguardando app=app-lanchonete
+2024-10-02 21:13:16 - Aguardando app=app-lanchonete
+2024-10-02 21:13:22 - Aguardando app=app-lanchonete
+2024-10-02 21:13:29 - Aguardando app=app-lanchonete
+2024-10-02 21:13:35 - Aguardando app=app-lanchonete
+2024-10-02 21:13:41 - Aguardando app=app-lanchonete
+2024-10-02 21:13:47 - Aguardando app=app-lanchonete
+2024-10-02 21:13:54 - Aguardando app=app-lanchonete
+2024-10-02 21:14:01 - Aguardando app=app-lanchonete
+2024-10-02 21:14:07 - Aguardando app=app-lanchonete
+2024-10-02 21:14:13 - Aguardando app=app-lanchonete
+2024-10-02 21:14:19 - Aguardando app=app-lanchonete
+2024-10-02 21:14:25 - Aguardando app=app-lanchonete
+2024-10-02 21:14:31 - Aguardando app=app-lanchonete
+2024-10-02 21:14:37 - Aguardando app=app-lanchonete
+2024-10-02 21:14:44 - Aguardando app=app-lanchonete
+2024-10-02 21:14:50 - Aguardando app=app-lanchonete
+2024-10-02 21:14:57 - Aguardando app=app-lanchonete
+2024-10-02 21:15:05 - Aguardando app=app-lanchonete
+2024-10-02 21:15:12 - Aguardando app=app-lanchonete
+2024-10-02 21:15:19 - Aguardando app=app-lanchonete
+2024-10-02 21:15:25 - Aguardando app=app-lanchonete
+2024-10-02 21:15:31 - Aguardando app=app-lanchonete
+2024-10-02 21:15:38 - Aguardando app=app-lanchonete
+2024-10-02 21:15:44 - Aguardando app=app-lanchonete
+2024-10-02 21:15:50 - Aguardando app=app-lanchonete
+2024-10-02 21:15:56 - Aguardando app=app-lanchonete
+2024-10-02 21:16:02 - Aguardando app=app-lanchonete
+2024-10-02 21:16:08 - Aguardando app=app-lanchonete
+2024-10-02 21:16:14 - Aguardando app=app-lanchonete
+2024-10-02 21:16:20 - Aguardando app=app-lanchonete
+2024-10-02 21:16:26 - Aguardando app=app-lanchonete
+2024-10-02 21:16:32 - Aguardando app=app-lanchonete
+2024-10-02 21:16:37 - Aguardando app=app-lanchonete
+2024-10-02 21:16:43 - Aguardando app=app-lanchonete
+2024-10-02 21:16:49 - Aguardando app=app-lanchonete
+2024-10-02 21:16:55 - Aguardando app=app-lanchonete
+2024-10-02 21:49:16 - Iniciando as variáveis de ambiente
+configmap/env-config created
+2024-10-02 21:49:18 - Variáveis de ambiente OK
+2024-10-02 21:49:18 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete created
+2024-10-02 21:49:20 - Volume de dados OK
+2024-10-02 21:49:20 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete created
+service/bd-lanchonete created
+2024-10-02 21:49:24 - Iniciando a aplicação
+deployment.apps/app-lanchonete created
+service/app-service created
+2024-10-02 21:49:28 - Aguardando app-lanchonete
+2024-10-02 21:49:36 - Aguardando app-lanchonete
+2024-10-02 21:49:42 - Aguardando app-lanchonete
+2024-10-02 21:49:48 - Aguardando app-lanchonete
+2024-10-02 21:49:55 - Aguardando app-lanchonete
+2024-10-02 21:50:01 - Aguardando app-lanchonete
+2024-10-02 21:50:07 - Aguardando app-lanchonete
+2024-10-02 21:50:14 - Aguardando app-lanchonete
+2024-10-02 21:50:33 - Aguardando app-lanchonete
+2024-10-02 21:50:41 - Aguardando app-lanchonete
+2024-10-02 21:50:47 - Aguardando app-lanchonete
+2024-10-02 21:50:53 - Aguardando app-lanchonete
+2024-10-02 21:50:59 - Aguardando app-lanchonete
+2024-10-02 21:51:05 - Aguardando app-lanchonete
+2024-10-02 21:51:11 - Aguardando app-lanchonete
+2024-10-02 21:51:16 - Aguardando app-lanchonete
+2024-10-02 21:51:22 - Aguardando app-lanchonete
+2024-10-02 21:51:28 - Aguardando app-lanchonete
+2024-10-02 21:51:34 - Aguardando app-lanchonete
+2024-10-02 21:51:39 - Aguardando app-lanchonete
+2024-10-02 21:51:45 - Aguardando app-lanchonete
+2024-10-02 21:51:51 - Aguardando app-lanchonete
+2024-10-02 21:51:58 - Aguardando app-lanchonete
+2024-10-02 21:52:20 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 21:52:22 - Variáveis de ambiente OK
+2024-10-02 21:52:22 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 21:52:24 - Volume de dados OK
+2024-10-02 21:52:24 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 21:52:26 - Iniciando a aplicação
+deployment.apps/app-lanchonete configured
+service/app-service unchanged
+2024-10-02 21:52:29 - Aguardando app-lanchonete
+2024-10-02 21:52:35 - Aguardando app-lanchonete
+2024-10-02 21:52:41 - Aguardando app-lanchonete
+2024-10-02 21:57:27 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 21:57:37 - Variáveis de ambiente OK
+2024-10-02 21:57:37 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 21:57:39 - Volume de dados OK
+2024-10-02 21:57:39 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 21:57:41 - Iniciando a aplicação
+deployment.apps/app-lanchonete unchanged
+service/app-service unchanged
+2024-10-02 21:57:44 - Aguardando app-lanchonete
+2024-10-02 21:57:50 - Aguardando app-lanchonete
+2024-10-02 21:58:09 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 21:58:11 - Variáveis de ambiente OK
+2024-10-02 21:58:11 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 21:58:13 - Volume de dados OK
+2024-10-02 21:58:13 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 21:58:15 - Iniciando a aplicação
+deployment.apps/app-lanchonete unchanged
+service/app-service unchanged
+2024-10-02 21:58:17 - Aguardando app-lanchonete
+2024-10-02 21:58:23 - Aguardando app-lanchonete
+2024-10-02 21:58:29 - Aguardando app-lanchonete
+2024-10-02 21:58:35 - Aguardando app-lanchonete
+2024-10-02 21:58:40 - Aguardando app-lanchonete
+2024-10-02 21:58:46 - Aguardando app-lanchonete
+2024-10-02 21:58:52 - Aguardando app-lanchonete
+2024-10-02 21:58:59 - Aguardando app-lanchonete
+2024-10-02 21:59:04 - Aguardando app-lanchonete
+2024-10-02 21:59:10 - Aguardando app-lanchonete
+2024-10-02 21:59:16 - Aguardando app-lanchonete
+2024-10-02 21:59:22 - Aguardando app-lanchonete
+2024-10-02 21:59:28 - Aguardando app-lanchonete
+2024-10-02 21:59:34 - Aguardando app-lanchonete
+2024-10-02 21:59:40 - Aguardando app-lanchonete
+2024-10-02 22:00:13 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 22:00:16 - Variáveis de ambiente OK
+2024-10-02 22:00:16 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 22:00:17 - Volume de dados OK
+2024-10-02 22:00:17 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 22:00:19 - Iniciando a aplicação
+deployment.apps/app-lanchonete configured
+service/app-service unchanged
+2024-10-02 22:00:22 - Aguardando app-lanchonete
+2024-10-02 22:00:28 - Aguardando app-lanchonete
+2024-10-02 22:00:39 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 22:00:41 - Variáveis de ambiente OK
+2024-10-02 22:00:41 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 22:00:43 - Volume de dados OK
+2024-10-02 22:00:43 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 22:00:45 - Iniciando a aplicação
+deployment.apps/app-lanchonete configured
+service/app-service unchanged
+2024-10-02 22:00:47 - Aguardando app-lanchonete
+2024-10-02 22:00:53 - Aguardando app-lanchonete
+2024-10-02 22:00:59 - Aguardando app-lanchonete
+2024-10-02 22:09:14 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 22:09:16 - Variáveis de ambiente OK
+2024-10-02 22:09:16 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 22:09:19 - Volume de dados OK
+2024-10-02 22:09:19 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 22:09:21 - Iniciando a aplicação
+deployment.apps/app-lanchonete unchanged
+service/app-service unchanged
+2024-10-02 22:09:26 - Aguardando app-lanchonete
+2024-10-02 22:09:31 - Aguardando app-lanchonete
+2024-10-02 22:09:37 - Aguardando app-lanchonete
+2024-10-02 22:09:43 - Aguardando app-lanchonete
+2024-10-02 22:09:49 - Aguardando app-lanchonete
+2024-10-02 22:09:55 - Aguardando app-lanchonete
+2024-10-02 22:10:01 - Aguardando app-lanchonete
+2024-10-02 22:10:07 - Aguardando app-lanchonete
+2024-10-02 22:12:36 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 22:12:38 - Variáveis de ambiente OK
+2024-10-02 22:12:38 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 22:12:39 - Volume de dados OK
+2024-10-02 22:12:39 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 22:12:42 - Iniciando a aplicação
+deployment.apps/app-lanchonete configured
+service/app-service unchanged
+2024-10-02 22:12:49 - Aguardando app-lanchonete
+2024-10-02 22:12:56 - Aguardando app-lanchonete
+2024-10-02 22:13:01 - Aguardando app-lanchonete
+2024-10-02 22:13:07 - Aguardando app-lanchonete
+2024-10-02 22:13:12 - Aguardando app-lanchonete
+2024-10-02 22:13:19 - Aguardando app-lanchonete
+2024-10-02 22:13:25 - Aguardando app-lanchonete
+2024-10-02 22:13:31 - Aguardando app-lanchonete
+2024-10-02 22:13:37 - Aguardando app-lanchonete
+2024-10-02 22:13:43 - Aguardando app-lanchonete
+2024-10-02 22:13:49 - Aguardando app-lanchonete
+2024-10-02 22:13:56 - Aguardando app-lanchonete
+2024-10-02 22:14:02 - Aguardando app-lanchonete
+2024-10-02 22:14:07 - Aguardando app-lanchonete
+2024-10-02 22:14:14 - Iniciando as variáveis de ambiente
+configmap/env-config unchanged
+2024-10-02 22:14:16 - Variáveis de ambiente OK
+2024-10-02 22:14:16 - Iniciando o volume de dados
+persistentvolumeclaim/dados-lanchonete unchanged
+2024-10-02 22:14:19 - Volume de dados OK
+2024-10-02 22:14:19 - Iniciando o banco de dados
+deployment.apps/bd-lanchonete unchanged
+service/bd-lanchonete unchanged
+2024-10-02 22:14:21 - Iniciando a aplicação
+deployment.apps/app-lanchonete configured
+service/app-service unchanged
+2024-10-02 22:14:25 - Aguardando app-lanchonete
+2024-10-02 22:14:30 - Aguardando app-lanchonete
+2024-10-02 22:14:36 - Aguardando app-lanchonete
+2024-10-02 22:14:41 - Aguardando app-lanchonete
+2024-10-02 22:14:47 - Aguardando app-lanchonete
+2024-10-02 22:14:53 - Aguardando app-lanchonete
+2024-10-02 22:14:59 - Aguardando app-lanchonete
+2024-10-02 23:03:27 - Iniciando as variáveis de ambiente
+configmap/env-config created
+2024-10-02 23:03:35 - Variáveis de ambiente OK
+2024-10-02 23:03:35 - Iniciando o volume de dados

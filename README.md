@@ -76,7 +76,7 @@ Poderíamos usar imagens locais, mas preferimos colocar no DockerHub para deixar
 Se desejar, você pode fazer o build da aplicação rodando o comando abaixo na pasta raiz deste projeto:
 
 ```
-docker build -t app-lanchonete -f Dockerfile.app .
+docker build -t app-lanchonete -f Dockerfile .
 ```
 
 Esse build é multi-staged, ou seja, ele irá usar um container intermediário e temporário para compilar o projeto e depois, usando o arquivo compilado, criará a imagem final.
@@ -124,15 +124,29 @@ minikube addons enable dashboard
 minikube addons enable metrics-server
 ```
 
-#### 4. baixe as imagens necessárias.
+#### 4. Prepare as imagens necessárias.
 
-Antes de continuarmos, baixe as imagens do banco de dados e da aplicação para que depois a aplicação possa subir mais rápido.
+Baixe a imagem do banco de dados e construa a imagem da aplicação com os seguintes comandos.
 
-Iremos baixá-las usando um comando do minikube, pois queremos que elas fiquem disponíveis no contexto do cluster kubernetes e não na nossa máquina local.
+```
+# Configura o terminal para usar o docker daemon dentro do minikube
+eval $(minikube docker-env)
+
+# Baixa a imagem do banco de dados
+docker pull mysql:8.4.0
+
+# Constrói a imagem da aplicação
+docker build -t app-lanchonete -f Dockerfile .
+
+# Verifica as imagens disponíveis no minikube
+minikube image ls
+```
+
+Caso você tenha baixado/construído as imagens no host local, você também pode importá-las para o minikube com os comandos abaixo.
 
 ```
 minikube image load mysql:8.4.0
-minikube image load efrancodelima/app-lanchonete:latest
+minikube image load app-lanchonete:latest
 ```
 
 #### 5. Inicie a aplicação.
