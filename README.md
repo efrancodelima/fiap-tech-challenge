@@ -234,7 +234,7 @@ Sugestão de ordem para execução das APIs:
 
 O status do pedido muda em uma ordem definida: recebido, em preparação, pronto, finalizado. Mas ele não avança se o pedido não tiver o pagamento aprovado, então é necessário realizar o mock da notificação do Mercado Pago antes de atualizar o status do pedido.
 
-Exemplo de mock para a notificação do Mercado Pago usando o curl (você pode usar o Postman também, se preferir):
+Exemplo de mock para a notificação do Mercado Pago usando o curl (você pode usar o Postman também, se preferir). lembre-se de substituir o `<link_aplicacao>` pela `<URL>` do item 8:
 ```
 curl -X PUT <link_aplicacao>/api/v2/pedidos/webhook/ \
 -H "Content-Type: application/json" \
