@@ -217,7 +217,68 @@ minikube service app --url
 Abra o navegador e acesse: `<URL>`/api/v2/ \
 Esse link deverá abrir o Swagger da aplicação.
 
-#### 9. Acesse o dashboard do minikube.
+#### 9. Ordem de execução das APIs.
+
+Sugestão de ordem para execução das APIs:
+- Cadastrar cliente
+- Buscar cliente pelo CPF
+- Cadastrar produtos
+- Editar produto
+- Buscar produtos por categoria
+- Remover produtos (não remova todos, deixe pelo menos 1)
+- Fazer checkout
+- Consultar o status do pagamento
+- Mock da notificação do Mercado Pago *
+- Atualizar o status do pedido
+- Listar pedidos
+
+O status do pedido muda em uma ordem definida: recebido, em preparação, pronto, finalizado. Mas ele não avança se o pedido não tiver o pagamento aprovado, então é necessário realizar o mock da notificação do Mercado Pago antes de atualizar o status do pedido.
+
+Exemplo de mock para a notificação do Mercado Pago usando o curl (você pode usar o Postman também, se preferir):
+```
+curl -X PUT <link_aplicacao>/api/v2/pedidos/webhook/ \
+-H "Content-Type: application/json" \
+-d '{
+  "id": 1,
+  "date_created": "2024-09-30T11:26:38.000Z",
+  "date_approved": "2024-09-30T11:26:38.000Z",
+  "date_last_updated": "2024-09-30T11:26:38.000Z",
+  "money_release_date": "2017-09-30T11:22:14.000Z",
+  "payment_method_id": "Pix",
+  "payment_type_id": "credit_card",
+  "status": "approved",
+  "status_detail": "accredited",
+  "currency_id": "BRL",
+  "description": "Pago Pizza",
+  "collector_id": 2,
+  "payer": {
+    "id": 123,
+    "email": "test_user_80507629@testuser.com",
+    "identification": {
+      "type": "CPF",
+      "number": 19119119100
+    },
+    "type": "customer"
+  },
+  "metadata": {},
+  "additional_info": {},
+  "external_reference": "MP0001",
+  "transaction_amount": 250,
+  "transaction_amount_refunded": 50,
+  "coupon_amount": 15,
+  "transaction_details": {
+    "net_received_amount": 250,
+    "total_paid_amount": 250,
+    "overpaid_amount": 0,
+    "installment_amount": 250
+  },
+  "installments": 1,
+  "card": {}
+}'
+```
+
+
+#### 10. Acesse o dashboard do minikube.
 
 Veja informações mais detalhadas sobre a aplicação no dashboard do minikube.
 
