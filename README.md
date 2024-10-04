@@ -1,6 +1,6 @@
 # Tech Challenge - Fase 2
 
-Projeto fornecido como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**.
+Projeto realizado como atividade avaliativa do curso de **Software Architecture - Pós-Tech - FIAP**.
 
 Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge
 
