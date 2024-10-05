@@ -25,7 +25,15 @@ Desenvolver um sistema para uma lanchonete, seguindo os pré-requisitos especifi
 
 ### Arquitetura
 
-O projeto da fase 1 (arquitetura hexagonal) deverá ser adaptado para a Clean Architecture.
+Arquitetura do software
+
+- O projeto da fase 1 (arquitetura hexagonal) deverá ser adaptado para a Clean Architecture.
+
+Arquitetura da infra
+
+- O projeto irá rodar em containeres gerenciados pelo kubernetes (usamos o minikube na máquina local).
+
+![Arquitetura kubernetes](assets/images/infra-architecture.svg)
 
 ### API's web
 
@@ -48,11 +56,6 @@ Pedido
 - Listar pedidos nessa ordem: Pronto > Em Preparação > Recebido
   - Pedidos mais antigos primeiro e mais novos depois.
   - Pedidos finalizados não devem aparecer na lista.
-
-### Infraestrutura
-
-Usamos o minikube para rodar os containeres na máquina local. \
-Para o banco de dados, foi utilizado o MySQL 8.4.0.
 
 ## Instruções para executar a aplicação
 
@@ -220,6 +223,7 @@ Esse link deverá abrir o Swagger da aplicação.
 #### 9. Ordem de execução das APIs.
 
 Sugestão de ordem para execução das APIs:
+
 - Cadastrar cliente
 - Buscar cliente pelo CPF
 - Cadastrar produtos
@@ -228,13 +232,14 @@ Sugestão de ordem para execução das APIs:
 - Remover produtos (não remova todos, deixe pelo menos 1)
 - Fazer checkout
 - Consultar o status do pagamento
-- Mock da notificação do Mercado Pago *
+- Mock da notificação do Mercado Pago \*
 - Atualizar o status do pedido
 - Listar pedidos
 
 O status do pedido muda em uma ordem definida: recebido, em preparação, pronto, finalizado. Mas ele não avança se o pedido não tiver o pagamento aprovado, então é necessário realizar o mock da notificação do Mercado Pago antes de atualizar o status do pedido.
 
 Exemplo de mock para a notificação do Mercado Pago usando o curl (você pode usar o Postman também, se preferir). lembre-se de substituir o `<link_aplicacao>` pela `<URL>` do item 8:
+
 ```
 curl -X PUT <link_aplicacao>/api/v2/pedidos/webhook/ \
 -H "Content-Type: application/json" \
@@ -276,7 +281,6 @@ curl -X PUT <link_aplicacao>/api/v2/pedidos/webhook/ \
   "card": {}
 }'
 ```
-
 
 #### 10. Acesse o dashboard do minikube.
 
