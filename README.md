@@ -345,8 +345,7 @@ Aqui temos os casos de uso, todos com interface e implementação.
 #### interfaces / gateways
 
 Temos as interfaces dos gateways, sem a implementação, que fica em outra camada. \
-As interfaces dos gateways são necessárias aqui para que os casos de uso possam saber como recuperar os dados necessários à sua função. \
-Pesquisando, encontrei outras formas de fazer isso, mas optei por essa que me pareceu a mais robusta.
+As interfaces dos gateways são necessárias aqui para que os casos de uso possam saber como recuperar os dados necessários à sua função.
 
 #### exceptions
 
