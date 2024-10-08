@@ -28,10 +28,10 @@ spec:
       policies:
         - type: Pods
           value: 1
-          periodSeconds: 150
+          periodSeconds: 90
     scaleDown:
       stabilizationWindowSeconds: 180
       policies:
-        - type: Utilization
+        - type: Percent
           value: 30
           periodSeconds: 180
