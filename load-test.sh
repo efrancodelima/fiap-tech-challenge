@@ -1,19 +1,8 @@
 #!/bin/bash
 
-# Cadastrar cliente
-curl -X 'POST' \
-  'http://127.0.0.1:42223/api/v2/clientes/cadastrar' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "cpf": "2054358070",
-  "nome": "Monteiro Lobato",
-  "email": "mlobato@gmail.com"
-}'
+end=$((SECONDS+120))
 
-# Buscar cliente
-for i in {1..500}
-do
-   curl -X GET "http://127.0.0.1:42223/api/v2/clientes/buscar/02054358070"
-   sleep 0.1
+while [ $SECONDS -lt $end ]; do
+  curl -X GET "http://127.0.0.1:36045/api/v2/clientes/buscar/12345678900"
+  curl -X GET "http://127.0.0.1:36045/api/v2/produtos/buscar/lanche"
 done
