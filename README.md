@@ -203,7 +203,7 @@ Use o comando abaixo para expor o serviço para acesso externo. Uma `<URL>` ser�
 Esse é um comando não responsivo, digite CTRL+C quando quiser sair. Note que ao liberar o terminal, o comando não estará mais executando e o acesso externo será cortado (a `<URL>` vai parar de funcionar).
 
 ```
-minikube service app-service
+minikube service app-service --url
 ```
 
 Abra o navegador e acesse: `<URL>`/api/v2/ \
