@@ -96,17 +96,17 @@ spec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 25
           readinessProbe:
             exec:
               command:
                 - mysqladmin
                 - ping
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 25
       volumes:
         - name: dados-pvc
           persistentVolumeClaim:

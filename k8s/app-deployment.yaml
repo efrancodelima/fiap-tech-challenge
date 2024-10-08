@@ -86,20 +86,20 @@ spec:
             httpGet:
               path: /startup
               port: 8081
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 25
           livenessProbe:
             httpGet:
               path: /health/liveness
               port: 8081
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 25
           readinessProbe:
             httpGet:
               path: /health/readiness
               port: 8081
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 6
-            failureThreshold: 50
+            failureThreshold: 25
