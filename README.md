@@ -71,24 +71,6 @@ As instruções citadas nesse documento foram testadas com:
 - Minikube 1.34.0
 - Git 2.34.1
 
-### Alguns esclarecimentos antes de iniciar
-
-A imagem docker do projeto está disponível no DockerHub conforme o link no início deste documento.
-
-O minikube irá trabalhar com essa imagem do DockerHub.
-
-Poderíamos usar imagens locais, mas preferimos colocar no DockerHub para deixar salvo na nuvem.
-
-Se desejar, você pode fazer o build da aplicação rodando o comando abaixo na pasta raiz deste projeto:
-
-```
-docker build -t app-lanchonete -f Dockerfile .
-```
-
-Esse build é multi-staged, ou seja, ele irá usar um container intermediário e temporário para compilar o projeto e depois, usando o arquivo compilado, criará a imagem final.
-
-Separamos o processo de construção do aplicativo do processo de criação da imagem, reduzindo o tamanho da imagem final e garantindo que o processo seja sempre idêntico, independente do build ser realizado em uma máquina ou outra.
-
 ### Rodando a aplicação
 
 #### 1. Abra um terminal e clone o projeto.
@@ -132,7 +114,11 @@ minikube addons enable metrics-server
 
 #### 4. Prepare as imagens necessárias.
 
-Baixe a imagem do banco de dados e construa a imagem da aplicação com os seguintes comandos.
+O build da imagem da aplicação é multi-staged, ou seja, ele irá usar um container intermediário e temporário para compilar o projeto e depois, usando o arquivo compilado, criará a imagem final.
+
+Esse build é mais demorado, porém ele separa o processo de construção do aplicativo do processo de criação da imagem, reduzindo o tamanho da imagem final e garantindo que a compilação seja sempre executada no mesmo ambiente (container intermediário), rodando os mesmos comandos, usando a mesma JDK, etc... independente da plataforma do host.
+
+Dito isto, baixe a imagem do banco de dados e construa a imagem da aplicação com os seguintes comandos.
 
 ```
 # Configura o terminal para usar o docker daemon dentro do minikube
