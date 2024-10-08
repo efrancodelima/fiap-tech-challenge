@@ -6,12 +6,11 @@ Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge
 
 Link da imagem Docker do projeto: https://hub.docker.com/repository/docker/efrancodelima/app-lanchonete/general
 
-Link do vídeo demonstrando a arquitetura: https://youtu.be/WEASkrnFXOM
+Link do vídeo demonstrando a arquitetura: pendente
 
 Link do vídeo rodando o projeto, consumindo a API e escalando os PODs: pendente
 
-Link do Swagger: http://localhost:8080/api/v2/swagger-ui/index.html
-
+Link do Swagger: `<URL>`/api/v2/swagger-ui/index.html
 
 # Índice
 
