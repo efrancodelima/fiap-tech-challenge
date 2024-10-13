@@ -31,7 +31,7 @@ main() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando a aplicação" | tee -a $LOG_FILE
   minikube kubectl -- apply -f app-deployment.yaml | tee -a $LOG_FILE
   minikube kubectl -- apply -f app-service.yaml | tee -a $LOG_FILE
-  wait_for_pod "app" "default" "Aplicação OK"
+  wait_for_pod "app" "Aplicação OK"
 
   # Inicia o metrics-server
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o metrics server" | tee -a $LOG_FILE
@@ -39,9 +39,9 @@ main() {
   wait_for_resource "configmap" "metrics-server-config" "kube-system" "Metrics server OK"
 
   # Inicia o HPA
-  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o HPA" | tee -a $LOG_FILE
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Iniciando o HPA da aplicação" | tee -a $LOG_FILE
   minikube kubectl -- apply -f app-hpa.yaml | tee -a $LOG_FILE
-  wait_for_hpa "app-hpa" "default" "HPA OK"
+  wait_for_hpa "app-hpa" "HPA OK"
 
   # Finaliza o script
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Script concluído com sucesso!" | tee -a $LOG_FILE

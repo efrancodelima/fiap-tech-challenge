@@ -20,10 +20,9 @@ wait_for_resource() {
 
 wait_for_pod() {
   local app_name=$1
-  local namespace=$2
-  local success_message=$3
+  local success_message=$2
   while true; do
-    pod_status=$(minikube kubectl -- get pods --selector=app=$app_name -n $namespace -o jsonpath='{.items[0].status.containerStatuses[0].ready}' 2>>$LOG_FILE)
+    pod_status=$(minikube kubectl -- get pods --selector=app=$app_name -n default -o jsonpath='{.items[0].status.containerStatuses[0].ready}' 2>>$LOG_FILE)
     if [ "$pod_status" == "true" ]; then
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
@@ -36,10 +35,9 @@ wait_for_pod() {
 
 wait_for_hpa() {
   local hpa_name=$1
-  local namespace=$2
-  local success_message=$3
+  local success_message=$2
   while true; do
-    hpa_status=$(minikube kubectl -- get hpa $hpa_name -n $namespace -o jsonpath='{.status.conditions[?(@.type=="AbleToScale")].status}' 2>>$LOG_FILE)
+    hpa_status=$(minikube kubectl -- get hpa $hpa_name -n default -o jsonpath='{.status.conditions[?(@.type=="AbleToScale")].status}' 2>>$LOG_FILE)
     if [ "$hpa_status" == "True" ]; then
       echo "$(date '+%Y-%m-%d %H:%M:%S') - $success_message" | tee -a $LOG_FILE
       break
