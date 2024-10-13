@@ -9,6 +9,7 @@ Link da imagem Docker do projeto: https://hub.docker.com/repository/docker/efran
 Link da playlist com os vídeos: https://www.youtube.com/playlist?list=PLqkuuK6NtwQ0W8lqcYVlN-KNkiP9A-tAX
 
 Essa playlist contém:
+
 - Arquitetura Kubernetes
 - Arquitetura Clean
 - Rodando o projeto
@@ -79,6 +80,7 @@ As instruções citadas nesse documento foram testadas com:
 #### 1. Clone o projeto.
 
 Abra um terminal, clone o projeto, mova para o diretório raiz do projeto e selecione a branch entrega-fase-2.
+
 ```
 git clone https://github.com/efrancodelima/fiap-tech-challenge.git
 cd fiap-tech-challenge
@@ -134,7 +136,7 @@ eval $(minikube docker-env)
 docker pull mysql:8.4.0
 
 # Constrói a imagem da aplicação
-docker build -t app-lanchonete -f Dockerfile .
+docker build -t app-lanchonete:1.11 -f Dockerfile .
 
 # Verifica as imagens disponíveis no minikube
 minikube image ls
