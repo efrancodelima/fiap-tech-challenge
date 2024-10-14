@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Bourne-Again shell script, ASCII text executable
 # Encontra e executa o primeiro arquivo .jar no diretorio
 

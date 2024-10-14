@@ -16,7 +16,7 @@ RUN mvn clean package -Dmaven.test.skip=true
 
 # ETAPA 2: Criação da imagem do projeto
 ## Define a imagem base
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk-alpine
 
 ## Define as variáveis de ambiente
 ENV DATASOURCE_URL=${DATASOURCE_URL}

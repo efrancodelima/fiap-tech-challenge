@@ -24,7 +24,7 @@ spec:
             ]
       containers:
         - name: app-deployment
-          image: app-lanchonete:latest
+          image: app-lanchonete:1.12
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

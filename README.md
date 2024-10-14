@@ -102,7 +102,7 @@ O comando abaixo inicia o minikube e cria um cluster com as especificações de 
 Ajuste os valores, se necessário. CPU se refere à quantidade de núcleos e memory está em MiB.
 
 ```
-minikube start --driver=docker --cpus=3 --memory=3870
+minikube start --driver=docker --cpus=4 --memory=3870
 ```
 
 #### 3. Habilite o dashboard e o coletor de métricas.
@@ -136,7 +136,7 @@ eval $(minikube docker-env)
 docker pull mysql:8.4.0
 
 # Constrói a imagem da aplicação
-docker build -t app-lanchonete:1.11 -f Dockerfile .
+docker build -t app-lanchonete:1.12 -f Dockerfile .
 
 # Verifica as imagens disponíveis no minikube
 minikube image ls
@@ -146,7 +146,7 @@ Caso você tenha baixado/construído as imagens no host local, você também pod
 
 ```
 minikube image load mysql:8.4.0
-minikube image load app-lanchonete:latest
+minikube image load app-lanchonete:1.12
 ```
 
 #### 5. Inicie a aplicação.
