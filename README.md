@@ -13,7 +13,8 @@ Essa playlist contém:
 - Arquitetura Kubernetes
 - Arquitetura Clean
 - Rodando o projeto
-- Escalando o projeto
+- Testando a API
+- Escalando a aplicação
 
 Link do Swagger: `<URL>`/api/v2/swagger-ui/index.html
 
