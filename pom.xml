@@ -12,7 +12,7 @@
 	<artifactId>tech-challenge</artifactId>
 	<version>2.0.0</version>
 	<name>tech-challenge</name>
-	<description>Tech Challenge Fase 2 - Software Architecture</description>
+	<description>Tech Challenge Fase 3 - Software Architecture</description>
 	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
@@ -115,7 +115,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>tech-challenge-2-v${project.version}</finalName>
+		<finalName>tech-challenge-3-v${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
