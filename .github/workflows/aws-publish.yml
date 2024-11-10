@@ -15,13 +15,15 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        if: success()
+		uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '17'
 
       - name: Cache Maven packages
-        uses: actions/cache@v2
+        if: success()
+		uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -29,36 +31,50 @@ jobs:
             ${{ runner.os }}-maven
 
       - name: Build with Maven
-        run: mvn clean install
+        if: success()
+		run: mvn clean install
 
       - name: Run tests
-        run: mvn test
+        if: success()
+		run: mvn test
+
+      - name: Extract project version
+        if: success()
+		id: extract_version
+        run: echo "::set-output name=VERSION::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        if: success()
+		uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        if: success()
+		uses: docker/setup-buildx-action@v2
 
       - name: Build Docker image
-        if: success() # Esta etapa só é executada se os testes passarem
-        run: docker build -t app-lanchonete -f Dockerfile .
+        if: success()
+        run: docker build -t app-lanchonete:${{ steps.extract_version.outputs.VERSION }} -f Dockerfile .
 
-      - name: Log in to Amazon ECR
-        if: success() # Esta etapa só é executada se o build for bem-sucedido
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          region: ${{ secrets.AWS_REGION }}
+	  - name: Configure AWS credentials
+	    if: success()
+		uses: aws-actions/configure-aws-credentials@v2
+		with:
+		  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+		  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+		  aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Push Docker image to Amazon ECR
-        if: success() # Esta etapa só é executada se o login for bem-sucedido
+	  - name: Log in to Amazon ECR
+		if: success()
+		run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+	  - name: Push Docker image to Amazon ECR
+        if: success()
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-repository:latest
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-repository:${{ steps.extract_version.outputs.VERSION }}
 
       - name: Logout from Amazon ECR
-        if: success() # Esta etapa só é executada se a publicação for bem-sucedida
+        if: success()
         run: docker logout ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
