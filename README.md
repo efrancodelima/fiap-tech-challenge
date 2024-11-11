@@ -4,8 +4,6 @@ Projeto realizado como atividade avaliativa do curso de **Software Architecture 
 
 Link do projeto no GitHub: https://github.com/efrancodelima/fiap-tech-challenge/tree/entrega-fase-2
 
-Link da imagem Docker do projeto: https://hub.docker.com/repository/docker/efrancodelima/app-lanchonete/general
-
 Link da playlist com os vídeos: https://www.youtube.com/playlist?list=PLqkuuK6NtwQ0W8lqcYVlN-KNkiP9A-tAX
 
 Essa playlist contém:
