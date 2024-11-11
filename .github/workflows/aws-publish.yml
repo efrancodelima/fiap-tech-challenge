@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - teste-aws
 
 jobs:
   build-and-push:
@@ -58,14 +59,13 @@ jobs:
         if: success()
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: AKIAWPPO6NEURSABHX5L
-          aws-secret-access-key: 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
-          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Login to Amazon ECR
+      - name: Log in to Amazon ECR
         if: success()
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
       - name: Push Docker image to Amazon ECR
         if: success()
